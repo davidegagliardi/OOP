@@ -58,7 +58,7 @@ Il passaggio per indirizzo viene utilizzato se la variabile è "grande".
 //Conviene passare per indirizzo se la variabile è grande, altrimenti va bene /per valore perché copio solo la variabile.
 P. riferimento: la variabile grande passa così per non spostare molti dati nella memoria. Si tende a non fare la copia.
 
-#### Operatore “++”
+### Operatore “++”
 Può essere pre-fisso (`++i`) o post-fisso (`i++`).
 
 Nel caso di incremento pre-fisso, la variabile verrà incrementata nello stesso ciclo:
@@ -75,34 +75,58 @@ cout << "Il valore di i e' " <<  i++;
 
 //L'output del programma sarà "Il valore di i è 5"
 ```
+Se l'operatore viene applicato ad un puntatore, il valore della cella di memoria rimarrà il medesimo. Verrà però incrementato l'indirizzo di memoria contenuto dal puntatore.
 
-Nel primo caso il valore viene incrementato e restituito prima dell’assegnazione (non si vede sul risultato nel passaggio a valori??!?). E’ un operatore unario, valore restituito prima dell’incremento (i++  i). Nel puntatore la variabile rimane la medesima ma viene incrementato il puntatore. Il risultato, a differenza di prima si vede.
-Prefisso si vede subito, post fisso dopo.
+### Operatore "new"
 
-Con new alloco un puntatore di memoria: alloco la memoria in modo dinamico. Non bisogna cancellare l’indirizzo di memoria allocato, se non faccio il delete cresce l’occupazione del programma nella memoria.
+L'operatore `new` alloca un puntatore di memoria, in questo modo l'allocazione avverrà in modo dinamico. Bisogna però preoccuparsi di utilizzare il comando `delete`, per non aumentare l'occupazione di memoria da parte del programma.
 
+### Costruttori
 
-Costruttori: quando costruisco una classe vuota è come se io facessi una definizione astratta perché non è detto che il compilatore allochi una memoria, come ad esempio il typedef. Se istanzio una classe ho un’allocazione di memoria (7:40). Se ho una classe vuota e l’istanza A non so cosa ci sia in questo momento. Risultato, rispetto a quello che c’era prima in memoria vengono aggiunte due cose: un puntatore this che punta dove la variabile è (punta a se stessa) e viene allocato un altro puntatore che punta dove ci sono i metodi di A. Punta i costruttori che ci sono sempre (default, 0 parametri, distruttore, costruttore di copia, operatore di assegnazione). Questo è a livello di memoria (lo fa il compilatore).
+Quando viene costruita una classe vuota, viene fatta una definizione astratta. Proprio per questo non è scontato che il compilatore allochi memoria (come per il `typedef`).
+L'allocazione di memoria avverrà una volta istanziata una classe. In questo modo verrano inseriti in memoria anche un puntatore `this` (che punta a dove la variabile è allocata) e un secondo puntatore verso i metodi di quella classe.
 
-Header
-Dichiarazione con cui si dichiarano il nome che il compilatore usa per chiamare il metodo (che è l’unico nel programma).
-Costruttore: metodo che viene chiamato quando si definisce un’istanza A::A() è chiamato con A e a; gli attributi in classe vanno allocati nella memoria (non memoria dinamica) . 09:40
+//Punta i costruttori che ci sono sempre (default, 0 parametri, distruttore, costruttore di copia, operatore di assegnazione). Questo è a livello di memoria (lo fa il compilatore).
 
-Distruttore: metodo che viene chiamato quando l’istanza è deallocata. Per esempio A::~A().
-E’ in grado di mettere le cose in ordine prima che l’informazione dell’istanza venga perduta per sempre. E’ un puntatore ad una classe di fatto. Il costruttore di una classe vuota inizializza, però lo utilizziamo ad esempio quando in una classe abbiamo un’istanza di un’altra classe, creo un richiamo ad una classe sopra il blocco, richiamando il costruttore dell’altra classe in modo da inizializzare l’attributo presente nella classe successiva. Solitamente lo si fa per ereditarietà. Il distruttore non fa nulla. Prima eseguirà sul codice e poi chiamerà gli attributi infatti prima chiama, poi esegue il codice e infine metterà un “+”.  Minuto 12:00 cazzo fa?
+### Header
 
-Passaggio per valore: un’area di memoria di “a” viene presa, copiata e inizializzata con il costruttore di copia. Di solito quando ho una nuova istanza devo inizializzarla.
-Il costruttore di copia non chiama né costruttore di default ne distruttore. E’ un costruttore a se.
-Prende qualcosa da una cella di memoria e lo copia in un’altra.
-This punta a se stesso, se però in mezzo ho fatto un costruttore di copia una cella di memoria viene utilizzata per questo costruttore di copia e this punterà sempre a te stesso, solamente che non ho celle contigue.
+Si tratta della dichiarazione all'inizio del file con cui si dichiara il nome che il compilatore usa per chiamare il metodo (che è l’unico nel programma).
 
-Fa una copia dei valori campo per campo.
+### Costruttore
 
-Il costruttore di default viene eliminato se ridefinisco costruttore con almeno un parametro. Posso fare una copia profonda che quando parte dalla memoria dinamica deve essere copiata nell’istanza (non sempre nel caso di dinamica però).
-Copia superficiale viene fatta valore per valore degli attributi (costruttore copia / valore di assegnazione 15:00).
+Funzione membro che si occupa di:
+* allocazione della memoria per tutti i suoi membri (dati e funzioni) nello heap o nello stack;
+* inizializzazione dei dati membri
 
-Copia attributo per attributo
-This rimane uguale, che è la proprietà di singola istanza e non copia puntatore a metodi.
+Caratteristiche del costruttore sono:
+* nome uguale a quello della classe di appartenenza;
+* non ha un valore di ritorno
 
-Il c++ cerca di risolvere tutte le istruzioni che possono essere simili o possono ricondursi a qualcosa, se ho un metodo/funzione e aggiungo explicit davanti evito questa cosa. Il c++ interpreta il costruttore a 1 parametro come se fosse un convertitore di tipo. ????
-Spiegare meglio
+Il costruttore può accettare uno o più argomenti. Nel caso di costruttore a zero parametri, prende il nome di costruttore di *default*. Nel caso fossero assenti i costruttori, il compilatore è in grado di generarne uno automaticamente (con i limiti del caso).
+
+L’uso di un costruttore appositamente definito, invece, consente di inizializzare tutti i membri della classe assieme, di modo che l’istanziazione di un oggetto sia sempre consistente con il nostro modello di dati e indipendente dalle scelte del compilatore.
+
+```
+NomeClasse::NomeClasse(){
+  cout << "Costruttore di default/zero parametri";
+}
+NomeClasse::NomeClasse(Nome _nome, Cognome _cognome){
+  cout << "Costruttore specifico a due parametri";
+  nome = _nome;
+  cognome = _cognome;
+}
+```
+
+### Distruttore
+
+Il distruttore di classe assolve il compito di rilasciare tutte le risorse associate ad un oggetto, quando esso non è più necessario.
+
+```
+NomeClasse::~NomeClasse(){
+  cout << "Il contenuto e' stato distrutto";
+}
+```
+Il distruttore è caratterizzato dal fatto che non ha valori di ritorno né parametri. Per questo motivo non può essere sovraccaricato.
+
+Il suo compito primario dovrebbe essere sempre e solo quella di rimuovere un oggetto e tutte le sue dipendenze dallo stato del programma in maniera sicura e completa.
+Viene invocato automaticamente per tutte le variabili, ogni volta che viene raggiunta la fine del loro ambito di visibilità, oppure nel caso di deallocazione tramite il comando `delete`.
