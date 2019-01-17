@@ -95,6 +95,7 @@ A seconda delle ereditarietà
 #### Ereditarietà di tipo public `class A: public B{};`
 
 * Quando è private in B diventa inaccessibile in A ed inaccessibile dall’esterno
+
 ```
 main() {
 
@@ -108,6 +109,7 @@ void A::m4(){
 ```
 
 * Quando è public in B diventa public in A
+
 ```
 main() {
 
@@ -118,7 +120,9 @@ void A::m4(){
    m2(); //OK accessibile anche per classi derivate
 }
 ```
+
 * Quando è protected in B diventa protected in A
+
 ```
 main() {
   A a;
@@ -138,9 +142,11 @@ void A::m4(){
 
 IS-A -> ogni istanza di A è anche istanza di B -> EREDITARIETA’
 ```
+
 #### Ereditarietà di tipo private `class A: private B{};`
 
 * Quando è private in B diventa inaccessibile da A ed inaccessibile dall’esterno
+
 ```
 main() {
 
@@ -152,7 +158,9 @@ void A::m4(){
   m1(); //NO *come nel caso precedente con ereditarietà public*
 }
 ```
+
 * Quando è public in B diventa private in A
+
 ```
 main() {
 
@@ -164,7 +172,9 @@ void A::m4(){
   m2(); //OK -> accessibile anche per classi derivate
 }
 ```
+
 * Quando è protected in B diventa private in A
+
 ```
 main() {
   A a;
@@ -175,9 +185,11 @@ void A::m4(){
   m3(); //OK
 }
 ```
+
 #### Ereditarietà di tipo protected `class A: protected B{};`
 
 * Quando è private in B diventa inaccessibile da A ed inaccessibile dall’esterno
+
 ```
 main() {
 
@@ -189,7 +201,9 @@ void A::m4(){
   m1();  //NO
 }
 ```
+
 * Quando è public in B diventa public in A
+
 ```
 main() {
 
@@ -201,6 +215,7 @@ void A::m4(){
   m2(); //OK -> interno ok
 }
 ```
+
 * Quando è protected in B diventa protected in A
 
 ```
@@ -233,7 +248,24 @@ Le 2 righe `private` e `protected` sono uguali per accessibilità: ci sono conse
 Quando ha senso fare ereditarietà private/protected?
 Ereditare in modo `private` implica la natura della classe base è nascosta dall’implementazione (ereditarietà per implementazione). In sostanza si effettua questo tipo di ereditarietà quando attributi e metodi sono utilizzati per l'implementazione.
 
-La classe derivata quindi non utilizzerà i metodi come la classe sovrastante.
+La classe derivata diventa così diversa dalla classe sopra, ne deriva che non utilizzerà i metodi come la classe sopra (superclasse)
+
+Quando ha senso fare ereditarietà public?
+
+
+| `class A: public B {
+	void m4();
+};
+A a;  B b;
+a = b;	 NO
+b = a;  	 SI 	(b è la classe base)` 	| <img https://github.com/davidegagliardi/OOP/blob/master/CelleMemoria.png" /> 	|
+|---	|---	|
+
+
+
+							a contiene b, a è più grande
+A&A::operator=(const A&a)				
+B&B::operator=(const B&b)  	OK per ereditarietà pubblica
 
 ### Differenze valore / puntatore / riferimento
 
