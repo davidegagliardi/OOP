@@ -85,13 +85,17 @@ class B {
 A seconda delle ereditarietà
 
 A a;
+a.m1();
+a.m2();
+a.m3();
 
-a.m1(), a.m2(), a.m3(); chiamo i metodi m1, m2, m3
+// Chiamo i metodi m1, m2, m3
+```
 
 Ereditarietà di tipo public class A: public B{};
 
 * Quando è private in B diventa inaccessibile in A ed inaccessibile dall’esterno
-
+```
 main() { //NO m1 è private in B (inaccessibile da classi derivate à private)
 
 A a; a.m1();
@@ -99,9 +103,10 @@ A a; a.m1();
 }
 
 void A::m4() {m1();} //NO m1 è private in B e quindi inaccessibile da A
+```
 
 * Quando è public in B diventa public in A
-
+```
 main() {
 
 A a; a.m2(); //OK
@@ -109,9 +114,9 @@ A a; a.m2(); //OK
 }
 
 void A::m4() { m2(); } //OK -> accessibile anche per classi derivate
-
+```
 * Quando è protected in B diventa protected in A
-
+```
 main() {A a; a.m3(); } //NO, non posso accedere dall’esterno
 
 main() {B b; b.m3(); } //NO
@@ -121,11 +126,11 @@ void B::m2() {m3(); } //OK
 void A::m4() {m3(); } //OK, se in B qualcosa è protected à resta inaccessibile dall’esterno, ma accessibile sia da classe base che da classe derivata
 
 IS-A à ogni istanza di A è anche istanza di B à EREDITARIETA’
-
+```
 Ereditarietà di tipo private class A: private B{};
 
 * Quando è private in B diventa inaccessibile da A ed inaccessibile dall’esterno
-
+```
 main() {
 
 A a; a.m1(); //NO
@@ -133,9 +138,9 @@ A a; a.m1(); //NO
 }
 
 void A::m4() {m1();} //NO *come nel caso precedente con ereditarietà public*
-
+```
 * Quando è public in B diventa private in A
-
+```
 main() {
 
 A a; a.m2(); //NO à privatizzato per l’esterno uguali
@@ -143,17 +148,17 @@ A a; a.m2(); //NO à privatizzato per l’esterno uguali
 }
 
 void A::m4() { m2(); } //OK -> accessibile anche per classi derivate
-
+```
 * Quando è protected in B diventa private in A
-
+```
 main() {A a; a.m3(); } //NO
 
 void A::m4() {m3(); } //OK
-
+```
 Ereditarietà di tipo protected class A: protected B{};
 
 * Quando è private in B diventa inaccessibile da A ed inaccessibile dall’esterno
-
+```
 main() {
 
 A a; a.m1(); //NO
@@ -161,9 +166,9 @@ A a; a.m1(); //NO
 }
 
 void A::m4() {m1();} //NO
-
+```
 * Quando è public in B diventa public in A
-
+```
 main() {
 
 A a; a.m2(); //NO à esterno no
@@ -171,9 +176,10 @@ A a; a.m2(); //NO à esterno no
 }
 
 void A::m4() { m2(); } //OK -> interno ok
-
+```
 * Quando è protected in B diventa protected in A
 
+```
 main() {A a; a.m3(); } //NO
 
 void A::m4() {m3(); } //OK
@@ -181,13 +187,27 @@ void A::m4() {m3(); } //OK
 ```
 
 
-|          |           | Base                       |                              |                            |                            |                            |                            |
-|:--------:|-----------|----------------------------|------------------------------|----------------------------|----------------------------|----------------------------|----------------------------|
-|          |           | Private                    |                              | Public                     |                            | Protected                  |                            |
-| Derivata | Public    | Inaccessibile dall'esterno | Inaccessibile dalla derivata | Inaccessibile dall'esterno | Accessibile dalla derivata | Inaccessibile dall'esterno | Accessibile dalla derivata |
-|          | Private   | Inaccessibile dall'esterno | Inaccessibile dalla derivata | Inaccessibile dall'esterno | Accessibile dalla derivata | Inaccessibile dall'esterno | Accessibile dalla derivata |
-|          | Protected | Inaccessibile dall'esterno | Inaccessibile dalla derivata | Inaccessibile dall'esterno | Accessibile dalla derivata | Inaccessibile dall'esterno | Accessibile dalla derivata |
 
+|          	|           	| Base                       	|                              	|                            	|                            	|                            	|                            	|
+|:--------:	|-----------	|----------------------------	|------------------------------	|----------------------------	|----------------------------	|----------------------------	|----------------------------	|
+|          	|           	| Private                    	|                              	| Public                     	|                            	| Protected                  	|                            	|
+| Derivata 	| Public    	| Inaccessibile dall'esterno 	| Inaccessibile dalla derivata 	| Inaccessibile dall'esterno 	| Accessibile dalla derivata 	| Inaccessibile dall'esterno 	| Accessibile dalla derivata 	|
+|          	| Private   	| Inaccessibile dall'esterno 	| Inaccessibile dalla derivata 	| Inaccessibile dall'esterno 	| Accessibile dalla derivata 	| Inaccessibile dall'esterno 	| Accessibile dalla derivata 	|
+|          	| Protected 	| Inaccessibile dall'esterno 	| Inaccessibile dalla derivata 	| Inaccessibile dall'esterno 	| Accessibile dalla derivata 	| Inaccessibile dall'esterno 	| Accessibile dalla derivata 	|
+
+
+Le 2 righe `private` e `protected` sono uguali per accessibilità: ci sono conseguenze su classi derivate
+
+|           	| Private       	| Public    	| Protected 	|
+|-----------	|---------------	|-----------	|-----------	|
+| Public    	| Inaccessibile 	| Public    	| Protected 	|
+| Private   	| Inaccessibile 	| Private   	| Private   	|
+| Protected 	| Inaccessibile 	| Protected 	| Protected 	|
+
+Quando ha senso fare ereditarietà private/protected?
+Ereditare in modo `private` implica la natura della classe base è nascosta dall’implementazione (ereditarietà per implementazione). In sostanza si effettua questo tipo di ereditarietà quando attributi e metodi sono utilizzati per l'implementazione.
+
+La classe derivata quindi non utilizzerà i metodi come la classe sovrastante.
 
 ### Differenze valore / puntatore / riferimento
 
