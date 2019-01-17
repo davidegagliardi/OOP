@@ -56,11 +56,137 @@ L'ereditarietà consente di creare classificazioni gerarchiche. E' possibile cre
 Si definisce *classe base* la classe ereditata, mentre la classe che "riceve" l'eredità è detta *classe derivata*. Avviene mediante la seguente sintassi:
 
 ```
-class NomeClasseDerivata : accesso NomeClasseBase{
+class NomeClasseDerivata : tipoEreditarietà NomeClasseBase{
   // contenuto della classe
+  // il tipoEreditarietà può essere public, private, protected
 };
 ```
+Quando, ad esempio, il tipo di accesso alla classe base è `public`, tutti i membri `public` della classe base diverranno membri `public` della classe derivata, Lo stesso discorso varrà per i membri `protected`.
+Per gli elementi di tipo `private` della classe base, questi non saranno accessibili da parte dei membri della classe derivata.
 
+Una classe derivata può ricevere in eredità elementi di due o più classi base.
+
+Di seguito alcuni esempi di ereditarietà:
+
+```
+class A : tipoEreditarietà B{
+  public:
+    void m4();
+}
+
+class B {
+  private:
+    void m1();
+  public:
+    void m2();
+    void m3();
+};
+
+A seconda delle ereditarietà
+
+A a;
+
+a.m1(), a.m2(), a.m3(); chiamo i metodi m1, m2, m3
+
+Ereditarietà di tipo public class A: public B{};
+
+* Quando è private in B diventa inaccessibile in A ed inaccessibile dall’esterno
+
+main() { //NO m1 è private in B (inaccessibile da classi derivate à private)
+
+A a; a.m1();
+
+}
+
+void A::m4() {m1();} //NO m1 è private in B e quindi inaccessibile da A
+
+* Quando è public in B diventa public in A
+
+main() {
+
+A a; a.m2(); //OK
+
+}
+
+void A::m4() { m2(); } //OK -> accessibile anche per classi derivate
+
+* Quando è protected in B diventa protected in A
+
+main() {A a; a.m3(); } //NO, non posso accedere dall’esterno
+
+main() {B b; b.m3(); } //NO
+
+void B::m2() {m3(); } //OK
+
+void A::m4() {m3(); } //OK, se in B qualcosa è protected à resta inaccessibile dall’esterno, ma accessibile sia da classe base che da classe derivata
+
+IS-A à ogni istanza di A è anche istanza di B à EREDITARIETA’
+
+Ereditarietà di tipo private class A: private B{};
+
+* Quando è private in B diventa inaccessibile da A ed inaccessibile dall’esterno
+
+main() {
+
+A a; a.m1(); //NO
+
+}
+
+void A::m4() {m1();} //NO *come nel caso precedente con ereditarietà public*
+
+* Quando è public in B diventa private in A
+
+main() {
+
+A a; a.m2(); //NO à privatizzato per l’esterno uguali
+
+}
+
+void A::m4() { m2(); } //OK -> accessibile anche per classi derivate
+
+* Quando è protected in B diventa private in A
+
+main() {A a; a.m3(); } //NO
+
+void A::m4() {m3(); } //OK
+
+Ereditarietà di tipo protected class A: protected B{};
+
+* Quando è private in B diventa inaccessibile da A ed inaccessibile dall’esterno
+
+main() {
+
+A a; a.m1(); //NO
+
+}
+
+void A::m4() {m1();} //NO
+
+* Quando è public in B diventa public in A
+
+main() {
+
+A a; a.m2(); //NO à esterno no
+
+}
+
+void A::m4() { m2(); } //OK -> interno ok
+
+* Quando è protected in B diventa protected in A
+
+main() {A a; a.m3(); } //NO
+
+void A::m4() {m3(); } //OK
+
+```
+
+
+|          |           | Base                       |                              |                            |                            |                            |                            |
+|:--------:|-----------|----------------------------|------------------------------|----------------------------|----------------------------|----------------------------|----------------------------|
+|          |           | Private                    |                              | Public                     |                            | Protected                  |                            |
+| Derivata | Public    | Inaccessibile dall'esterno | Inaccessibile dalla derivata | Inaccessibile dall'esterno | Accessibile dalla derivata | Inaccessibile dall'esterno | Accessibile dalla derivata |
+|          | Private   | Inaccessibile dall'esterno | Inaccessibile dalla derivata | Inaccessibile dall'esterno | Accessibile dalla derivata | Inaccessibile dall'esterno | Accessibile dalla derivata |
+|          | Protected | Inaccessibile dall'esterno | Inaccessibile dalla derivata | Inaccessibile dall'esterno | Accessibile dalla derivata | Inaccessibile dall'esterno | Accessibile dalla derivata |
 
 
 ### Differenze valore / puntatore / riferimento
