@@ -253,19 +253,22 @@ La classe derivata diventa così diversa dalla classe sopra, ne deriva che non u
 Quando ha senso fare ereditarietà public?
 
 
-| `class A: public B {
+```
+class A: public B {
 	void m4();
 };
-A a;  B b;
-a = b;	 NO
-b = a;  	 SI 	(b è la classe base)` 	| <img src="https://github.com/davidegagliardi/OOP/blob/master/CelleMemoria.png" /> 	|
-|---	|---	|
+A a;
+B b;
+a = b; // NO
+b = a; // SI 	(b è la classe base)
+```
+![a contiene b, a è più grande]
+<img src="https://github.com/davidegagliardi/OOP/blob/master/CelleMemoria.png" />
 
-
-
-							a contiene b, a è più grande
-A&A::operator=(const A&a)				
-B&B::operator=(const B&b)  	OK per ereditarietà pubblica
+```
+A& A::operator=(const A&a)				
+B& B::operator=(const B&b)  // OK per ereditarietà pubblica
+```
 
 ### Differenze valore / puntatore / riferimento
 
