@@ -1,5 +1,5 @@
 # Programmazione a oggetti
-Appunti a cura di *Andrea Abriani, Davide Gagliardi, Andrea Braghiroli*
+Appunti a cura di *Andrea Abriani (@aabriani), Davide Gagliardi (@davidegagliardi), Andrea Braghiroli*
 
 ### Fattori qualità software:
 
@@ -44,25 +44,39 @@ Oggetto | Elemento
 
 Gli oggetti risultano essere elementi del dominio con vita propria indipendente con identificatore e istanza.
 
+La parte grafica in UML non è arbitraria ma unificata, ovvero vengono utilizzate convenzioni per rappresentare determinati elementi del programma.
+
 <img src="https://github.com/davidegagliardi/OOP/blob/master/ObjectUML.png" />
 
-Parte grafica UML non arbitraria ma unificata
+### Differenze valore / puntatore / riferimento
 
+* **Passaggio per valore**: il valore di una variabile viene copiato in una struttura stack. Successivamente la funzione recupera il dato.
+* **Passaggio per indirizzo**: viene copiato l’indirizzo della variabile in modo esplicito.
+Il passaggio per indirizzo viene utilizzato se la variabile è "grande".
+* **Passaggio per riferimento** (esclusivo del c++):  alla funzione viene passato l’indirizzo e non il valore dell’argomento. Questo approccio richiede meno memoria rispetto alla chiamata per valore, e soprattutto consente di modificare il valore delle variabili che sono ad un livello di visibilità (scope) esterno alla funzione o al metodo.
 
-
-
-
-
-Differenze valore / puntatore / riferimento
-
-Passaggio valore: valore che viene copiato in una struttura stack e poi la funzione lo prende.
-Passaggio puntatore: viene copiato l’indirizzo della variabile in modo esplicito
-Passaggio riferimento: (esclusivo del c++) stesso meccanismo del puntatore, ma anziché passare l’indirizzo passa il valore (utilizzo &) SPECIFICARE MEGLIO
-
-Conviene passare per indirizzo se la variabile è grande, altrimenti va bene per valore perché copio solo la variabile.
+//Conviene passare per indirizzo se la variabile è grande, altrimenti va bene /per valore perché copio solo la variabile.
 P. riferimento: la variabile grande passa così per non spostare molti dati nella memoria. Si tende a non fare la copia.
 
-Operatore “++”: può essere prefisso o postfisso. Nel primo caso il valore viene incrementato e restituito prima dell’assegnazione (non si vede sul risultato nel passaggio a valori??!?). E’ un operatore unario, valore restituito prima dell’incremento (i++  i). Nel puntatore la variabile rimane la medesima ma viene incrementato il puntatore. Il risultato, a differenza di prima si vede.
+#### Operatore “++”
+Può essere pre-fisso (`++i`) o post-fisso (`i++`).
+
+Nel caso di incremento pre-fisso, la variabile verrà incrementata nello stesso ciclo:
+```
+int i = 5;
+cout << "Il valore di i e' " <<  ++i;
+
+//L'output del programma sarà "Il valore di i è 6"
+```
+Nel caso di operatore post fisso, la variabile verrà incrementata nel ciclo successivo:
+```
+int i = 5;
+cout << "Il valore di i e' " <<  i++;
+
+//L'output del programma sarà "Il valore di i è 5"
+```
+
+Nel primo caso il valore viene incrementato e restituito prima dell’assegnazione (non si vede sul risultato nel passaggio a valori??!?). E’ un operatore unario, valore restituito prima dell’incremento (i++  i). Nel puntatore la variabile rimane la medesima ma viene incrementato il puntatore. Il risultato, a differenza di prima si vede.
 Prefisso si vede subito, post fisso dopo.
 
 Con new alloco un puntatore di memoria: alloco la memoria in modo dinamico. Non bisogna cancellare l’indirizzo di memoria allocato, se non faccio il delete cresce l’occupazione del programma nella memoria.
