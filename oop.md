@@ -1,35 +1,37 @@
 # Programmazione a oggetti
 Appunti a cura di *Andrea Abriani (@aabriani), Davide Gagliardi (@davidegagliardi), Andrea Braghiroli*
 
-### Fattori qualità software:
+## Fattori qualità software:
 
-#### Esterni
+### Esterni
 
 * **Estendibilità**: sistema amplia funzionalità che il software aveva in precedenza. Programmazione ad oggetti viene resa più semplice.
 * **Riusabilità**: software e componenti possono essere riutilizzati per un insieme di requisiti che possono essere diversi da quelli precedenti.
 
 
 
-#### Interni:
+### Interni:
 *fattori percepibili al codice della sorgente*
 
 *	**Strutturazione**: codice viene scritto in modo tale da astrarre delle singole parti. E’ possibile un’individuazione di parti di software indipendenti dalle altre (es. Input/output può essere posizionato in zona differente).
 *	**Modularità**: collegata alla strutturazione. Va oltre la struttura e indica che può essere usata in modo diverso e con componenti può raggiungere scopi e requisiti differenti. (Il codice può essere utilizzato  per scopi diversi).
 *	**Comprensibilità**: software strutturato in modo che corrisponda alla descrizione del dominio.
 
-### Caratteristiche programmazione a oggetti
+## Caratteristiche della programmazione a oggetti
 
 *Key idea: connessione esplicita funzioni-dati (non vi sono più struct con metodi e costruttori)*
 
+### Connessione esplicita fra funzioni e dati - Incapsulamento
+
 In precedenza, vi era una procedura che lavorava su variabili globali. Ora invece, le funzioni sono connesse ai dati. Questo delimita ciò che le funzioni possono fare. Questo avviene tramite la procedura di **incapsulamento**. Questa procedura non avviene per la sicurezza dei dati bensì per la visibilità. Solo alcuni metodi e funzioni potranno accedere agli elementi di una determinata classe.
 
-#### Classe
+#### Concetto di classe
 Le classi sono legate in gerachie. Una eredita l'altra per creare una struttura.
 
 Si pone enfasi sulla rappresentazione. In caso di errori si andrà a realizzare una struttura sbagliata.
 L'enfasi viene spostata da computazione a rappresentazione (più o meno astratta) sul quale il software deve agire
 
-#### Metodi di progettazione software
+#### Enfasi sulla rappresentazione
 
 Il software può essere visto come un insieme di scatole, nelle quali entrano ed escono dati.
 
@@ -47,6 +49,19 @@ Gli oggetti risultano essere elementi del dominio con vita propria indipendente 
 La parte grafica in UML non è arbitraria ma unificata, ovvero vengono utilizzate convenzioni per rappresentare determinati elementi del programma.
 
 <img src="https://github.com/davidegagliardi/OOP/blob/master/ObjectUML.png" />
+
+#### Ereditarietà
+
+L'ereditarietà consente di creare classificazioni gerarchiche. E' possibile creare una classe generale che definisce le caratteristiche comuni a una serie di oggetti correlati. La classe può, in seguito, essere ereditata da una o più classi, ognuna delle quali aggiunge alla classe solo elementi specifici.
+Si definisce *classe base* la classe ereditata, mentre la classe che "riceve" l'eredità è detta *classe derivata*. Avviene mediante la seguente sintassi:
+
+```
+class NomeClasseDerivata : accesso NomeClasseBase{
+  // contenuto della classe
+};
+```
+
+
 
 ### Differenze valore / puntatore / riferimento
 
