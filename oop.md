@@ -44,7 +44,7 @@ Oggetto | Elemento
 
 Gli oggetti risultano essere elementi del dominio con vita propria indipendente con identificatore e istanza.
 
-<img src="https://github.com/davidegagliardi/OOP/ObjectUML.png" />
+<img src="https://github.com/davidegagliardi/OOP/blob/master/ObjectUML.png" />
 
 Parte grafica UML non arbitraria ma unificata
 
