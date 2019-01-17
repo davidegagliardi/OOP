@@ -258,7 +258,7 @@ Quando ha senso fare ereditarietà public?
 };
 A a;  B b;
 a = b;	 NO
-b = a;  	 SI 	(b è la classe base)` 	| <img https://github.com/davidegagliardi/OOP/blob/master/CelleMemoria.png" /> 	|
+b = a;  	 SI 	(b è la classe base)` 	| <img src="https://github.com/davidegagliardi/OOP/blob/master/CelleMemoria.png" /> 	|
 |---	|---	|
 
 
