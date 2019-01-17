@@ -31,7 +31,7 @@ Le classi sono legate in gerachie. Una eredita l'altra per creare una struttura.
 Si pone enfasi sulla rappresentazione. In caso di errori si andrà a realizzare una struttura sbagliata.
 L'enfasi viene spostata da computazione a rappresentazione (più o meno astratta) sul quale il software deve agire
 
-#### Enfasi sulla rappresentazione
+### Enfasi sulla rappresentazione
 
 Il software può essere visto come un insieme di scatole, nelle quali entrano ed escono dati.
 
@@ -50,7 +50,7 @@ La parte grafica in UML non è arbitraria ma unificata, ovvero vengono utilizzat
 
 <img src="https://github.com/davidegagliardi/OOP/blob/master/ObjectUML.png" />
 
-#### Ereditarietà
+### Ereditarietà
 
 L'ereditarietà consente di creare classificazioni gerarchiche. E' possibile creare una classe generale che definisce le caratteristiche comuni a una serie di oggetti correlati. La classe può, in seguito, essere ereditata da una o più classi, ognuna delle quali aggiunge alla classe solo elementi specifici.
 Si definisce *classe base* la classe ereditata, mentre la classe che "riceve" l'eredità è detta *classe derivata*. Avviene mediante la seguente sintassi:
@@ -84,109 +84,135 @@ class B {
 
 A seconda delle ereditarietà
 
-A a;
-a.m1();
-a.m2();
-a.m3();
+  A a;
+  a.m1();
+  a.m2();
+  a.m3();
 
-// Chiamo i metodi m1, m2, m3
+  // Chiamo i metodi m1, m2, m3
 ```
 
-Ereditarietà di tipo public class A: public B{};
+#### Ereditarietà di tipo public `class A: public B{};`
 
 * Quando è private in B diventa inaccessibile in A ed inaccessibile dall’esterno
 ```
-main() { //NO m1 è private in B (inaccessibile da classi derivate à private)
+main() {
 
-A a; a.m1();
-
+  A a;
+  a.m1(); // NO m1 è private in B (inaccessibile da classi derivate à private)
 }
 
-void A::m4() {m1();} //NO m1 è private in B e quindi inaccessibile da A
+void A::m4(){
+  m1(); // NO m1 è private in B e quindi inaccessibile da A
+}
 ```
 
 * Quando è public in B diventa public in A
 ```
 main() {
 
-A a; a.m2(); //OK
-
+  A a;
+  a.m2(); //OK
 }
-
-void A::m4() { m2(); } //OK -> accessibile anche per classi derivate
+void A::m4(){
+   m2(); //OK accessibile anche per classi derivate
+}
 ```
 * Quando è protected in B diventa protected in A
 ```
-main() {A a; a.m3(); } //NO, non posso accedere dall’esterno
+main() {
+  A a;
+  a.m3(); // NO, non posso accedere dall’esterno
+}
 
-main() {B b; b.m3(); } //NO
+main() {
+  B b;
+  b.m3();  // NO
+}
+void B::m2(){
+  m3(); // OK
+}
+void A::m4(){
+  m3(); //OK, se in B qualcosa è protected -> resta inaccessibile dall’esterno, ma accessibile sia da classe base che da classe derivata
+}
 
-void B::m2() {m3(); } //OK
-
-void A::m4() {m3(); } //OK, se in B qualcosa è protected à resta inaccessibile dall’esterno, ma accessibile sia da classe base che da classe derivata
-
-IS-A à ogni istanza di A è anche istanza di B à EREDITARIETA’
+IS-A -> ogni istanza di A è anche istanza di B -> EREDITARIETA’
 ```
-Ereditarietà di tipo private class A: private B{};
+#### Ereditarietà di tipo private `class A: private B{};`
 
 * Quando è private in B diventa inaccessibile da A ed inaccessibile dall’esterno
 ```
 main() {
 
-A a; a.m1(); //NO
-
+  A a;
+  a.m1(); //NO
 }
 
-void A::m4() {m1();} //NO *come nel caso precedente con ereditarietà public*
+void A::m4(){
+  m1(); //NO *come nel caso precedente con ereditarietà public*
+}
 ```
 * Quando è public in B diventa private in A
 ```
 main() {
 
-A a; a.m2(); //NO à privatizzato per l’esterno uguali
-
+A a;
+a.m2(); //NO -> privatizzato per l’esterno uguali
 }
 
-void A::m4() { m2(); } //OK -> accessibile anche per classi derivate
+void A::m4(){
+  m2(); //OK -> accessibile anche per classi derivate
+}
 ```
 * Quando è protected in B diventa private in A
 ```
-main() {A a; a.m3(); } //NO
+main() {
+  A a;
+  a.m3();  //NO
+}
 
-void A::m4() {m3(); } //OK
+void A::m4(){
+  m3(); //OK
+}
 ```
-Ereditarietà di tipo protected class A: protected B{};
+#### Ereditarietà di tipo protected `class A: protected B{};`
 
 * Quando è private in B diventa inaccessibile da A ed inaccessibile dall’esterno
 ```
 main() {
 
-A a; a.m1(); //NO
-
+  A a;
+  a.m1(); //NO
 }
 
-void A::m4() {m1();} //NO
+void A::m4(){
+  m1();  //NO
+}
 ```
 * Quando è public in B diventa public in A
 ```
 main() {
 
-A a; a.m2(); //NO à esterno no
-
+  A a;
+  a.m2(); //NO à esterno no
 }
 
-void A::m4() { m2(); } //OK -> interno ok
+void A::m4(){
+  m2(); //OK -> interno ok
+}
 ```
 * Quando è protected in B diventa protected in A
 
 ```
-main() {A a; a.m3(); } //NO
+main() {
+  A a;
+  a.m3(); //NO
+}
 
-void A::m4() {m3(); } //OK
-
+void A::m4(){
+  m3(); //OK
+}
 ```
-
-
 
 |          	|           	| Base                       	|                              	|                            	|                            	|                            	|                            	|
 |:--------:	|-----------	|----------------------------	|------------------------------	|----------------------------	|----------------------------	|----------------------------	|----------------------------	|
