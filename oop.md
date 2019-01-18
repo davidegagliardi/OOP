@@ -827,7 +827,7 @@ Proprietà della lista:
 * Non si può accedere in modo casuale agli elementi, quindi si rischia scorrere l'intera lista
 * Gli iteratori rimangono validi anche una volta aggiunti/rimossi gli elementi dalla lista
 
-##### Vector
+#### Vector
 ```
 ```
 Proprietà del Vector
@@ -840,7 +840,7 @@ Proprietà del Vector
 * Gli iteratori sono invalidati se viene aggiunto o rimosso un elemento al vettore
 * E' possibile ottenere facilmente un array se si necessita di un array di elementi
 
-##### Set
+#### Set
 
 ```
 #include <set>
@@ -870,7 +870,7 @@ Proprietà del set:
 * Gli elementi sono unici, ordinati e sempre disposti dal più basso al più alto
 
 
-##### Multiset
+#### Multiset
 
 ```
 multiset <int> mi;
@@ -884,7 +884,7 @@ for(miter=mi.begin(); miter!=mi.end(); ++miter){
 Proprietà del multiset:
 * Si comportano come i set, ma gli elementi possono non essere unici
 
-##### Map
+#### Map
 
 ```
 #include <map>
@@ -913,7 +913,7 @@ stampaMap(m);
 Proprietà del Map
 *
 
-##### Multimap
+#### Multimap
 
 ```
 
