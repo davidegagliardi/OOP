@@ -466,7 +466,7 @@ Nel caso si voglia implementare **[ a == b ]**
 ```
 friend bool operator == (const A& aa, const B& bb);	 // dentro i 2 public delle 2 classi A e B
 bool operator == (const A& aa, const B& bb) {		   // funzione esterna alla classe
-	return aa.val = bb.val;
+	return aa.val == bb.val;
 }
 ```
 
