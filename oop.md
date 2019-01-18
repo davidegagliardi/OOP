@@ -262,8 +262,10 @@ B b;
 a = b; // NO
 b = a; // SI 	(b è la classe base)
 ```
-![a contiene b, a è più grande]
+
 <img src="https://github.com/davidegagliardi/OOP/blob/master/CelleMemoria.png" />
+
+a contiene b, a è più grande
 
 ```
 A& A::operator=(const A&a)				
@@ -352,3 +354,25 @@ Il distruttore è caratterizzato dal fatto che non ha valori di ritorno né para
 
 Il suo compito primario dovrebbe essere sempre e solo quella di rimuovere un oggetto e tutte le sue dipendenze dallo stato del programma in maniera sicura e completa.
 Viene invocato automaticamente per tutte le variabili, ogni volta che viene raggiunta la fine del loro ambito di visibilità, oppure nel caso di deallocazione tramite il comando `delete`.
+
+### Attributi statici operatori
+
+Gli attributi statici sono attributi istanziati solo una volta che valgono per tutte le istanze della classe.
+Se un’istanza cambia il contenuto, allora viene cambiata per tutte le istanze
+
+Esempio:
+`static int numIstanze`
+* indica il n° di licenze disponibili nel programma.
+
+Dal punto di vista funzionale, la variabile statica è come una variabile globale.
+
+`const float miaConst`
+* non cambia mai dopo l’inizializzazione (attributo costante ->`A():miaConst(1,1) {…}`)
+* qui ho già inizializzato l’attributo
+
+`static const int a = 1;`
+* `static const int b;` private
+* `const float A::b = 1.0` fuori dal main
+
+`static const int a;`
+* ![#f03c15]`non` posso scriverlo, con `static` potrei mettere il valore dopo l’inizializzazione, solo che con  `const` `a` deve esistere 
