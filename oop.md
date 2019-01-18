@@ -137,7 +137,7 @@ void B::m2(){
   m3(); // OK
 }
 void A::m4(){
-  m3(); // OK, se in B qualcosa è protected -> resta inaccessibile dall’esterno, 
+  m3(); // OK, se in B qualcosa è protected -> resta inaccessibile dall’esterno,
         // ma accessibile sia da classe base che da classe derivata
 }
 
@@ -275,13 +275,12 @@ B& B::operator=(const B&b)  // OK per ereditarietà pubblica
 
 ### Differenze valore / puntatore / riferimento
 
-* **Passaggio per valore**: il valore di una variabile viene copiato in una struttura stack. Successivamente la funzione recupera il dato.
+* **Passaggio per valore**: il valore di una variabile viene copiato in una struttura stack. Successivamente la funzione recupera il dato. Viene utilizzato questo tipo di passaggio quando la variabile è "piccola".
 * **Passaggio per indirizzo**: viene copiato l’indirizzo della variabile in modo esplicito.
 Il passaggio per indirizzo viene utilizzato se la variabile è "grande".
 * **Passaggio per riferimento** (esclusivo del c++):  alla funzione viene passato l’indirizzo e non il valore dell’argomento. Questo approccio richiede meno memoria rispetto alla chiamata per valore, e soprattutto consente di modificare il valore delle variabili che sono ad un livello di visibilità (scope) esterno alla funzione o al metodo.
 
-//Conviene passare per indirizzo se la variabile è grande, altrimenti va bene /per valore perché copio solo la variabile.
-P. riferimento: la variabile grande passa così per non spostare molti dati nella memoria. Si tende a non fare la copia.
+In linea di massima, si tende a non fare la copia.
 
 ### Operatore “++”
 Può essere pre-fisso (`++i`) o post-fisso (`i++`).
@@ -311,7 +310,7 @@ L'operatore `new` alloca un puntatore di memoria, in questo modo l'allocazione a
 Quando viene costruita una classe vuota, viene fatta una definizione astratta. Proprio per questo non è scontato che il compilatore allochi memoria (come per il `typedef`).
 L'allocazione di memoria avverrà una volta istanziata una classe. In questo modo verrano inseriti in memoria anche un puntatore `this` (che punta a dove la variabile è allocata) e un secondo puntatore verso i metodi di quella classe.
 
-//Punta i costruttori che ci sono sempre (default, 0 parametri, distruttore, costruttore di copia, operatore di assegnazione). Questo è a livello di memoria (lo fa il compilatore).
+A livello di memoria, il compilatore punta i costruttori che ci sono sempre (default, 0 parametri, distruttore, costruttore di copia, operatore di assegnazione).
 
 ### Header
 
