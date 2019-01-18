@@ -378,7 +378,7 @@ Dal punto di vista funzionale, la variabile statica è come una variabile global
 `static const int a;`
 * NON posso scriverlo; con `static` potrei mettere il valore dopo l’inizializzazione, solo che con  `const` `a` deve esistere
 
-### Overload operatori come metodi
+### Overload operatori come metodi (all'interno della classe)
 
 * [a = 3]
 
