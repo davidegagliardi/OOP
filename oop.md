@@ -436,7 +436,7 @@ A& operator == (const A& aa) {
 ```
 A& operator != (const A& aa) {			
 	cout << “operator += const A&” << endl;
-	return !(*this == aa);
+	return k!=aa.k;      // in alternativa return !(*this == aa);
 }
 ```
 * [++a;]  pre-incremento
