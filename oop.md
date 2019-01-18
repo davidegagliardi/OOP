@@ -527,7 +527,7 @@ a1.operator = (operator + (A(3), a2));  // l’operatore è quello di intero,
 ```
 a1 = a1 + a2;
 A a1(1);  A a2(2);
-a1 operator = (a1 operator + (a2));
+a1.operator = (a1.operator + (a2));
 A a3;
 a3 = a1 + a2;
 ```
