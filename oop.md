@@ -817,13 +817,28 @@ if(deliter!=mialista.end()){
 }
 ```
 Proprietà della lista:
-*
+* Memoria non contigua e non pre-allocata
+* Ricerca lineare
+* Ricerca, inserimento e cancellazione richiedono un tempo costante
+* Gli elementi possono essere ordinati, classificati e duplicati
+* Ogni elemento richiede uno spazio extra per il nodo che tiene l'elemento (next/prev)
+* Quando viene aggiunto un elemento non deve ri-allocare la memoria dell'intera lista
+* Inserimento e rimozione sono computazionalmente economici
+* Non si può accedere in modo casuale agli elementi, quindi si rischia scorrere l'intera lista
+* Gli iteratori rimangono validi anche una volta aggiunti/rimossi gli elementi dalla lista
 
 ##### Vector
 ```
 ```
 Proprietà del Vector
-* 
+* Memoria contigua e pre-allocata per elementi futuri. Viene dunque richiesto uno spazio extra oltre a quello degli elementi in sé
+* Ogni elemento richiede solamente lo spazio per l'elemento stesso (non ci sono puntatori extra)
+* Può riallocare memoria per l'intero vettore ogni volta che viene aggiunto un elemento
+* Gli inserimenti hanno un costo o(n), tranne alla fine dove sono costanti
+* Le cancellazioni hanno un costo o(n), tranne alla fine dove sono costanti
+* E' possibile accedere casualmente ai suoi elementi
+* Gli iteratori sono invalidati se viene aggiunto o rimosso un elemento al vettore
+* E' possibile ottenere facilmente un array se si necessita di un array di elementi
 
 ##### Set
 
@@ -850,7 +865,10 @@ bool Lamiaclasse::operator < (const Qualcosa& q)const{
 
 ```
 Proprietà del set:
-*
+* La ricerca è logaritmica nella grandezza
+* Inserimento e cancellazione sono logaritmiche
+* Gli elementi sono unici, ordinati e sempre disposti dal più basso al più alto
+
 
 ##### Multiset
 
@@ -864,7 +882,7 @@ for(miter=mi.begin(); miter!=mi.end(); ++miter){
 }
 ```
 Proprietà del multiset:
-*
+* Si comportano come i set, ma gli elementi possono non essere unici
 
 ##### Map
 
