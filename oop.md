@@ -550,7 +550,7 @@ class A {
     }
 }
 ```
-nel `return` c’è operazione di deferenziazione, quindi ritorna la stessa istanza, ma modificata (`lvalue` per fare assegnazione e quindi come fa l’operazione di assegnazione).
+nel `return` c’è operazione di dereferenziazione, quindi ritorna la stessa istanza, ma modificata (`lvalue` per fare assegnazione e quindi come fa l’operazione di assegnazione).
 
 
 ```
