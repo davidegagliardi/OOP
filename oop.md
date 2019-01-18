@@ -137,7 +137,8 @@ void B::m2(){
   m3(); // OK
 }
 void A::m4(){
-  m3(); //OK, se in B qualcosa è protected -> resta inaccessibile dall’esterno, ma accessibile sia da classe base che da classe derivata
+  m3(); // OK, se in B qualcosa è protected -> resta inaccessibile dall’esterno, 
+        // ma accessibile sia da classe base che da classe derivata
 }
 
 IS-A -> ogni istanza di A è anche istanza di B -> EREDITARIETA’
