@@ -665,7 +665,7 @@ public:
 ```
 
 
-Gli **algoritmi** sono funzioni alle quali possono essere passati dei contenitori (iterator ai contenitori).
+Gli **algoritmi** sono funzioni template alle quali possono essere passati dei contenitori (iterator ai contenitori).
 
 Fanno cose come minimo dalla lista
 * efficiente
