@@ -401,7 +401,7 @@ A& operator = (const A& aa) {
 * [a = a + b]
 
 ```
-A& operator + (const A& aa) {			
+A operator + (const A& aa) {			
 	A temp;                                //creata classe temporanea
 	temp.k = k + aa.k;                     //k = valore classe in cui sono dentro
 	cout << “operator + const A&” << endl; //aa.k = valore classe passata
