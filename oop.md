@@ -429,7 +429,7 @@ A& operator == (const A& aa) {
 	return k == aa.k;
 }
 ```
-`return *this == bb;` è un confronto infinito (ricorsivo) tra classi, quindi devo confrontare i valori
+`return *this == aa;` è un confronto infinito (ricorsivo) tra classi, quindi devo confrontare i valori
 
 * [a != c]
 
