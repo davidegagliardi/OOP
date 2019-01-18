@@ -166,7 +166,7 @@ void A::m4(){
 main() {
 
 A a;
-a.m2(); //NO -> privatizzato per l’esterno uguali
+a.m2(); //NO -> privatizzato per l’esterno uguale
 }
 
 void A::m4(){
@@ -209,7 +209,7 @@ void A::m4(){
 main() {
 
   A a;
-  a.m2(); //NO à esterno no
+  a.m2(); //NO -> esterno no
 }
 
 void A::m4(){
@@ -233,7 +233,7 @@ void A::m4(){
 |          	|           	| Base                       	|                              	|                            	|                            	|                            	|                            	|
 |:--------:	|-----------	|----------------------------	|------------------------------	|----------------------------	|----------------------------	|----------------------------	|----------------------------	|
 |          	|           	| Private                    	|                              	| Public                     	|                            	| Protected                  	|                            	|
-| Derivata 	| Public    	| Inaccessibile dall'esterno 	| Inaccessibile dalla derivata 	| Inaccessibile dall'esterno 	| Accessibile dalla derivata 	| Inaccessibile dall'esterno 	| Accessibile dalla derivata 	|
+| Derivata 	| Public    	| Inaccessibile dall'esterno 	| Inaccessibile dalla derivata 	| Accessibile dall'esterno 	| Accessibile dalla derivata 	| Inaccessibile dall'esterno 	| Accessibile dalla derivata 	|
 |          	| Private   	| Inaccessibile dall'esterno 	| Inaccessibile dalla derivata 	| Inaccessibile dall'esterno 	| Accessibile dalla derivata 	| Inaccessibile dall'esterno 	| Accessibile dalla derivata 	|
 |          	| Protected 	| Inaccessibile dall'esterno 	| Inaccessibile dalla derivata 	| Inaccessibile dall'esterno 	| Accessibile dalla derivata 	| Inaccessibile dall'esterno 	| Accessibile dalla derivata 	|
 
@@ -247,7 +247,7 @@ Le 2 righe `private` e `protected` sono uguali per accessibilità: ci sono conse
 | Protected 	| Inaccessibile 	| Protected 	| Protected 	|
 
 Quando ha senso fare ereditarietà private/protected?
-Ereditare in modo `private` implica la natura della classe base è nascosta dall’implementazione (ereditarietà per implementazione). In sostanza si effettua questo tipo di ereditarietà quando attributi e metodi sono utilizzati per l'implementazione.
+Ereditare in modo `private` implica che la natura della classe base è nascosta dall’implementazione (ereditarietà per implementazione). In sostanza si effettua questo tipo di ereditarietà quando attributi e metodi sono utilizzati per l'implementazione.
 
 La classe derivata diventa così diversa dalla classe sopra, ne deriva che non utilizzerà i metodi come la classe sopra (superclasse)
 
