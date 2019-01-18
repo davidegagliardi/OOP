@@ -711,6 +711,8 @@ public:
 Tramite `virtual`, posso decidere in che classe della gerarchia va fatto eseguire un determinato metodo. In poche parole, con il `virtual`, il compilatore non esegue il metodo della classe madre, ma quello delle classi derivate.
 Con gli operatori, prima guardo di che tipo (classe) è il primo operatore (sempre che in quella classe ci sia implementato lo stesso metodo del `virtual`) e poi il secondo che deve essere lo stesso tipo del primo.
 
+Il `virtual` viene utilizzato solo con allocazioni di tipo dinamico.
+
 ```
 class Cavaliere: public Personaggio {
 private:
