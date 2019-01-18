@@ -511,199 +511,268 @@ public:
     return A(_a1.i + _a2.i + i); //NON FUNZIONA, i è privato. Uso funzione esterna
   };
 ```
+vediamo gli operatori che vengono chiamati nei prossimi esempi
 
 ```
-	A a1(1), A a2(2);
-	a1 = a2 + 3;
-	a1 operator = a2.operator + (A(3));    	chiamato costruttore ad un parametro  non c’è explicit    										    quindi va
-	a1 = 3 + a2;
-	a1 operator = (operator + (A(3), a2));	l’operatore è quello di intero, non trova modo di fare intero					con a e	quindi mi dà errore
-```
-
-```
-	a1 = a1 + a2;
-	A a1(1);  A a2(2);
-	a1 operator = (a1 operator + (a2));
-	A a3;
-	a3 = a1 + a2;
+A a1(1), A a2(2);
+a1 = a2 + 3;
+a1 operator = a2.operator + (A(3));     // chiamato costruttore ad un parametro
+a1 = 3 + a2;                            // non c’è explicit quindi va
+a1 operator = (operator + (A(3), a2));  // l’operatore è quello di intero,
+                                        // non trova modo di fare intero con a
+                                        // e quindi mi da errore
 ```
 
 ```
-	int c;  c = 3 + 2;
-	A d;  d = 3 + 2;		d operator = (A(3 + 2));
+a1 = a1 + a2;
+A a1(1);  A a2(2);
+a1 operator = (a1 operator + (a2));
+A a3;
+a3 = a1 + a2;
 ```
 
 ```
-	a1 += a2;
-	class A {
-		int i;
-	    public:
-		A(int _i) {i = _i;}
-		A& operator += (const A& _a)	//NO const dopo perché l’oggetto chiamato sarà modificato
- { i += _a.i;  return *this; }		 & è referenza
+int c;  c = 3 + 2;
+A d;  d = 3 + 2;		
+d operator = (A(3 + 2));
+```
+
+```
+a1 += a2;
+class A {
+  private:
+    int i;
+  public:
+    A(int _i) {i = _i;}
+    A& operator += (const A& _a){   // & è referenza
+      i += _a.i;  return *this;     // NO const dopo, perché l'oggetto chiamato sarà modificato
+    }
 }
-*nel return c’è operazione di deferenziazione  ritorna la stessa istanza, ma modificata (lvalue per fare assegnazione e quindi come fa l’operazione di assegnazione)*
 ```
+nel `return` c’è operazione di deferenziazione, quindi ritorna la stessa istanza, ma modificata (`lvalue` per fare assegnazione e quindi come fa l’operazione di assegnazione).
 
-```		
- 	class A {
-		int i;
-	    public:
-		A(int _i) {i = _i;}
-		bool operator < (const A& _a) const { return (i < _a.i); }
 
-A operator * (const A& _a) const {
+```
+class A {
+private:
+  int i;
+public:
+  A(int _i) {i = _i;}
+  bool operator < (const A& _a) const { return (i < _a.i); }
+
+  A operator * (const A& _a) const {
 		A temp = (*this);
-		return temp *= _a;		
-}
-		//return (*this) * _a;	NO!!!
+		return temp *= _a;          //return (*this) * _a; NO!!!
+  }
 
-A& operator *= (const A& _a) {		 efficienza uguale ma scrivo meno
+  A& operator *= (const A& _a) {    //efficienza uguale ma scrivo meno
 		(*this) = (*this) * _a;
-		return (*this);		
-}
+		return (*this);
+  }
 ```
 
-STANDARD TEMPLATE LIBRARY (STL)
-Una standard template library è universalmente nota; è portabile (integrata con il linguaggio, quindi il compilatore deve compilare ed avere accanto quella libreria standard).
+## Standard Template Library (STL)
 
+Una Standard Template Library è universalmente nota; è portabile (integrata con il linguaggio, quindi il compilatore deve compilare ed avere accanto quella libreria standard).
+
+Di seguito elenchiamo una funzione che calcola il minimo tra due variabili, riguardo diversi tipi:
+
+```
 int min(_i int, _j int) {
 	if (_i < _j) return _i;
 	else return _j;
 }
+```
 
+```
 double min( _t double,  _s double);
+```
 
+```
 class A {
-	int i;
-   public:
-	bool operator < (const _a A) const;
+private:
+  int i;
+public:
+  bool operator < (const _a A) const;
 };
-	bool A::operator <(const _a A) const {
-		return i < _a.i;
+
+bool A::operator <(const _a A) const {
+  return i < _a.i;
 }
-	A min (_a1 A, _a2 A);
-	A min (_a1 A, _a2 A) {
-		if (_a1 < _a2)  return _a1;
-		else return _a2;
+
+A min (_a1 A, _a2 A);
+A min (_a1 A, _a2 A) {
+	if (_a1 < _a2)  return _a1;
+	else return _a2;
 }
 B min (_b1 B, _b2 B) {
-	if (_b1 < _b2)  return b1;
-	else return b2;
+  if (_b1 < _b2)  return b1;
+  else return b2;
 }
-Un template è utilizzato per definire opzioni, metodi, strutture parametrizzate.
+```
+
+Un template è utilizzato per definire opzioni, metodi e strutture parametrizzate.
+
 Ad esempio, per fare un cerca e copia di funzioni posso generalizzare rispetto ad un parametro.
 
-template <E> E min (E e1, E e2)   header definizione template
-template <E> E min (E e1, E e2)  {   implementazione   fuori main  (nel main sarebbe stato  min(3, 2));
-		if (e1 < e2)  return e1;
-		else return e2;
-		}
+```
+template <E> E min (E e1, E e2)   // header definizione template
+template <E> E min (E e1, E e2){  // implementazione fuori main (nel main sarebbe stato min(3, 2));
+  if (e1 < e2)  return e1;
+	else return e2;
+  }
+```
 
-È possibile definire una classe template avendo una classe personalizzata?
+##### È possibile definire una classe template avendo una classe personalizzata?
+```
 template <E> class list <E> {
-	public:  int size();
-	};
+  public:
+    int size();
+};
+```
+Allora con `#include <list>`
 
-Allora con #include <list>
-	list <int> l;
-	l.push_front(3);
-	l.push_back(1);
+```
+list <int> l;
+l.push_front(3);
+l.push_back(1);
+```
 
-Necessario standardizzare la varie classi che ricevono.
+E' necessario standardizzare la varie classi che ricevono.
+
 Nella STL ci sono:
-•	container (contenitori)
-•	iterator (iteratori)
-•	algorithms
-I container sono classi che contengono qualcosa:
--	list
--	vector
--	set
--	queue
--	stack
--	map
-Uso i container per non implementare continuamente le stesse cose
-	class A {
-		list <B> lb;
-	      public:
-}
+* container (contenitori)
+* iterator (iteratori)
+* algorithms
 
-Gli algoritmi sono funzioni alle quali possono essere passati dei contenitori (iterator ai contenitori).
+I **container** sono classi che contengono qualcosa:
+* list
+* vector
+* set
+* queue
+* stack
+* map
+
+Uso i container per non implementare continuamente le stesse cose
+
+```
+class A {
+private:
+  list <B> lb;
+public:
+}
+```
+
+
+Gli **algoritmi** sono funzioni alle quali possono essere passati dei contenitori (iterator ai contenitori).
+
 Fanno cose come minimo dalla lista
--	efficiente
--	testato, usato molte volte
--	si passa ad una programmazione dove si compongono pezzi con algoritmi che ci sono
+* efficiente
+* testato, usato molte volte
+* si passa ad una programmazione dove si compongono pezzi con algoritmi che ci sono
 
 Definisco delle classi (organizzate in una gerarchia) che mi permettono l’accesso agli elementi del contenitore.
-Gli iteratori sono un modo per accedere ad i contenitori: non sono puntatori, ma ci assomigliano per alcune funzionalità.
-	list/set/vector <int>::iterator it;		 è un iteratore bidirezionale
-	map <int, float>::iterator iter;
+Gli **iteratori** sono un modo per accedere ai contenitori: non sono puntatori, ma ci assomigliano per alcune funzionalità.
+
+```
+list/set/vector <int>::iterator it;		//è un iteratore bidirezionale
+map <int, float>::iterator iter;
+```
+
 Un esempio di implementazione è
-	list <int> l;	//se l è vuoto, l.begin() == l.end();   iteratore è oggetto della classe di iteratori
-	l.push_front(3); l.push_back(2);
-	list <int>::iterator it;
-	for(it = l.begin(); it != l.end(); it++) {
-cout << *it;	//overloading di operatori per dereferenziare l’operatore  * restituisce 				 oggetto puntato, è un operatore unario
+
+```
+list <int> l;	//se l è vuoto, l.begin() == l.end();   iteratore è oggetto della classe di iteratori
+l.push_front(3); l.push_back(2);
+list <int>::iterator it;
+for(it = l.begin(); it != l.end(); it++) {
+  cout << *it;	// overloading di operatori per dereferenziare l’operatore -> * restituisce oggetto
+                  // puntato, è un operatore unario
 }
+```
 
 
-VIRTUAL
+## Virtual
+
+Consideriamo il seguente frame di codice:
+
+```
 class Personaggio {
-	int vita = 100;
-     public:
-	virtual void stampa() = 0;  	 il =0 rende il metodo puramente virtuale
-	virtual bool operator < (const Personaggio&);
+private:
+  int vita = 100;
+public:
+  virtual void stampa() = 0;  // =0 rende il metodo puramente virtuale
+  virtual bool operator < (const Personaggio&);
 };
-//Personaggio p;	NON posso scriverlo  classe ha un metodo puramente virtuale
+//Personaggio p;	NON posso scriverlo, la classe ha un metodo puramente virtuale
+```
 
-Tramite virtual, posso decidere in che classe della gerarchia va fatto eseguire un determinato metodo. In poche parole, con il virtual non mi stampa il metodo della classe madre, ma quello delle classi derivate.
-Con gli operatori, prima guardo di che tipo (classe) è il primo operatore (sempre che in quella classe ci sia implementato lo stesso metodo del virtual) e poi il secondo che deve essere lo stesso tipo del primo.
+Tramite `virtual`, posso decidere in che classe della gerarchia va fatto eseguire un determinato metodo. In poche parole, con il `virtual`, il compilatore non esegue il metodo della classe madre, ma quello delle classi derivate.
+Con gli operatori, prima guardo di che tipo (classe) è il primo operatore (sempre che in quella classe ci sia implementato lo stesso metodo del `virtual`) e poi il secondo che deve essere lo stesso tipo del primo.
 
-
+```
 class Cavaliere: public Personaggio {
-	string nome;  int forza;
-     public:
-	Cavaliere (string n, int f);
-	void stampa() {cout << … ;}
+private:
+  string nome;
+  int forza;
+public:
+  Cavaliere (string n, int f);
+  void stampa() {cout << … ;}
 };
 
 class Mago: public Personaggio {
-	string nome;  int potere;
-   public:
-	bool operator < (const Mago&);
-	friend ostream& operator << (ostream& os, const Mago& m);
+private:
+  string nome;
+  int potere;
+public:
+  bool operator < (const Mago&);
+  friend ostream& operator << (ostream& os, const Mago& m);
 }
 
 main() {
-	list <Personaggio*> l;
-	l.push_front(new Mago(“Circe”, 100));
-	l.push_back(new Cavaliere(“Odolfo”, 100));
+  list <Personaggio*> l;
+  l.push_front(new Mago(“Circe”, 100));
+  l.push_back(new Cavaliere(“Odolfo”, 100));
 }
+```
 
-Allora se
+Allora, considerando la seguente implementazione
+
+```
 Personaggio* pp;
 pp = new Cavaliere(“Astolfo”, 100);
-pp->stampa()
-•	Senza virtual, e con implementazione di stampa in Personaggio, avrei stampato quello in Personaggio
-•	Con virtual, vado a scegliere a runtime il metodo più giusto per stampare (stampa in Cavaliere)
+pp->stampa();
+```
 
+* Senza `virtual`, e con implementazione di `stampa()` in `Personaggio`, avrei stampato quello in `Personaggio`
+* Con `virtual`, vado a scegliere a runtime il metodo più giusto per stampare (`stampa()` in `Cavaliere`)
 
+A conferma di ciò, si verifica il seguente caso
+
+```
 Personaggio* pp = new Mago( … );
-pp -> stampa();		 Mago::stampa(); 	perché ho virtual (con = 0 o senza)
-			 Personaggio::stampa()	non ho virtual
+pp -> stampa();
+  //Mago::stampa(); perché ho virtual (con = 0 o senza)
+  //Personaggio::stampa() non ho virtual
+```
 
+Altro caso `virtual`
 
-Altro caso virtual
-	class Personaggio {
-		int vita = 100;
-	      public:
-		virtual void Stampa() = 0;
-		friend ostream& operator << (ostream& os, const Personaggio& p);
-		friend virtual ostream& op(ostream& os); non è virtuale puro perché implementato sotto
+```
+class Personaggio {
+private:
+  int vita = 100;
+public:
+  virtual void Stampa() = 0;
+  friend ostream& operator << (ostream& os, const Personaggio& p);
+  friend virtual ostream& op(ostream& os); //non è virtuale puro perché implementato sotto
 }
-ostream& Personaggio::op (ostream& os) {	
-	return os << vita;
+ostream& Personaggio::op (ostream& os) {
+  return os << vita;
 }
 
-ostream& operator << (ostream& os, const Personaggio& p) { }
-Non possiamo definire i metodi esterni come virtual  neanche i costruttori!
+ostream& operator << (ostream& os, const Personaggio& p){
+
+}
+```
+Non si possono definire i metodi esterni come `virtual`, neanche i costruttori!
