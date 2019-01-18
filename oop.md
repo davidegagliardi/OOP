@@ -618,7 +618,7 @@ Ad esempio, per fare un cerca e copia di funzioni posso generalizzare rispetto a
 
 ```
 template <E> E min (E e1, E e2)   // header definizione template
-template <E> E min (E e1, E e2){  // implementazione fuori main (nel main sarebbe stato min(3, 2));
+template <E> E min (E e1, E e2){  // implementazione fuori main (nel main sarebbe stato, ad esempio, min(3, 2));
   if (e1 < e2)  return e1;
 	else return e2;
   }
