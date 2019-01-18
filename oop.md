@@ -779,3 +779,126 @@ ostream& operator << (ostream& os, const Personaggio& p){
 }
 ```
 Non si possono definire i metodi esterni come `virtual`, neanche i costruttori!
+
+### Liste / Set / Vettori / Map
+
+Di seguito la sintassi utile per liste, set, vector e map.
+
+#### Liste
+
+```
+#include <list>
+list <int> mialista;
+list <int>::iterator iter;
+list <int>::reverse_iterator riter;
+for(i=0; i<5; ++i){
+mialista.push_back(i);
+mialista.push_front(i);
+}
+//stampa inizio-fine
+for(iter=mialista.begin(); iter!=mialista.end(); ++iter){
+     //cout << *iter  << " ";
+     stampa(*iter);
+}
+
+//stampa fine-inizio
+for(riter=mialista.rbegin(); riter!=mialista.rend(); ++riter){
+     cout << *riter << " ";
+}
+
+for_each(mialista.begin(),mialista.end(),&stampa); //da dove, a dove, cosa fa
+for_each(mialista.rbegin(),mialista.rend(),stampa);
+
+//delete
+list <int>::iterator deliter;
+deliter = find(mialista.begin(), mialista.end(), 3); //da dove, a dove, cosa fa
+if(deliter!=mialista.end()){
+    mialista.erase(deliter);
+}
+```
+Proprietà della lista:
+*
+
+##### Vector
+```
+```
+Proprietà del Vector
+* 
+
+##### Set
+
+```
+#include <set>
+set <int> si;
+set <int>::iterator siter;
+si.insert(1);
+//Se un valore è già presente, gli altri non vengono inseriti
+//Stampa
+for(siter=si.begin(); siter!=si.end(); ++siter){
+  cout << *siter << " ";
+}
+//Elimina
+siter = si.find(15);
+if (siter != si.end()){
+    si.erase(siter);
+}
+
+//ATTENZIONE->Ricordati di fare questo
+bool Lamiaclasse::operator < (const Qualcosa& q)const{
+    return name < q.name;
+}
+
+```
+Proprietà del set:
+*
+
+##### Multiset
+
+```
+multiset <int> mi;
+multiset <int>::iterator miter;
+mi.insert(30);
+//Stampa
+for(miter=mi.begin(); miter!=mi.end(); ++miter){
+  cout << *miter << " ";
+}
+```
+Proprietà del multiset:
+*
+
+##### Map
+
+```
+#include <map>
+map <string, int> m;
+map <string,int>::iterator miter;
+m.insert(pair <Persona ,int> (Persona("Nome"),21));
+//oppure
+m["Paolo"]=33;
+//Cerca ed elimina
+miter = m.find("Paolo");
+  if(miter!=m.end()){
+    cout << "Eta' di " << miter->first << ": " << miter->second << endl;
+    m.erase(miter);
+}
+//stampa
+void stampaMap(map <string,int> mm){
+     map <string,int>::iterator miter;
+     for(miter=mm.begin(); miter!=mm.end(); ++miter){
+			 	if(miter->second.getMatricola() == matricola)
+         cout << miter ->first << " di eta': " << miter -> second << endl;
+     }
+}
+
+stampaMap(m);
+```
+Proprietà del Map
+*
+
+##### Multimap
+
+```
+
+```
+Proprietà del Multimap
+*
