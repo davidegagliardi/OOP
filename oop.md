@@ -456,7 +456,7 @@ A operator ++ (int) {
 	A aa = *this;
 	k++;
   cout << “operator A++” << endl;
-  return aa;	//istanza-1 perché viene distrutto l’operatore di copia
+  return aa;	//istanza-1
 }
 ```
 il passaggio del parametro di tipo `int` è ciò che distingue il post-incremento dal pre-incremento.
