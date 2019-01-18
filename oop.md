@@ -1,4 +1,4 @@
-# Programmazione a oggetti
+# Programmazione ad oggetti
 Appunti a cura di *Andrea Abriani (@aabriani), Davide Gagliardi (@davidegagliardi), Andrea Braghiroli*
 
 ## Fattori qualità software:
