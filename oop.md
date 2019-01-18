@@ -517,9 +517,9 @@ vediamo gli operatori che vengono chiamati nei prossimi esempi
 ```
 A a1(1), A a2(2);
 a1 = a2 + 3;
-a1 operator = a2.operator + (A(3));     // chiamato costruttore ad un parametro
+a1.operator = a2.operator + (A(3));     // chiamato costruttore ad un parametro
 a1 = 3 + a2;                            // non c’è explicit quindi va
-a1 operator = (operator + (A(3), a2));  // l’operatore è quello di intero,
+a1.operator = (operator + (A(3), a2));  // l’operatore è quello di intero,
                                         // non trova modo di fare intero con a
                                         // e quindi mi da errore
 ```
