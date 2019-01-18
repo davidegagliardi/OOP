@@ -601,12 +601,12 @@ bool A::operator <(const _a A) const {
   return i < _a.i;
 }
 
-A min (_a1 A, _a2 A);
-A min (_a1 A, _a2 A) {
+A min (A _a1, A _a2);
+A min (A _a1, A _a2) {
 	if (_a1 < _a2)  return _a1;
 	else return _a2;
 }
-B min (_b1 B, _b2 B) {
+B min (B _b1, B _b2) {
   if (_b1 < _b2)  return b1;
   else return b2;
 }
