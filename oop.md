@@ -535,7 +535,7 @@ a3 = a1 + a2;
 ```
 int c;  c = 3 + 2;
 A d;  d = 3 + 2;		
-d operator = (A(3 + 2));
+d.operator = (A(3 + 2));
 ```
 
 ```
