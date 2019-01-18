@@ -375,4 +375,335 @@ Dal punto di vista funzionale, la variabile statica è come una variabile global
 * `const float A::b = 1.0` fuori dal main
 
 `static const int a;`
-* ![#f03c15]`non` posso scriverlo, con `static` potrei mettere il valore dopo l’inizializzazione, solo che con  `const` `a` deve esistere 
+* NON posso scriverlo; con `static` potrei mettere il valore dopo l’inizializzazione, solo che con  `const` `a` deve esistere
+
+### Overload operatori come metodi
+
+* [a = 3]
+
+```
+A& operator = (const int _k) {			
+	k = _k;
+	cout << “operator = const int” << endl;
+	return *this;
+}
+```
+* [b = a]
+
+```
+A& operator = (const A& aa) {			
+	k = aa.k;
+	cout << “operator = const A&” << endl;			NOTA: qualcuno ha già implementato
+	return *this;							uguale tra int e float
+}
+```
+* [a = a + b]
+
+```
+A& operator + (const A& aa) {			
+	A temp;                                //creata classe temporanea
+	temp.k = k + aa.k;                     //k = valore classe in cui sono dentro
+	cout << “operator + const A&” << endl; //aa.k = valore classe passata
+	return temp;                           //temp = il mio risultato
+}
+
+// A crea una nuova istanza. Prendo le 2 istanze e le sommo.
+// Infine metto il valore nella nuova istanza
+// temporanea -> la somma non modifica l’istanza corrente
+```
+* [c += a]
+
+```
+A& operator += (const A& aa) {			
+	k += aa.k;
+	cout << “operator += const A&” << endl;
+	return *this;
+}
+```
+* [a == c]
+
+```
+A& operator == (const A& aa) {			
+	cout << “operator == const A&” << endl;		//NOTA: NO per classi diverse!!
+	return k == aa.k;
+}
+```
+`return *this == bb;` è un confronto infinito (ricorsivo) tra classi, quindi devo confrontare i valori
+
+* [a != c]
+
+```
+A& operator != (const A& aa) {			
+	cout << “operator += const A&” << endl;
+	return !(*this == aa);
+}
+```
+* [++a;]  pre-incremento
+
+```
+A& operator ++ () {				
+	cout << “operator ++A” << endl;
+	k++;
+  return *this;
+}
+```
+* [++a;]  post-incremento
+
+```
+
+A operator ++ (int) {				
+	A aa = *this;
+	k++;
+  cout << “operator A++” << endl;
+  return aa;	//istanza-1 perché viene distrutto l’operatore di copia
+}
+```
+il passaggio del parametro di tipo `int` è ciò che distingue il post-incremento dal pre-incremento.
+
+
+Nel caso si voglia implementare **[ a == b ]**
+```
+friend bool operator == (const A& aa, const B& bb);	 // dentro i 2 public delle 2 classi A e B
+bool operator == (const A& aa, const B& bb) {		   // funzione esterna alla classe
+	return aa.val = bb.val;
+}
+```
+
+Al contrario, per implementare  **[ b == a ]** bisogna cambiare `A` con `B` ed `aa` con `bb` e viceversa.
+**[ a == a ]** è un metodo interno.
+
+### Operatori in C++ e la loro ridefinizione (operator overloading)
+* Operator `<<`
+* Operator `=`
+* Operator `++`
+* Operator `==`
+
+Gli operatori sono funzioni, quindi è possibile fare l’overloading degli operatori. Ciò vuol dire che alla stessa entità si possono dare significati diversi (capita per le funzioni, posso fare overloading).
+
+#### Cosa sono gli operatori?
+Sono operazioni che si trovano nelle espressioni dei vari tipi base (per esempio nell’`int`: gli operatori predefiniti).
+L’operatore sempre definito in ogni classe è l’operatore `=`.
+Qualsiasi classe noi definiamo, il comando `new` restituisce un puntatore.
+
+Data l’espressione `a = b + c;`, il compilatore c++ cerca gli operatori/metodi per svolgere l’espressione
+* nei tipi base: ci sono predefiniti
+* nelle classi: li vado a cercare (l'operatore `=` c’è sempre, mentre il `+` lo va a cercare)
+
+**Nota bene**: L’overloading degli operatori è un caso particolare dell’overloading di funzioni.
+
+A livello codice, per alcuni operatori l’overloading è realizzabile in due modi:
+* come metodo
+*	come funzione esterna
+
+Al contrario, l’operator `=` ad esempio, è possibile implementarlo solo come metodo.
+
+Consideriamo il seguente frame di codice
+
+```
+class A {
+private:
+  int i;
+public:
+	A(int _i) { i = _i; }
+	A operator + (const A& _a) const {return A( i + _a.i )};
+	friend A operator + (const A&, const A&);
+	A operator + (const A& _a1, const A& _a2) {
+    return A(_a1.i + _a2.i + i); //NON FUNZIONA, i è privato. Uso funzione esterna
+  };
+```
+
+```
+	A a1(1), A a2(2);
+	a1 = a2 + 3;
+	a1 operator = a2.operator + (A(3));    	chiamato costruttore ad un parametro  non c’è explicit    										    quindi va
+	a1 = 3 + a2;
+	a1 operator = (operator + (A(3), a2));	l’operatore è quello di intero, non trova modo di fare intero					con a e	quindi mi dà errore
+```
+
+```
+	a1 = a1 + a2;
+	A a1(1);  A a2(2);
+	a1 operator = (a1 operator + (a2));
+	A a3;
+	a3 = a1 + a2;
+```
+
+```
+	int c;  c = 3 + 2;
+	A d;  d = 3 + 2;		d operator = (A(3 + 2));
+```
+
+```
+	a1 += a2;
+	class A {
+		int i;
+	    public:
+		A(int _i) {i = _i;}
+		A& operator += (const A& _a)	//NO const dopo perché l’oggetto chiamato sarà modificato
+ { i += _a.i;  return *this; }		 & è referenza
+}
+*nel return c’è operazione di deferenziazione  ritorna la stessa istanza, ma modificata (lvalue per fare assegnazione e quindi come fa l’operazione di assegnazione)*
+```
+
+```		
+ 	class A {
+		int i;
+	    public:
+		A(int _i) {i = _i;}
+		bool operator < (const A& _a) const { return (i < _a.i); }
+
+A operator * (const A& _a) const {
+		A temp = (*this);
+		return temp *= _a;		
+}
+		//return (*this) * _a;	NO!!!
+
+A& operator *= (const A& _a) {		 efficienza uguale ma scrivo meno
+		(*this) = (*this) * _a;
+		return (*this);		
+}
+```
+
+STANDARD TEMPLATE LIBRARY (STL)
+Una standard template library è universalmente nota; è portabile (integrata con il linguaggio, quindi il compilatore deve compilare ed avere accanto quella libreria standard).
+
+int min(_i int, _j int) {
+	if (_i < _j) return _i;
+	else return _j;
+}
+
+double min( _t double,  _s double);
+
+class A {
+	int i;
+   public:
+	bool operator < (const _a A) const;
+};
+	bool A::operator <(const _a A) const {
+		return i < _a.i;
+}
+	A min (_a1 A, _a2 A);
+	A min (_a1 A, _a2 A) {
+		if (_a1 < _a2)  return _a1;
+		else return _a2;
+}
+B min (_b1 B, _b2 B) {
+	if (_b1 < _b2)  return b1;
+	else return b2;
+}
+Un template è utilizzato per definire opzioni, metodi, strutture parametrizzate.
+Ad esempio, per fare un cerca e copia di funzioni posso generalizzare rispetto ad un parametro.
+
+template <E> E min (E e1, E e2)   header definizione template
+template <E> E min (E e1, E e2)  {   implementazione   fuori main  (nel main sarebbe stato  min(3, 2));
+		if (e1 < e2)  return e1;
+		else return e2;
+		}
+
+È possibile definire una classe template avendo una classe personalizzata?
+template <E> class list <E> {
+	public:  int size();
+	};
+
+Allora con #include <list>
+	list <int> l;
+	l.push_front(3);
+	l.push_back(1);
+
+Necessario standardizzare la varie classi che ricevono.
+Nella STL ci sono:
+•	container (contenitori)
+•	iterator (iteratori)
+•	algorithms
+I container sono classi che contengono qualcosa:
+-	list
+-	vector
+-	set
+-	queue
+-	stack
+-	map
+Uso i container per non implementare continuamente le stesse cose
+	class A {
+		list <B> lb;
+	      public:
+}
+
+Gli algoritmi sono funzioni alle quali possono essere passati dei contenitori (iterator ai contenitori).
+Fanno cose come minimo dalla lista
+-	efficiente
+-	testato, usato molte volte
+-	si passa ad una programmazione dove si compongono pezzi con algoritmi che ci sono
+
+Definisco delle classi (organizzate in una gerarchia) che mi permettono l’accesso agli elementi del contenitore.
+Gli iteratori sono un modo per accedere ad i contenitori: non sono puntatori, ma ci assomigliano per alcune funzionalità.
+	list/set/vector <int>::iterator it;		 è un iteratore bidirezionale
+	map <int, float>::iterator iter;
+Un esempio di implementazione è
+	list <int> l;	//se l è vuoto, l.begin() == l.end();   iteratore è oggetto della classe di iteratori
+	l.push_front(3); l.push_back(2);
+	list <int>::iterator it;
+	for(it = l.begin(); it != l.end(); it++) {
+cout << *it;	//overloading di operatori per dereferenziare l’operatore  * restituisce 				 oggetto puntato, è un operatore unario
+}
+
+
+VIRTUAL
+class Personaggio {
+	int vita = 100;
+     public:
+	virtual void stampa() = 0;  	 il =0 rende il metodo puramente virtuale
+	virtual bool operator < (const Personaggio&);
+};
+//Personaggio p;	NON posso scriverlo  classe ha un metodo puramente virtuale
+
+Tramite virtual, posso decidere in che classe della gerarchia va fatto eseguire un determinato metodo. In poche parole, con il virtual non mi stampa il metodo della classe madre, ma quello delle classi derivate.
+Con gli operatori, prima guardo di che tipo (classe) è il primo operatore (sempre che in quella classe ci sia implementato lo stesso metodo del virtual) e poi il secondo che deve essere lo stesso tipo del primo.
+
+
+class Cavaliere: public Personaggio {
+	string nome;  int forza;
+     public:
+	Cavaliere (string n, int f);
+	void stampa() {cout << … ;}
+};
+
+class Mago: public Personaggio {
+	string nome;  int potere;
+   public:
+	bool operator < (const Mago&);
+	friend ostream& operator << (ostream& os, const Mago& m);
+}
+
+main() {
+	list <Personaggio*> l;
+	l.push_front(new Mago(“Circe”, 100));
+	l.push_back(new Cavaliere(“Odolfo”, 100));
+}
+
+Allora se
+Personaggio* pp;
+pp = new Cavaliere(“Astolfo”, 100);
+pp->stampa()
+•	Senza virtual, e con implementazione di stampa in Personaggio, avrei stampato quello in Personaggio
+•	Con virtual, vado a scegliere a runtime il metodo più giusto per stampare (stampa in Cavaliere)
+
+
+Personaggio* pp = new Mago( … );
+pp -> stampa();		 Mago::stampa(); 	perché ho virtual (con = 0 o senza)
+			 Personaggio::stampa()	non ho virtual
+
+
+Altro caso virtual
+	class Personaggio {
+		int vita = 100;
+	      public:
+		virtual void Stampa() = 0;
+		friend ostream& operator << (ostream& os, const Personaggio& p);
+		friend virtual ostream& op(ostream& os); non è virtuale puro perché implementato sotto
+}
+ostream& Personaggio::op (ostream& os) {	
+	return os << vita;
+}
+
+ostream& operator << (ostream& os, const Personaggio& p) { }
+Non possiamo definire i metodi esterni come virtual  neanche i costruttori!
