@@ -1,4 +1,4 @@
-# Programmazione ad oggetti
+àà# Programmazione ad oggetti
 
 Appunti a cura di _Andrea Abriani (@aabriani), Davide Gagliardi (@davidegagliardi), Fabio Della Giustina (@fabiodellagiustina), Andrea Braghiroli_.
 
@@ -317,7 +317,7 @@ File .h contenente le dichiarazioni di classi, metodi, funzioni.
 
 ### Function header
 
-L'operatore `new` alloca un puntatore di memoria, in questo modo l'allocazione avverra' in modo dinamico. Bisogna pero' preoccuparsi di utilizzare il comando `delete`, per non aumentare l'occupazione di memoria da parte del programma.
+L'operatore `new` alloca un puntatore di memoria, in questo modo l'allocazione avverrà in modo dinamico. Bisogna però preoccuparsi di utilizzare il comando `delete`, per non aumentare l'occupazione di memoria da parte del programma.
 
 Include il nome della funzione e specifica i parametri in ingresso e il tipo di dato in uscita.
 
@@ -328,7 +328,7 @@ returnValueType functionName(valueType parameter1, valueType parameter2, ...){
 }
 ```
 
-Si tratta della dichiarazione all'inizio del file con cui si dichiara il nome che il compilatore usa per chiamare il metodo (che e' l’unico nel programma).
+Si tratta della dichiarazione all'inizio del file con cui si dichiara il nome che il compilatore usa per chiamare il metodo (che è l’unico nel programma).
 
 ### Costruttore
 
@@ -432,7 +432,7 @@ Personaggio p; //NON posso scriverlo, la classe ha un metodo puramente virtuale
 ```
 
 Tramite `virtual`, posso decidere in che classe della gerarchia va fatto eseguire un determinato metodo. In poche parole, con il `virtual`, il compilatore non esegue il metodo della classe madre, ma quello delle classi derivate.
-Con gli operatori, prima guardo di che tipo (classe) e' il primo operatore (sempre che in quella classe ci sia implementato lo stesso metodo del `virtual`) e poi il secondo che deve essere lo stesso tipo del primo.
+Con gli operatori, prima guardo di che tipo (classe) è il primo operatore (sempre che in quella classe ci sia implementato lo stesso metodo del `virtual`) e poi il secondo che deve essere lo stesso tipo del primo.
 
 Il `virtual` viene utilizzato solo con allocazioni di tipo dinamico.
 
@@ -473,9 +473,9 @@ pp->stampa();
 ```
 
 -   Senza `virtual`, e con implementazione di `stampa()` in `Personaggio`, avrei stampato quello in `Personaggio`
--   Con `virtual`, vado a scegliere a runtime il metodo piu' giusto per stampare (`stampa()` in `Cavaliere`)
+-   Con `virtual`, vado a scegliere a runtime il metodo più giusto per stampare (`stampa()` in `Cavaliere`)
 
-A conferma di cio', si verifica il seguente caso
+A conferma di ciò, si verifica il seguente caso
 
 ```cpp
 Personaggio* pp = new Mago(…);
@@ -493,7 +493,7 @@ class Personaggio{
   public:
     virtual void Stampa() = 0;
     friend ostream& operator<<(ostream& os, const Personaggio& p);
-    friend virtual ostream& op(ostream& os); //non e' virtuale puro perché implementato sotto
+    friend virtual ostream& op(ostream& os); //non è virtuale puro perché implementato sotto
 };
 ostream& Personaggio::op(ostream& os){
   return os << vita;
