@@ -428,6 +428,7 @@ class Personaggio{
     int vita = 100;
   public:
     virtual void stampa() = 0;  //=0 rende il metodo puramente virtuale
+    // la classe diventa astratta e non può essere istanziata direttamente
     virtual bool operator<(const Personaggio&);
 };
 Personaggio p; //NON posso scriverlo, la classe ha un metodo puramente virtuale
