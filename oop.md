@@ -2,35 +2,20 @@
 
 Appunti a cura di _Andrea Abriani (@aabriani), Davide Gagliardi (@davidegagliardi), Fabio Della Giustina (@fabiodellagiustina), Andrea Braghiroli_.
 
-<<<<<<< HEAD
-## Fattori qualità del software
-
-### Esterni
-
--   **Estendibilità:** è possibile ampliare le funzionalità che il software aveva in precedenza. Rende quindi la programmazione ad oggetti più semplice.
--   **Riusabilità:** il software e le sue componenti possono essere riutilizzati per un insieme di requisiti che possono essere diversi da quelli iniziali.
-=======
 ## Fattori qualita' software:
 
 ### Esterni
 
 -   **Estendibilita'**: sistema amplia funzionalita' che il software aveva in precedenza. Programmazione ad oggetti viene resa piu' semplice.
 -   **Riusabilita'**: software e componenti possono essere riutilizzati per un insieme di requisiti che possono essere diversi da quelli precedenti.
->>>>>>> e23d404e207f4b4dfb3295faf7f780d1bbd59c15
 
 ### Interni
 
 _Fattori percepibili dal codice sorgente_
 
-<<<<<<< HEAD
--   **Strutturazione:** il codice viene scritto in modo tale da astrarre delle singole parti. E’ possibile un’individuazione di parti di software indipendenti dalle altre (es: input/output può essere posizionato in una zona del codice differente).
--   **Modularità:** è collegata alla strutturazione. Va oltre la struttura e indica che può essere usata in modo diverso e con altri componenti può raggiungere scopi e requisiti differenti. Il codice può essere utilizzato  per scopi diversi.
--   **Comprensibilità:** il software è strutturato in modo che corrisponda alla descrizione del dominio.
-=======
 -   **Strutturazione**: codice viene scritto in modo tale da astrarre delle singole parti. E’ possibile un’individuazione di parti di software indipendenti dalle altre (es. Input/output puo' essere posizionato in zona differente).
 -   **Modularita'**: collegata alla strutturazione. Va oltre la struttura e indica che puo' essere usata in modo diverso e con componenti puo' raggiungere scopi e requisiti differenti. (Il codice puo' essere utilizzato  per scopi diversi).
 -   **Comprensibilita'**: software strutturato in modo che corrisponda alla descrizione del dominio.
->>>>>>> e23d404e207f4b4dfb3295faf7f780d1bbd59c15
 
 ## Caratteristiche programmazione a oggetti
 
@@ -46,17 +31,12 @@ Le classi costitui- scono un contenitore che racchiude negli attributi le specif
 
 Le classi sono legate in gerachie. Una eredita l'altra per creare una struttura.
 
-<<<<<<< HEAD
-Si pone enfasi sulla rappresentazione. In caso di errori si andrà a realizzare una struttura sbagliata.
-L'enfasi viene spostata da computazione a rappresentazione (più o meno astratta) sul quale il software deve agire.
-=======
 Si pone enfasi sulla rappresentazione. In caso di errori si andra' a realizzare una struttura sbagliata.
 L'enfasi viene spostata da computazione a rappresentazione (piu' o meno astratta) sul quale il software deve agire
 
 #### Istanza
 
 Gli oggetti descritti dalle classi e quindi gli elementi di queste vengono chiamate istanze. Esse provvedono a dare un valore alle specifiche richieste dalla classe stessa e su di esse si possono direttamente applicare i metodi descritti nelle classi. Le istanze formano il livello estensionale dei diagrammi.
->>>>>>> e23d404e207f4b4dfb3295faf7f780d1bbd59c15
 
 ### Enfasi sulla rappresentazione
 
@@ -64,14 +44,8 @@ Il software puo' essere visto come un insieme di scatole, nelle quali entrano ed
 
 Viene utilizzato l'**UML** (_unified modeling language_), uno standard che contiene un insieme di linguaggi grafici per realizzare un diagramma delle classi e degli oggetti, ottenendo una rappresentazione grafica della programmazione.
 
-<<<<<<< HEAD
-#### Oggetti in UML
-
-All'interno dell'UML, la relazione oggetto-classe è simile a elemento-insieme
-=======
 Oggetti in UML
 All'interno dell'UML, la relazione oggetto-classe e' simile a elemento-insieme
->>>>>>> e23d404e207f4b4dfb3295faf7f780d1bbd59c15
 
 | Classe  | Insieme  |
 | ------- | -------- |
@@ -178,11 +152,7 @@ void A::m4(){
 //IS-A -> ogni istanza di A e' anche istanza di B -> EREDITARIETA’
 ```
 
-<<<<<<< HEAD
-#### Ereditarietà di tipo private `class A : private B`
-=======
 #### Ereditarieta' di tipo private `class A: private B`
->>>>>>> e23d404e207f4b4dfb3295faf7f780d1bbd59c15
 
 -   Quando e' private in B diventa inaccessibile da A ed inaccessibile dall’esterno
 
@@ -220,11 +190,7 @@ void A::m4(){
 }
 ```
 
-<<<<<<< HEAD
-#### Ereditarietà di tipo protected `class A : protected B`
-=======
 #### Ereditarieta' di tipo protected `class A: protected B`
->>>>>>> e23d404e207f4b4dfb3295faf7f780d1bbd59c15
 
 -   Quando e' private in B diventa inaccessibile da A ed inaccessibile dall’esterno
 
@@ -280,11 +246,7 @@ Le 2 righe `private` e `protected` sono uguali per accessibilita': ci sono conse
 Quando ha senso fare ereditarieta' private/protected?
 Ereditare in modo `private` implica che la natura della classe base e' nascosta dall’implementazione (ereditarieta' per implementazione). In sostanza si effettua questo tipo di ereditarieta' quando attributi e metodi sono utilizzati per l'implementazione.
 
-<<<<<<< HEAD
-La classe derivata diventa così diversa dalla classe sopra, ne deriva che non utilizzerà i metodi come la classe sopra (superclasse).
-=======
 La classe derivata diventa cosi' diversa dalla classe sopra, ne deriva che non utilizzera' i metodi come la classe sopra (superclasse)
->>>>>>> e23d404e207f4b4dfb3295faf7f780d1bbd59c15
 
 Quando ha senso fare ereditarieta' public?
 
@@ -340,7 +302,6 @@ Se l'operatore viene applicato ad un puntatore, il valore della cella di memoria
 
 ### Operatore "new"
 
-<<<<<<< HEAD
 L'operatore `new` istanzia un oggetto dinamicamente nell'heap restituendo l'indirizzo di memoria dell'oggetto istanziato. Bisogna però preoccuparsi di utilizzare il comando `delete`, per non aumentare l'occupazione di memoria da parte del programma.
 
 ### Header file
@@ -355,22 +316,15 @@ File .h contenente le dichiarazioni di classi, metodi, funzioni.
 ```
 
 ### Function header
-=======
-L'operatore `new` alloca un puntatore di memoria, in questo modo l'allocazione avverra' in modo dinamico. Bisogna pero' preoccuparsi di utilizzare il comando `delete`, per non aumentare l'occupazione di memoria da parte del programma.
->>>>>>> e23d404e207f4b4dfb3295faf7f780d1bbd59c15
 
 Include il nome della funzione e specifica i parametri in ingresso e il tipo di dato in uscita.
 
-<<<<<<< HEAD
 ```cpp
 returnValueType functionName(valueType parameter1, valueType parameter2, ...){
   ...
   return returnValue;
 }
 ```
-=======
-Si tratta della dichiarazione all'inizio del file con cui si dichiara il nome che il compilatore usa per chiamare il metodo (che e' l’unico nel programma).
->>>>>>> e23d404e207f4b4dfb3295faf7f780d1bbd59c15
 
 ### Costruttore
 
@@ -430,11 +384,7 @@ Attributi, metodi e funzioni possono avere dei qualificatori che ne specificano 
 
 E' un qualificatore attribuito ad una funzione che si vuole rendere "amica" di una classe ovvero consentirle di accedere a tutti gli attributi e metodi (anche privati) di una classe.
 
-<<<<<<< HEAD
-Dal punto di vista funzionale, la variabile statica è come una variabile globale per le istanze della stessa classe.
-=======
 ### Static
->>>>>>> e23d404e207f4b4dfb3295faf7f780d1bbd59c15
 
 E' un qualificatore che se messo davanti ad un attributo di una classe prevede che tutte le istanze di quella classe abbiano quell’attributo condiviso. Solitamente viene inizializzato come variabile globale (come in C) e non all’interno della classe, questo perché altrimenti ogni volta che venisse creata una nuova istanza il valore di quell’attributo verrebbe reinizializzato.
 
@@ -447,105 +397,14 @@ E' un qualificatore che può essere associato sia ad attributi che a metodi.
 
 A seconda dell'attribuzione e' bene prestare attenzione alle funzionalita' questa introduce per non creare collisioni
 
-<<<<<<< HEAD
--   NON posso scriverlo; con `static` potrei mettere il valore dopo l’inizializzazione, solo che con  `const` `a` deve esistere
-
-### Overload operatori come metodi (all'interno della classe)
-
--   [a = 3]
-
-```cpp
-A& operator=(const int uk){
-  k = uk;
-  cout << "operator = const int" << endl;
-  return \*this;
-};
-```
-
--   [b = a]
-
-```cpp
-A& operator=(const A& a){
-  k = a.k;
-  cout << "operator = const A&" << endl; //NOTA: qualcuno ha già implementato
-  return \*this; //uguale tra int e float
-};
-```
-
--   [a = a + b]
-
-```cpp
-A operator+(const A& a){
-  A temp;                                //creata classe temporanea
-  temp.k = k + a.k;                      //k = valore classe in cui sono dentro
-  cout << "operator + const A&" << endl; //a.k = valore classe passata
-  return temp;                           //temp = il mio risultato
-};
-//A crea una nuova istanza. Prendo le 2 istanze e le sommo.
-//Infine metto il valore nella nuova istanza
-//temporanea -> la somma non modifica l’istanza corrente
-```
-
--   [c += a]
-
-```cpp
-A& operator+=(const A& a){
-  k += a.k;
-  cout << "operator += const A&" << endl;
-  return \*this;
-};
-```
-
--   [a == c]
-
-```cpp
-A& operator==(const A& a){
-  cout << "operator == const A&" << endl;		//NOTA: NO per classi diverse!!
-  return k == aa.k;
-};
-```
-
-`return *this == aa;` è un confronto infinito (ricorsivo) tra classi, quindi devo confrontare i valori
-
--   [a != c]
-
-```cpp
-A& operator!=(const A& a){
-  cout << "operator += const A&" << endl;
-  return k != aa.k; //in alternativa return !(\*this == a);
-};
-```
-
--   [++a] pre-incremento
-
-```cpp
-A& operator++(){
-  cout << "operator ++A" << endl;
-  k++;
-  return \*this;
-};
-```
-=======
 Esempio:
->>>>>>> e23d404e207f4b4dfb3295faf7f780d1bbd59c15
 
 -   `static int numIstanze` variabile comune a tutte le istanze che puo' essere incrementata
 -   `const float miaConst` variabile che dopo un'inizializzazione non potra' piu' essere modifica (per l'utilizzo del `const`)
 -   `static const int miaConst = 1` variabile che viene inizializzata al valore 1. Sara' comune a tutte le istanze e non potra' essere modificata
 -   `static const int a` si tratta come un errore. La variabile verra' inizializzata ad un valore casuale e non sara' possibile modificarla (a causa di `static`)
 
-<<<<<<< HEAD
-```cpp
-A operator++(int){
-  A a = \*this;
-  k++;
-  cout << "operator A++" << endl;
-  return a;	//istanza-1
-};
-```
-=======
 ### Explicit
->>>>>>> e23d404e207f4b4dfb3295faf7f780d1bbd59c15
 
 E' un qualificatore che può essere assegnato solo ai costruttore ad un parametro. Ogni volta che un costruttore ad un solo parametro viene invocato per inizializzare un oggetto si sta creando implicitamente una conversione dal tipo del parametro al tipo della classe. Talvolta però si desidera che questa conversione automatica non abbia luogo. Per questo motivo il linguaggio C++ definisce la parola riservata explicit.
 
