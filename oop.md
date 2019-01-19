@@ -152,11 +152,7 @@ void A::m4(){
 //IS-A -> ogni istanza di A è anche istanza di B -> EREDITARIETA’
 ```
 
-#### Ereditarieta' di tipo private `class A: private B`
-
-> > > > > > > # e23d404e207f4b4dfb3295faf7f780d1bbd59c15
-> > > > > > >
-> > > > > > > #### Ereditarietà di tipo private `class A: private B`
+#### Ereditarietà di tipo private `class A : private B`
 
 -   Quando è private in B diventa inaccessibile da A ed inaccessibile dall’esterno
 
@@ -194,11 +190,7 @@ void A::m4(){
 }
 ```
 
-#### Ereditarieta' di tipo protected `class A: protected B`
-
-> > > > > > > # e23d404e207f4b4dfb3295faf7f780d1bbd59c15
-> > > > > > >
-> > > > > > > #### Ereditarietà di tipo protected `class A: protected B`
+#### Ereditarietà di tipo protected `class A : protected B`
 
 -   Quando è private in B diventa inaccessibile da A ed inaccessibile dall’esterno
 
@@ -327,14 +319,6 @@ File .h contenente le dichiarazioni di classi, metodi, funzioni.
 
 L'operatore `new` alloca un puntatore di memoria, in questo modo l'allocazione avverra' in modo dinamico. Bisogna pero' preoccuparsi di utilizzare il comando `delete`, per non aumentare l'occupazione di memoria da parte del programma.
 
-> > > > > > > e23d404e207f4b4dfb3295faf7f780d1bbd59c15
-
-Include il nome della funzione e specifica i parametri in ingresso e il tipo di dato in uscita.
-
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-
-=======
-
 Include il nome della funzione e specifica i parametri in ingresso e il tipo di dato in uscita.
 
 ```cpp
@@ -345,8 +329,6 @@ returnValueType functionName(valueType parameter1, valueType parameter2, ...){
 ```
 
 Si tratta della dichiarazione all'inizio del file con cui si dichiara il nome che il compilatore usa per chiamare il metodo (che e' l’unico nel programma).
-
-> > > > > > > # e23d404e207f4b4dfb3295faf7f780d1bbd59c15
 
 ### Costruttore
 
@@ -417,11 +399,7 @@ Attributi, metodi e funzioni possono avere dei qualificatori che ne specificano 
 -   Attributo: prevede che il suo valore non possa essere cambiato in seguito all’inizializzazione. Se viene associato ad un puntatore per esempio impedisce che nel resto del programma si possa cambiare il valore della casella di memoria al quale punta.
 -   Metodo: prevede che il metodo prevenga qualsiasi cambiamento fatto all’istanza chiamante, ciò garantisce più sicurezza nell’uso, per esempio, di metodi che coinvolgano parametri definiti privati.
 
-Esempio:
-
-> > > > > > > # e23d404e207f4b4dfb3295faf7f780d1bbd59c15
-> > > > > > >
-> > > > > > > A seconda dell'attribuzione è bene prestare attenzione alle funzionalità questa introduce per non creare collisioni
+A seconda dell'attribuzione è bene prestare attenzione alle funzionalità questa introduce per non creare collisioni
 
 Esempio:
 
@@ -431,10 +409,6 @@ Esempio:
 -   `static const int a` si tratta come un errore. La variabile verrà inizializzata ad un valore casuale e non sarà possibile modificarla (a causa di `static`)
 
 ### Explicit
-
-> > > > > > > # e23d404e207f4b4dfb3295faf7f780d1bbd59c15
-> > > > > > >
-> > > > > > > ### Explicit
 
 è un qualificatore che può essere assegnato solo ai costruttore ad un parametro. Ogni volta che un costruttore ad un solo parametro viene invocato per inizializzare un oggetto si sta creando implicitamente una conversione dal tipo del parametro al tipo della classe. Talvolta però si desidera che questa conversione automatica non abbia luogo. Per questo motivo il linguaggio C++ definisce la parola riservata explicit.
 
@@ -888,95 +862,6 @@ for(it=l.begin(); it!=l.end(); it++){
                 //puntato, è un operatore unario
 }
 ```
-
-## Virtual
-
-Consideriamo il seguente frame di codice:
-
-```cpp
-class Personaggio{
-  private:
-    int vita = 100;
-  public:
-    virtual void stampa() = 0;  //=0 rende il metodo puramente virtuale
-    virtual bool operator <(const Personaggio&);
-};
-Personaggio p; //NON posso scriverlo, la classe ha un metodo puramente virtuale
-```
-
-Tramite `virtual`, posso decidere in che classe della gerarchia va fatto eseguire un determinato metodo. In poche parole, con il `virtual`, il compilatore non esegue il metodo della classe madre, ma quello delle classi derivate.
-Con gli operatori, prima guardo di che tipo (classe) è il primo operatore (sempre che in quella classe ci sia implementato lo stesso metodo del `virtual`) e poi il secondo che deve essere lo stesso tipo del primo.
-
-Il `virtual` viene utilizzato solo con allocazioni di tipo dinamico.
-
-```cpp
-class Cavaliere : public Personaggio{
-  private:
-    string nome;
-    int forza;
-  public:
-    Cavaliere(string n, int f);
-    void stampa(){
-      cout << "…";
-    }
-};
-
-class Mago : public Personaggio{
-  private:
-    string nome;
-    int potere;
-  public:
-    bool operator <(const Mago&);
-    friend ostream& operator <<(ostream& os, const Mago& m);
-}
-
-main(){
-  list<Personaggio*> l;
-  l.push_front(new Mago("Circe", 100));
-  l.push_back(new Cavaliere("Odolfo", 100));
-}
-```
-
-Allora, considerando la seguente implementazione
-
-```cpp
-Personaggio* pp;
-pp = new Cavaliere("Astolfo", 100);
-pp->stampa();
-```
-
--   Senza `virtual`, e con implementazione di `stampa()` in `Personaggio`, avrei stampato quello in `Personaggio`
--   Con `virtual`, vado a scegliere a runtime il metodo più giusto per stampare (`stampa()` in `Cavaliere`)
-
-A conferma di ciò, si verifica il seguente caso
-
-```cpp
-Personaggio* pp = new Mago(…);
-pp -> stampa();
-//Mago::stampa(); perché ho virtual (con = 0 o senza)
-//Personaggio::stampa(); non ho virtual
-```
-
-Altro caso `virtual`
-
-```cpp
-class Personaggio{
-  private:
-    int vita = 100;
-  public:
-    virtual void Stampa() = 0;
-    friend ostream& operator <<(ostream& os, const Personaggio& p);
-    friend virtual ostream& op(ostream& os); //non è virtuale puro perché implementato sotto
-};
-ostream& Personaggio::op(ostream& os){
-  return os << vita;
-};
-ostream& operator <<(ostream& os, const Personaggio& p){
-  ...
-};
-```
-
-Non si possono definire i metodi esterni come `virtual`, neanche i costruttori!
 
 ### Liste / Set / Vettori / Map
 
