@@ -362,7 +362,7 @@ Il distruttore è caratterizzato dal fatto che non ha valori di ritorno né para
 Il suo compito primario dovrebbe essere sempre e solo quella di rimuovere un oggetto e tutte le sue dipendenze dallo stato del programma in maniera sicura e completa.
 Viene invocato automaticamente per tutte le variabili, ogni volta che viene raggiunta la fine del loro ambito di visibilità, oppure nel caso di deallocazione tramite il comando `delete`.
 
-### Attributi statici operatori(???)
+### Attributi statici operatori
 
 Gli attributi statici sono attributi istanziati solo una volta che valgono per tutte le istanze della classe.
 Se un’istanza cambia il contenuto, allora viene cambiata per tutte le istanze
