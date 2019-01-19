@@ -1,8 +1,8 @@
 # Programmazione ad oggetti
 
-Appunti a cura di Andrea Abriani (@aabriani), Davide Gagliardi (@davidegagliardi), Fabio Della Giustina (@fabiodellagiustina), Andrea Braghiroli.
+Appunti a cura di _**Andrea Abriani** (@aabriani), **Davide Gagliardi** (@davidegagliardi), **Fabio Della Giustina** (@fabiodellagiustina), **Andrea Braghiroli**._
 
-Si ringraziano Antonio Stefani (@AntonioStefani) e Davide Galvan (@gvlaan) per aver contibuito agli appunti.
+_Si ringraziano **Antonio Stefani** (@AntonioStefani) e **Davide Galvan** (@gvlaan) per aver contibuito agli appunti._
 
 ## Fattori qualità software:
 
