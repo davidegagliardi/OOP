@@ -29,7 +29,7 @@ In precedenza, vi era una procedura che lavorava su variabili globali. Ora invec
 
 ### Concetto di classe
 
-Le classi costitui- scono un contenitore che racchiude negli attributi le specifiche degli oggetti, che saranno tutti omogenei tra loro, mentre racchiude nei metodi il comportamento di questi. Le classi formano il livello intensionale dei diagrammi.
+Le classi costituiscono un contenitore che racchiude negli attributi le specifiche degli oggetti, che saranno tutti omogenei tra loro, mentre racchiude nei metodi il comportamento di questi. Le classi formano il livello intensionale dei diagrammi.
 
 Le classi sono legate in gerachie. Una eredita l'altra per creare una struttura.
 
@@ -46,7 +46,6 @@ Il software può essere visto come un insieme di scatole, nelle quali entrano ed
 
 Viene utilizzato l'**UML** (_unified modeling language_), uno standard che contiene un insieme di linguaggi grafici per realizzare un diagramma delle classi e degli oggetti, ottenendo una rappresentazione grafica della programmazione.
 
-Oggetti in UML
 All'interno dell'UML, la relazione oggetto-classe è simile a elemento-insieme
 
 | Classe  | Insieme  |
@@ -61,11 +60,12 @@ La parte grafica in UML non è arbitraria ma unificata, ovvero vengono utilizzat
 
 ### Ereditarietà
 
-L'ereditarietà consente di creare classificazioni gerarchiche. è possibile creare una classe generale che definisce le caratteristiche comuni a una serie di oggetti correlati. La classe può, in seguito, essere ereditata da una o più classi, ognuna delle quali aggiunge alla classe solo elementi specifici.
+L'ereditarietà consente di creare classificazioni gerarchiche. E' possibile creare una classe generale che definisce le caratteristiche comuni a una serie di oggetti correlati. La classe può, in seguito, essere ereditata da una o più classi, ognuna delle quali aggiunge alla classe solo elementi specifici.
 Si definisce _classe base_ la classe ereditata, mentre la classe che "riceve" l'eredità è detta _classe derivata_. Avviene mediante la seguente sintassi:
 
 ```cpp
-class ClasseDerivata : tipoEreditarieta ClasseBase{ //tipoEreditarieta può essere public, private, protected
+class ClasseDerivata : tipoEreditarieta ClasseBase{
+  //tipoEreditarieta può essere public, private, protected
   //contenuto della classe
 };
 ```
@@ -76,7 +76,7 @@ Esistono diversi tipi di ereditarietà:
 -   **private**: ereditarietà privata significa che i campi pubblici e protetti della classe base diventano campi privati della classe derivata. L’ereditarietà privata è quella di default
 -   **protected**: ereditarietà protetta significa che i campi pubblici e protetti della classe base diventano campi protetti della classe derivata
 
-Quando, ad esempio, il tipo di accesso alla classe base è `public`, tutti i membri `public` della classe base diverranno membri `public` della classe derivata, Lo stesso discorso varrà per i membri `protected`.
+Quando, ad esempio, il tipo di accesso alla classe base è `public`, tutti i membri `public` della classe base diverranno membri `public` della classe derivata. Lo stesso discorso varrà per i membri `protected`.
 Per gli elementi di tipo `private` della classe base, questi non saranno accessibili da parte dei membri della classe derivata.
 
 Una classe derivata può ricevere in eredità elementi di due o più classi base.
@@ -319,8 +319,6 @@ File .h contenente le dichiarazioni di classi, metodi, funzioni.
 
 ### Function header
 
-L'operatore `new` alloca un puntatore di memoria, in questo modo l'allocazione avverrà in modo dinamico. Bisogna però preoccuparsi di utilizzare il comando `delete`, per non aumentare l'occupazione di memoria da parte del programma.
-
 Include il nome della funzione e specifica i parametri in ingresso e il tipo di dato in uscita.
 
 ```cpp
@@ -353,6 +351,8 @@ Caratteristiche del costruttore sono:
 -   **Costruttore di default**: un costruttore è un metodo che viene richiamato automaticamente con il compito di inizializzare l’istanza a dei valori di default. Nel momento in cui viene sovrascritto da un qualsiasi costruttore (default o con parametri) viene disabilitato
 -   **Costruttore di copia**: il costruttore di copia si occupa di copiare un’istanza in un’altra della stessa classe. Di base questo avviene con una copia superficiale, per evitare che ci siano instabilità quindi è utile ridefinirlo così da attuare una copia profonda in caso di puntatori
 
+**Copia superficiale** e **copia profonda**: si parla di copia superficiale quando tra due istanze c’è la copia membro a membro. Questo tipo di copia è automatica nel costruttore di copia generato dal compilatore; la copia profonda invece è necessario ottenerla nel caso uno degli attributi di un’istanza sia un puntatore. Questo perché con la copia superficiale si creerebbe nell’istanza copiata un puntatore che punta alla stessa casella di memoria di quello originale, ciò potrebbe comportare instabilità nel programma quindi più correttamente sarebbe da allocare una porzione di memoria per un altro puntatore e poi uguagliare il contenuto del puntatore originale con quello del puntatore della copia.
+
 _L’uso di un costruttore appositamente definito consente di inizializzare tutti i membri della classe assieme, di modo che l’istanziazione di un oggetto sia sempre consistente con il nostro modello di dati e indipendente dalle scelte del compilatore._
 
 ```cpp
@@ -379,7 +379,7 @@ NomeClasse::~NomeClasse(){
 
 Il distruttore è caratterizzato dal fatto che non ha valori di ritorno né parametri. Per questo motivo non può essere sovraccaricato.
 
-Il suo compito primario dovrebbe essere sempre e solo quella di rimuovere un oggetto e tutte le sue dipendenze dallo stato del programma in maniera sicura e completa.
+Il suo compito primario dovrebbe essere sempre e solo quello di rimuovere un oggetto e tutte le sue dipendenze dallo stato del programma in maniera sicura e completa.
 Viene invocato automaticamente per tutte le variabili, ogni volta che viene raggiunta la fine del loro ambito di visibilità, oppure nel caso di deallocazione tramite il comando `delete`.
 
 ## Specifiche di attributi, metodi e funzioni
@@ -388,15 +388,15 @@ Attributi, metodi e funzioni possono avere dei qualificatori che ne specificano 
 
 ### Friend
 
-è un qualificatore attribuito ad una funzione che si vuole rendere "amica" di una classe ovvero consentirle di accedere a tutti gli attributi e metodi (anche privati) di una classe.
+E' un qualificatore attribuito ad una funzione che si vuole rendere "amica" di una classe ovvero consentirle di accedere a tutti gli attributi e metodi (anche privati) di una classe.
 
 ### Static
 
-è un qualificatore che se messo davanti ad un attributo di una classe prevede che tutte le istanze di quella classe abbiano quell’attributo condiviso. Solitamente viene inizializzato come variabile globale (come in C) e non all’interno della classe, questo perché altrimenti ogni volta che venisse creata una nuova istanza il valore di quell’attributo verrebbe reinizializzato.
+E' un qualificatore che se messo davanti ad un attributo di una classe prevede che tutte le istanze di quella classe abbiano quell’attributo condiviso. Solitamente viene inizializzato come variabile globale (come in C) e non all’interno della classe, questo perché altrimenti ogni volta che venisse creata una nuova istanza il valore di quell’attributo verrebbe reinizializzato.
 
 ### Const
 
-è un qualificatore che può essere associato sia ad attributi che a metodi.
+E' un qualificatore che può essere associato sia ad attributi che a metodi.
 
 -   Attributo: prevede che il suo valore non possa essere cambiato in seguito all’inizializzazione. Se viene associato ad un puntatore per esempio impedisce che nel resto del programma si possa cambiare il valore della casella di memoria al quale punta.
 -   Metodo: prevede che il metodo prevenga qualsiasi cambiamento fatto all’istanza chiamante, ciò garantisce più sicurezza nell’uso, per esempio, di metodi che coinvolgano parametri definiti privati.
@@ -412,11 +412,11 @@ Esempio:
 
 ### Explicit
 
-è un qualificatore che può essere assegnato solo ai costruttore ad un parametro. Ogni volta che un costruttore ad un solo parametro viene invocato per inizializzare un oggetto si sta creando implicitamente una conversione dal tipo del parametro al tipo della classe. Talvolta però si desidera che questa conversione automatica non abbia luogo. Per questo motivo il linguaggio C++ definisce la parola riservata explicit.
+E' un qualificatore che può essere assegnato solo ai costruttore ad un parametro. Ogni volta che un costruttore ad un solo parametro viene invocato per inizializzare un oggetto si sta creando implicitamente una conversione dal tipo del parametro al tipo della classe. Talvolta però si desidera che questa conversione automatica non abbia luogo. Per questo motivo il linguaggio C++ definisce la parola riservata explicit.
 
 ### Virtual
 
-è un qualificatore che può essere assegnato solo ai metodi, tramite questo si vuole indicare al compilatore di prevedere un binding dinamico riguardo quel metodo ovvero di decidere cosa eseguire runtime. Grazie a questa pratica, chiamata **polimorfismo** si ha la possibilità di utilizzare uno stesso metodo per oggetti di classi diverse. Questo qualificatore prevede che ci sia un’implementazione di classi derivate e che quindi si vada via via a creare una gerarchia di classi. In particolare si indica al compilatore che quel metodo verrà implementato nelle classi figlie e che verrà richiamato tramite un puntatore.
+E' un qualificatore che può essere assegnato solo ai metodi, tramite questo si vuole indicare al compilatore di prevedere un binding (legame entità-valore) dinamico riguardo quel metodo ovvero di decidere cosa eseguire runtime. Grazie a questa pratica, chiamata **polimorfismo** si ha la possibilità di utilizzare uno stesso metodo per oggetti di classi diverse. Questo qualificatore prevede che ci sia un’implementazione di classi derivate e che quindi si vada via via a creare una gerarchia di classi. In particolare si indica al compilatore che quel metodo verrà implementato nelle classi figlie e che verrà richiamato tramite un puntatore.
 
 È inoltre possibile, tramite il qualificatore virtual, definire dei metodi virtuali puri, ovvero che non necessitano di un’implementazione seppur minima e che demandano il compito di essere scritti effettivamente nelle classi derivate. Come conseguenza dell’uso di metodi virtuali puri è che la classe diventa completamente astratta, ciò vuol dire che non è più possibile istanziarla.
 
@@ -939,9 +939,9 @@ Proprietà del Vector
 -   Può riallocare memoria per l'intero vettore ogni volta che viene aggiunto un elemento
 -   Gli inserimenti hanno un costo o(n), tranne alla fine dove sono costanti
 -   Le cancellazioni hanno un costo o(n), tranne alla fine dove sono costanti
--   è possibile accedere casualmente ai suoi elementi
+-   E' possibile accedere casualmente ai suoi elementi
 -   Gli iteratori sono invalidati se viene aggiunto o rimosso un elemento al vettore
--   è possibile ottenere facilmente un array se si necessita di un array di elementi
+-   E' possibile ottenere facilmente un array se si necessita di un array di elementi
 
 #### Set
 
@@ -1026,7 +1026,7 @@ Proprietà del Map
 -   Gli elementi vengono inseriti ordinandoli per la loro chiave, tramite apposita funzione di confronto
 -   Gli elementi hanno una chiave univoca
 -   Pair-Associativa: i valori degli elementi si distinguono dai valori fondamentali
--   è una classe Template poiché fornisce funzionalità generiche. I tipi di dati utilizzati per gli elementi e le chiavi sono specificati come parametri nel modello di classe insieme alla funzione di confronto e allocatore.
+-   E' una classe Template poiché fornisce funzionalità generiche. I tipi di dati utilizzati per gli elementi e le chiavi sono specificati come parametri nel modello di classe insieme alla funzione di confronto e allocatore.
 
 #### Multimap
 
