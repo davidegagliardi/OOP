@@ -1,4 +1,4 @@
-àà# Programmazione ad oggetti
+# Programmazione ad oggetti
 
 Appunti a cura di _Andrea Abriani (@aabriani), Davide Gagliardi (@davidegagliardi), Fabio Della Giustina (@fabiodellagiustina), Andrea Braghiroli_.
 
