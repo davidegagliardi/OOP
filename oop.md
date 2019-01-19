@@ -805,7 +805,7 @@ for(i=0; i<5; ++i){
 //stampa inizio-fine
 for(iter=mialista.begin(); iter!=mialista.end(); ++iter){
      //cout << \*iter  << " ";
-     stampa( \*iter);
+     stampa(\*iter);
 }
 
 //stampa fine-inizio
@@ -836,17 +836,17 @@ Proprietà della lista:
 
 #### Vector
 ```cpp
-vector <int> miovett;
-vector <int>::iterator viter;
+vector<int> miovett;
+vector<int>::iterator viter;
 int i;
 //init
 for(i=0; i<5; ++i){
-    miovett.push_back(i); //non push_front, non implementato      
+  miovett.push_back(i); //non push_front, non implementato      
 }
 for_each(miovett.begin(), miovett.end(), &stampa);
 
 void stampa(int dato){
-     cout << dato << " ";     
+  cout << dato << " ";     
 }
 ```
 Proprietà del Vector
@@ -880,8 +880,8 @@ if(siter != si.end()){
 }
 
 //ATTENZIONE->Ricordati di fare questo per ottenere un confronto tra gli elementi che si vanno ad inserire
-bool Lamiaclasse::operator < (const Qualcosa& q)const{
-    return name < q.name;
+bool MiaClasse::operator<(const Qualcosa& q)const{
+  return name < q.name;
 }
 ```
 Proprietà del set:
@@ -893,8 +893,8 @@ Proprietà del set:
 #### Multiset
 
 ```cpp
-multiset <int> mi;
-multiset <int>::iterator miter;
+multiset<int> mi;
+multiset<int>::iterator miter;
 mi.insert(30);
 
 //stampa
@@ -916,9 +916,9 @@ m.insert(pair<Persona,int>(Persona("Nome"),21));
 m["Paolo"]=33;
 //cerca ed elimina
 miter = m.find("Paolo");
-  if(miter!=m.end()){
-    cout << "Eta' di " << miter->first << ": " << miter->second << endl;
-    m.erase(miter);
+if(miter!=m.end()){
+  cout << "Eta' di " << miter->first << ": " << miter->second << endl;
+  m.erase(miter);
 }
 //stampa
 void stampaMap(map<string,int> mm){
@@ -942,19 +942,18 @@ Proprietà del Map
 #### Multimap
 
 ```cpp
-multimap <string, Dati> mmdati;
-mmdati.insert(pair<string, Dati> (string("caso1"),d));
-mmdati.insert(pair<string, Dati> (string("caso2"),d));
+multimap<string, Dati> mmdati;
+mmdati.insert(pair<string, Dati>(string("caso1"),d));
+mmdati.insert(pair<string, Dati>(string("caso2"),d));
 stampaMMapDati(mdati);
 
-void stampaMMapDati(multimap <string, Dati> mdati){
-     multimap<string,Dati>::iterator miter;
-     for(miter=mdati.begin(); miter!=mdati.end(); ++miter){
-     cout << "Stampa: " << miter->first << endl;
-     miter -> second.stampa();
-     }
+void stampaMMapDati(multimap<string, Dati> mdati){
+   multimap<string,Dati>::iterator miter;
+   for(miter=mdati.begin(); miter!=mdati.end(); ++miter){
+   cout << "Stampa: " << miter->first << endl;
+   miter->second.stampa();
+   }
 }
-
 ```
 Proprietà del Multimap
 * Si comporta come il Map, ma le chiavi possono non essere univoche
