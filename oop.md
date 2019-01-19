@@ -63,7 +63,7 @@ L'ereditarietà consente di creare classificazioni gerarchiche. è possibile cre
 Si definisce _classe base_ la classe ereditata, mentre la classe che "riceve" l'eredità è detta _classe derivata_. Avviene mediante la seguente sintassi:
 
 ```cpp
-class NomeClasseDerivata : tipoEreditarieta NomeClasseBase{ //tipoEreditarieta può essere public, private, protected
+class ClasseDerivata : tipoEreditarieta ClasseBase{ //tipoEreditarieta può essere public, private, protected
   //contenuto della classe
 };
 ```
@@ -124,7 +124,7 @@ main(){
   a.m2(); //OK
 }
 void A::m4(){
-   m2(); //OK accessibile anche per classi derivate
+  m2(); //OK accessibile anche per classi derivate
 }
 ```
 
@@ -252,7 +252,7 @@ Quando ha senso fare ereditarietà public?
 
 ```cpp
 class A : public B{
-	void m4();
+  void m4();
 };
 A a;
 B b;
@@ -265,8 +265,8 @@ b = a; //SI (b è la classe base)
 a contiene b, a è più grande
 
 ```cpp
-A& A::operator=(const A& a);
-B& B::operator=(const B& b); //OK per ereditarietà pubblica
+A& A::operator =(const A& a);
+B& B::operator =(const B& b); //OK per ereditarietà pubblica
 ```
 
 ### Differenze valore / puntatore / riferimento
@@ -447,19 +447,19 @@ Consideriamo il seguente frame di codice
 
 ```cpp
 class A{
-private:
-  int i;
-public:
-	A(int k){
-    i = k;
-  };
-	A operator+(const A& a)const{
-    return A(i+a.i);
-  };
-	friend A operator + (const A&, const A&);
+  private:
+    int i;
+  public:
+    A(int k){
+      i = k;
+    };
+    A operator +(const A& a)const{
+      return A(i+a.i);
+    };
+    friend A operator +(const A&, const A&);
 };
-A operator+(const A& a1, const A& a2) {
-  return A(a1.i+a2.i+i); //NON FUNZIONA, i è privato -> uso funzione esterna
+A operator +(const A& a1, const A& a2) {
+  return A(a1.i + a2.i + i); //NON FUNZIONA: i è privato -> uso funzione esterna
 };
 ```
 
@@ -502,7 +502,7 @@ class A{
     A(int k){
       i = k;
     };
-    A& operator+=(const A& aa){ // & è referenza
+    A& operator +=(const A& aa){ // & è referenza
       i += aa.i;
       return \*this; // NO const dopo, perché l'oggetto chiamato sarà modificato
     };
@@ -513,23 +513,23 @@ nel `return` c’è operazione di dereferenziazione, quindi ritorna la stessa is
 
 ```cpp
 class A{
-private:
-  int i;
-public:
-  A(int k){
-    i = k;
-  };
-  bool operator<(const A& aa)const{
-    return i < aa.i;
-  };
-  A operator*(const A& aa)const{
-		A temp = \*this;
-		return temp \*= aa; //return (\*this) * aa; NO!!!
-  };
-  A& operator*=(const A& aa){ //efficienza uguale ma scrivo meno
-		(\*this) = (\*this) * aa;
-		return \*this;
-  };
+  private:
+    int i;
+  public:
+    A(int k){
+      i = k;
+    };
+    bool operator <(const A& aa)const{
+      return i < aa.i;
+    };
+    A operator *(const A& aa)const{
+      A temp = \*this;
+      return temp \*= aa; //return (\*this) * aa; NO!!!
+    };
+    A& operator *=(const A& aa){ //efficienza uguale ma scrivo meno
+      (\*this) = (\*this) * aa;
+      return \*this;
+    };
 };
 ```
 
@@ -538,31 +538,31 @@ public:
 -   [a = 3]
 
 ```cpp
-A& operator=(const int uk){
-	k = uk;
-	cout << "operator = const int" << endl;
-	return \*this;
+A& operator =(const int uk){
+  k = uk;
+  cout << "operator = const int" << endl;
+  return \*this;
 };
 ```
 
 -   [b = a]
 
 ```cpp
-A& operator=(const A& a){
-	k = a.k;
-	cout << "operator = const A&" << endl; //NOTA: qualcuno ha già implementato
-	return \*this; //uguale tra int e float
+A& operator =(const A& a){
+  k = a.k;
+  cout << "operator = const A&" << endl; //NOTA: qualcuno ha già implementato
+  return \*this; //uguale tra int e float
 };
 ```
 
 -   [a = a + b]
 
 ```cpp
-A operator+(const A& a){
-	A temp;                                //creata classe temporanea
-	temp.k = k + a.k;                      //k = valore classe in cui sono dentro
-	cout << "operator + const A&" << endl; //a.k = valore classe passata
-	return temp;                           //temp = il mio risultato
+A operator +(const A& a){
+  A temp;                                //creata classe temporanea
+  temp.k = k + a.k;                      //k = valore classe in cui sono dentro
+  cout << "operator + const A&" << endl; //a.k = valore classe passata
+  return temp;                           //temp = il mio risultato
 };
 //A crea una nuova istanza. Prendo le 2 istanze e le sommo.
 //Infine metto il valore nella nuova istanza
@@ -572,39 +572,39 @@ A operator+(const A& a){
 -   [c += a]
 
 ```cpp
-A& operator+=(const A& a){
-	k += a.k;
-	cout << "operator += const A&" << endl;
-	return \*this;
+A& operator +=(const A& a){
+  k += a.k;
+  cout << "operator += const A&" << endl;
+  return \*this;
 };
 ```
 
 -   [a == c]
 
 ```cpp
-A& operator==(const A& a){
-	cout << "operator == const A&" << endl;		//NOTA: NO per classi diverse!!
-	return k == aa.k;
+A& operator ==(const A& a){
+  cout << "operator == const A&" << endl; //NOTA: NO per classi diverse!!
+  return k == aa.k;
 };
 ```
 
-`return *this == aa;` è un confronto infinito (ricorsivo) tra classi, quindi devo confrontare i valori
+`return *this == aa` è un confronto infinito (ricorsivo) tra classi, quindi devo confrontare i valori
 
 -   [a != c]
 
 ```cpp
-A& operator!=(const A& a){
-	cout << "operator += const A&" << endl;
-	return k != aa.k; //in alternativa return !(\*this == a);
+A& operator !=(const A& a){
+  cout << "operator += const A&" << endl;
+  return k != aa.k; //in alternativa return !(\*this == a);
 };
 ```
 
 -   [++a] pre-incremento
 
 ```cpp
-A& operator++(){
-	cout << "operator ++A" << endl;
-	k++;
+A& operator ++(){
+  cout << "operator ++A" << endl;
+  k++;
   return \*this;
 };
 ```
@@ -612,9 +612,9 @@ A& operator++(){
 -   [a++] post-incremento
 
 ```cpp
-A operator++(int){
-	A a = \*this;
-	k++;
+A operator ++(int){
+  A a = \*this;
+  k++;
   cout << "operator A++" << endl;
   return a;	//istanza-1
 };
@@ -625,9 +625,9 @@ il passaggio del parametro di tipo `int` è ciò che distingue il post-increment
 Nel caso si voglia implementare **[ a == b ]**
 
 ```cpp
-friend bool operator==(const A& a, const B& b); //dentro i 2 public delle 2 classi A e B
-bool operator==(const A& a, const B& b){ //funzione esterna alla classe
-	return a.k == b.k;
+friend bool operator ==(const A& a, const B& b); //dentro i 2 public delle 2 classi A e B
+bool operator ==(const A& a, const B& b){ //funzione esterna alla classe
+  return a.k == b.k;
 };
 ```
 
@@ -642,7 +642,7 @@ Di seguito elenchiamo una funzione che calcola il minimo tra due variabili, rigu
 
 ```cpp
 int min(int i, int j){
-	if(i < j){
+  if(i < j){
     return i;
   }else{
     return j;
@@ -659,16 +659,16 @@ class A{
   private:
     int i;
   public:
-    bool operator<(const A a)const;
+    bool operator <(const A a)const;
 };
 
-bool A::operator<(const A a)const{
+bool A::operator <(const A a)const{
   return i < a.i;
 };
 
 A min(A a1, A a2);
 A min(A a1, A a2){
-	if(a1 < a2){
+  if(a1 < a2){
     return a1;
   }else{
     return a2;
@@ -738,7 +738,6 @@ Uso i container per non implementare continuamente le stesse cose
 class A{
   private:
     list<B> lb;
-  public:
 };
 ```
 
@@ -766,8 +765,8 @@ l.push_front(3);
 l.push_back(2);
 list<int>::iterator it;
 for(it=l.begin(); it!=l.end(); it++){
-  cout <<  \*it; //overloading di operatori per dereferenziare l’operatore -> * restituisce oggetto
-               //puntato, è un operatore unario
+  cout << \*it; //overloading di operatori per dereferenziare l’operatore -> * restituisce oggetto
+                //puntato, è un operatore unario
 }
 ```
 
@@ -781,7 +780,7 @@ class Personaggio{
     int vita = 100;
   public:
     virtual void stampa() = 0;  //=0 rende il metodo puramente virtuale
-    virtual bool operator<(const Personaggio&);
+    virtual bool operator <(const Personaggio&);
 };
 Personaggio p; //NON posso scriverlo, la classe ha un metodo puramente virtuale
 ```
@@ -804,12 +803,12 @@ class Cavaliere : public Personaggio{
 };
 
 class Mago : public Personaggio{
-private:
-  string nome;
-  int potere;
-public:
-  bool operator<(const Mago&);
-  friend ostream& operator<<(ostream& os, const Mago& m);
+  private:
+    string nome;
+    int potere;
+  public:
+    bool operator <(const Mago&);
+    friend ostream& operator <<(ostream& os, const Mago& m);
 }
 
 main(){
@@ -847,14 +846,14 @@ class Personaggio{
     int vita = 100;
   public:
     virtual void Stampa() = 0;
-    friend ostream& operator<<(ostream& os, const Personaggio& p);
+    friend ostream& operator <<(ostream& os, const Personaggio& p);
     friend virtual ostream& op(ostream& os); //non è virtuale puro perché implementato sotto
 };
 ostream& Personaggio::op(ostream& os){
   return os << vita;
 };
-ostream& operator<<(ostream& os, const Personaggio& p){
-
+ostream& operator <<(ostream& os, const Personaggio& p){
+  ...
 };
 ```
 
@@ -878,13 +877,13 @@ for(i=0; i<5; ++i){
 
 //stampa inizio-fine
 for(iter=mialista.begin(); iter!=mialista.end(); ++iter){
-     //cout << \*iter  << " ";
-     stampa(\*iter);
+  //cout << \*iter  << " ";
+  stampa(\*iter);
 }
 
 //stampa fine-inizio
 for(riter=mialista.rbegin(); riter!=mialista.rend(); ++riter){
-     cout << \*riter << " ";
+  cout << \*riter << " ";
 }
 
 for_each(mialista.begin(),mialista.end(),&stampa); //da dove, a dove, cosa fa
@@ -1004,11 +1003,11 @@ if(miter!=m.end()){
 }
 //stampa
 void stampaMap(map<string,int> mm){
-   map<string,int>::iterator miter;
-   for(miter=mm.begin(); miter!=mm.end(); ++miter){
-		 	if(miter->second.getMatricola() == matricola)
-       cout << miter->first << " di età: " << miter->second << endl;
-   }
+  map<string,int>::iterator miter;
+  for(miter=mm.begin(); miter!=mm.end(); ++miter){
+    if(miter->second.getMatricola() == matricola)
+    cout << miter->first << " di età: " << miter->second << endl;
+  }
 }
 
 stampaMap(m);
@@ -1032,11 +1031,11 @@ mmdati.insert(pair<string, Dati>(string("caso2"),d));
 stampaMMapDati(mdati);
 
 void stampaMMapDati(multimap<string, Dati> mdati){
-   multimap<string,Dati>::iterator miter;
-   for(miter=mdati.begin(); miter!=mdati.end(); ++miter){
-   cout << "Stampa: " << miter->first << endl;
-   miter->second.stampa();
-   }
+  multimap<string,Dati>::iterator miter;
+  for(miter=mdati.begin(); miter!=mdati.end(); ++miter){
+    cout << "Stampa: " << miter->first << endl;
+    miter->second.stampa();
+  }
 }
 ```
 
