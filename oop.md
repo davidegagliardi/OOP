@@ -1,5 +1,5 @@
 # Programmazione ad oggetti
-Appunti a cura di *Andrea Abriani (@aabriani), Davide Gagliardi (@davidegagliardi), Andrea Braghiroli*
+Appunti a cura di *Andrea Abriani (@aabriani), Davide Gagliardi (@davidegagliardi), Fabio Della Giustina (@fabiodellagiustina), Andrea Braghiroli*
 
 ## Fattori qualità software:
 
@@ -19,9 +19,10 @@ Appunti a cura di *Andrea Abriani (@aabriani), Davide Gagliardi (@davidegagliard
 
 ## Caratteristiche della programmazione a oggetti
 
-*Key idea: connessione esplicita funzioni-dati (non vi sono più struct con metodi e costruttori)*
 
 ### Connessione esplicita fra funzioni e dati - Incapsulamento
+
+*Key idea: connessione esplicita funzioni-dati (non vi sono più struct con metodi e costruttori)*
 
 In precedenza, vi era una procedura che lavorava su variabili globali. Ora invece, le funzioni sono connesse ai dati. Questo delimita ciò che le funzioni possono fare. Questo avviene tramite la procedura di **incapsulamento**. Questa procedura non avviene per la sicurezza dei dati bensì per la visibilità. Solo alcuni metodi e funzioni potranno accedere agli elementi di una determinata classe.
 
@@ -286,18 +287,16 @@ Se l'operatore viene applicato ad un puntatore, il valore della cella di memoria
 
 L'operatore `new` alloca un puntatore di memoria, in questo modo l'allocazione avverrà in modo dinamico. Bisogna però preoccuparsi di utilizzare il comando `delete`, per non aumentare l'occupazione di memoria da parte del programma.
 
-### Costruttori
-
-Quando viene costruita una classe vuota, viene fatta una definizione astratta. Proprio per questo non è scontato che il compilatore allochi memoria (come per il `typedef`).
-L'allocazione di memoria avverrà una volta istanziata una classe. In questo modo verrano inseriti in memoria anche un puntatore `this` (che punta a dove la variabile è allocata) e un secondo puntatore verso i metodi di quella classe.
-
-A livello di memoria, il compilatore punta i costruttori che ci sono sempre (default, 0 parametri, distruttore, costruttore di copia, operatore di assegnazione).
-
 ### Header
 
 Si tratta della dichiarazione all'inizio del file con cui si dichiara il nome che il compilatore usa per chiamare il metodo (che è l’unico nel programma).
 
 ### Costruttore
+
+Quando viene costruita una classe vuota, viene fatta una definizione astratta. Proprio per questo non è scontato che il compilatore allochi memoria (come per il `typedef`).
+L'allocazione di memoria avverrà una volta istanziata una classe. In questo modo verrano inseriti in memoria anche un puntatore `this` (che punta a dove la variabile è allocata) e un secondo puntatore verso i metodi di quella classe.
+
+A livello di memoria, il compilatore punta i costruttori che ci sono sempre (default, 0 parametri, distruttore, costruttore di copia, operatore di assegnazione).
 
 Funzione membro che si occupa di:
 * allocazione della memoria per tutti i suoi membri (dati e funzioni) nello heap o nello stack;
@@ -805,13 +804,13 @@ for(i=0; i<5; ++i){
 
 //stampa inizio-fine
 for(iter=mialista.begin(); iter!=mialista.end(); ++iter){
-  //cout << \*iter  << " ";
-  stampa(*iter);
+     //cout << \*iter  << " ";
+     stampa( \*iter);
 }
 
 //stampa fine-inizio
 for(riter=mialista.rbegin(); riter!=mialista.rend(); ++riter){
-  cout << \*riter << " ";
+     cout << \*riter << " ";
 }
 
 for_each(mialista.begin(),mialista.end(),&stampa); //da dove, a dove, cosa fa
@@ -836,7 +835,19 @@ Proprietà della lista:
 * Gli iteratori rimangono validi anche una volta aggiunti/rimossi gli elementi dalla lista
 
 #### Vector
-```
+```cpp
+vector <int> miovett;
+vector <int>::iterator viter;
+int i;
+//init
+for(i=0; i<5; ++i){
+    miovett.push_back(i); //non push_front, non implementato      
+}
+for_each(miovett.begin(), miovett.end(), &stampa);
+
+void stampa(int dato){
+     cout << dato << " ";     
+}
 ```
 Proprietà del Vector
 * Memoria contigua e pre-allocata per elementi futuri. Viene dunque richiesto uno spazio extra oltre a quello degli elementi in sé
@@ -868,9 +879,9 @@ if(siter != si.end()){
   si.erase(siter);
 }
 
-//ATTENZIONE->Ricordati di fare questo
-bool MiaClasse::operator<(const Qualcosa& q)const{
-  return name < q.name;
+//ATTENZIONE->Ricordati di fare questo per ottenere un confronto tra gli elementi che si vanno ad inserire
+bool Lamiaclasse::operator < (const Qualcosa& q)const{
+    return name < q.name;
 }
 ```
 Proprietà del set:
@@ -882,8 +893,8 @@ Proprietà del set:
 #### Multiset
 
 ```cpp
-multiset<int> mi;
-multiset<int>::iterator miter;
+multiset <int> mi;
+multiset <int>::iterator miter;
 mi.insert(30);
 
 //stampa
@@ -892,7 +903,7 @@ for(miter=mi.begin(); miter!=mi.end(); ++miter){
 }
 ```
 Proprietà del multiset:
-* Si comportano come i set, ma gli elementi possono non essere unici
+* Si comporta come i set, ma gli elementi possono non essere unici
 
 #### Map
 
@@ -921,12 +932,29 @@ void stampaMap(map<string,int> mm){
 stampaMap(m);
 ```
 Proprietà del Map
-*
+* Contenitore di dimensioni variabili che recupera il dato richiesto grazie all'utilizzo di una chiave ad esso associato
+* Fornisce iteratori bidirezionali
+* Gli elementi vengono inseriti ordinandoli per la loro chiave, tramite apposita funzione di confronto
+* Gli elementi hanno una chiave univoca
+* Pair-Associativa: i valori degli elementi si distinguono dai valori fondamentali
+* E' una classe Template poiché fornisce funzionalita' generiche. I tipi di dati utilizzati per gli elementi e le chiavi sono specificati come parametri nel modello di classe insieme alla funzione di confronto e allocatore.
 
 #### Multimap
 
-```
+```cpp
+multimap <string, Dati> mmdati;
+mmdati.insert(pair<string, Dati> (string("caso1"),d));
+mmdati.insert(pair<string, Dati> (string("caso2"),d));
+stampaMMapDati(mdati);
+
+void stampaMMapDati(multimap <string, Dati> mdati){
+     multimap<string,Dati>::iterator miter;
+     for(miter=mdati.begin(); miter!=mdati.end(); ++miter){
+     cout << "Stampa: " << miter->first << endl;
+     miter -> second.stampa();
+     }
+}
 
 ```
 Proprietà del Multimap
-*
+* Si comporta come il Map, ma le chiavi possono non essere univoche
