@@ -19,10 +19,10 @@ Appunti a cura di *Andrea Abriani (@aabriani), Davide Gagliardi (@davidegagliard
 
 ## Caratteristiche della programmazione a oggetti
 
-*Key idea: connessione esplicita funzioni-dati (non vi sono più struct con metodi e costruttori)*
 
 ### Connessione esplicita fra funzioni e dati - Incapsulamento
 
+*Key idea: connessione esplicita funzioni-dati (non vi sono più struct con metodi e costruttori)*
 In precedenza, vi era una procedura che lavorava su variabili globali. Ora invece, le funzioni sono connesse ai dati. Questo delimita ciò che le funzioni possono fare. Questo avviene tramite la procedura di **incapsulamento**. Questa procedura non avviene per la sicurezza dei dati bensì per la visibilità. Solo alcuni metodi e funzioni potranno accedere agli elementi di una determinata classe.
 
 #### Concetto di classe
