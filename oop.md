@@ -2,44 +2,50 @@
 
 Appunti a cura di _Andrea Abriani (@aabriani), Davide Gagliardi (@davidegagliardi), Fabio Della Giustina (@fabiodellagiustina), Andrea Braghiroli_
 
-## Fattori qualità software:
+## Fattori qualita' software:
 
 ### Esterni
 
--   **Estendibilità**: sistema amplia funzionalità che il software aveva in precedenza. Programmazione ad oggetti viene resa più semplice.
--   **Riusabilità**: software e componenti possono essere riutilizzati per un insieme di requisiti che possono essere diversi da quelli precedenti.
+-   **Estendibilita'**: sistema amplia funzionalita' che il software aveva in precedenza. Programmazione ad oggetti viene resa piu' semplice.
+-   **Riusabilita'**: software e componenti possono essere riutilizzati per un insieme di requisiti che possono essere diversi da quelli precedenti.
 
 ### Interni:
 
 _fattori percepibili al codice della sorgente_
 
--   **Strutturazione**: codice viene scritto in modo tale da astrarre delle singole parti. E’ possibile un’individuazione di parti di software indipendenti dalle altre (es. Input/output può essere posizionato in zona differente).
--   **Modularità**: collegata alla strutturazione. Va oltre la struttura e indica che può essere usata in modo diverso e con componenti può raggiungere scopi e requisiti differenti. (Il codice può essere utilizzato  per scopi diversi).
--   **Comprensibilità**: software strutturato in modo che corrisponda alla descrizione del dominio.
+-   **Strutturazione**: codice viene scritto in modo tale da astrarre delle singole parti. E’ possibile un’individuazione di parti di software indipendenti dalle altre (es. Input/output puo' essere posizionato in zona differente).
+-   **Modularita'**: collegata alla strutturazione. Va oltre la struttura e indica che puo' essere usata in modo diverso e con componenti puo' raggiungere scopi e requisiti differenti. (Il codice puo' essere utilizzato  per scopi diversi).
+-   **Comprensibilita'**: software strutturato in modo che corrisponda alla descrizione del dominio.
 
 ## Caratteristiche della programmazione a oggetti
 
 ### Connessione esplicita fra funzioni e dati - Incapsulamento
 
-_Key idea: connessione esplicita funzioni-dati (non vi sono più struct con metodi e costruttori)_
+_Key idea: connessione esplicita funzioni-dati (non vi sono piu' struct con metodi e costruttori)_
 
-In precedenza, vi era una procedura che lavorava su variabili globali. Ora invece, le funzioni sono connesse ai dati. Questo delimita ciò che le funzioni possono fare. Questo avviene tramite la procedura di **incapsulamento**. Questa procedura non avviene per la sicurezza dei dati bensì per la visibilità. Solo alcuni metodi e funzioni potranno accedere agli elementi di una determinata classe.
+In precedenza, vi era una procedura che lavorava su variabili globali. Ora invece, le funzioni sono connesse ai dati. Questo delimita cio' che le funzioni possono fare. Questo avviene tramite la procedura di **incapsulamento**. Questa procedura non avviene per la sicurezza dei dati bensi' per la visibilita'. Solo alcuni metodi e funzioni potranno accedere agli elementi di una determinata classe.
 
 ### Concetto di classe
 
+Le classi costitui- scono un contenitore che racchiude negli attributi le specifiche degli oggetti, che saranno tutti omogenei tra loro, mentre racchiude nei metodi il comportamento di questi. Le classi formano il livello intensionale dei diagrammi.
+
 Le classi sono legate in gerachie. Una eredita l'altra per creare una struttura.
 
-Si pone enfasi sulla rappresentazione. In caso di errori si andrà a realizzare una struttura sbagliata.
-L'enfasi viene spostata da computazione a rappresentazione (più o meno astratta) sul quale il software deve agire
+Si pone enfasi sulla rappresentazione. In caso di errori si andra' a realizzare una struttura sbagliata.
+L'enfasi viene spostata da computazione a rappresentazione (piu' o meno astratta) sul quale il software deve agire
+
+#### Istanza
+
+Gli oggetti descritti dalle classi e quindi gli elementi di queste vengono chiamate istanze. Esse provvedono a dare un valore alle specifiche richieste dalla classe stessa e su di esse si possono direttamente applicare i metodi descritti nelle classi. Le istanze formano il livello estensionale dei diagrammi.
 
 ### Enfasi sulla rappresentazione
 
-Il software può essere visto come un insieme di scatole, nelle quali entrano ed escono dati.
+Il software puo' essere visto come un insieme di scatole, nelle quali entrano ed escono dati.
 
 Viene utilizzato l'**UML** (_unified modeling language_), uno standard che contiene un insieme di linguaggi grafici per realizzare un diagramma delle classi e degli oggetti, ottenendo una rappresentazione grafica della programmazione.
 
 Oggetti in UML
-All'interno dell'UML, la relazione oggetto-classe è simile a elemento-insieme
+All'interno dell'UML, la relazione oggetto-classe e' simile a elemento-insieme
 
 | Classe  | Insieme  |
 | ------- | -------- |
@@ -47,27 +53,33 @@ All'interno dell'UML, la relazione oggetto-classe è simile a elemento-insieme
 
 Gli oggetti risultano essere elementi del dominio con vita propria indipendente con identificatore e istanza.
 
-La parte grafica in UML non è arbitraria ma unificata, ovvero vengono utilizzate convenzioni per rappresentare determinati elementi del programma.
+La parte grafica in UML non e' arbitraria ma unificata, ovvero vengono utilizzate convenzioni per rappresentare determinati elementi del programma.
 
 <img src="https://github.com/davidegagliardi/OOP/blob/master/ObjectUML.png" />
 
-### Ereditarietà
+### Ereditarieta'
 
-L'ereditarietà consente di creare classificazioni gerarchiche. E' possibile creare una classe generale che definisce le caratteristiche comuni a una serie di oggetti correlati. La classe può, in seguito, essere ereditata da una o più classi, ognuna delle quali aggiunge alla classe solo elementi specifici.
-Si definisce _classe base_ la classe ereditata, mentre la classe che "riceve" l'eredità è detta _classe derivata_. Avviene mediante la seguente sintassi:
+L'ereditarieta' consente di creare classificazioni gerarchiche. E' possibile creare una classe generale che definisce le caratteristiche comuni a una serie di oggetti correlati. La classe puo', in seguito, essere ereditata da una o piu' classi, ognuna delle quali aggiunge alla classe solo elementi specifici.
+Si definisce _classe base_ la classe ereditata, mentre la classe che "riceve" l'eredita' e' detta _classe derivata_. Avviene mediante la seguente sintassi:
 
 ```cpp
-class NomeClasseDerivata : tipoEreditarieta NomeClasseBase{ //tipoEreditarieta può essere public, private, protected
+class NomeClasseDerivata : tipoEreditarieta NomeClasseBase{ //tipoEreditarieta puo' essere public, private, protected
   //contenuto della classe
 };
 ```
 
-Quando, ad esempio, il tipo di accesso alla classe base è `public`, tutti i membri `public` della classe base diverranno membri `public` della classe derivata, Lo stesso discorso varrà per i membri `protected`.
+Esistono diversi tipi di ereditarieta':
+
+-   **public**: ereditarieta' pubblica significa che una classe derivata ha accesso agli elementi pubblici e protetti della sua classe base, gli elementi pubblici si ereditano come elementi pubblici e quelli protetti come elementi protetti
+-   **private**: ereditarieta' privata significa che i campi pubblici e protetti della classe base diventano campi privati della classe derivata. L’ereditarieta' privata e' quella di default
+-   **protected**: ereditarieta' protetta significa che i campi pubblici e protetti della classe base diventano campi protetti della classe derivata
+
+Quando, ad esempio, il tipo di accesso alla classe base e' `public`, tutti i membri `public` della classe base diverranno membri `public` della classe derivata, Lo stesso discorso varra' per i membri `protected`.
 Per gli elementi di tipo `private` della classe base, questi non saranno accessibili da parte dei membri della classe derivata.
 
-Una classe derivata può ricevere in eredità elementi di due o più classi base.
+Una classe derivata puo' ricevere in eredita' elementi di due o piu' classi base.
 
-Di seguito alcuni esempi di ereditarietà:
+Di seguito alcuni esempi di ereditarieta':
 
 ```cpp
 class A : tipoEreditarieta B{
@@ -82,7 +94,7 @@ class B{
   protected:
     void m3();
 };
-//a seconda delle ereditarietà
+//a seconda delle ereditarieta'
 A a;
 a.m1();
 a.m2();
@@ -90,21 +102,21 @@ a.m3();
 //chiamo i metodi m1, m2, m3
 ```
 
-#### Ereditarietà di tipo public `class A : public B`
+#### Ereditarieta' di tipo public `class A : public B`
 
--   Quando è private in B diventa inaccessibile in A ed inaccessibile dall’esterno
+-   Quando e' private in B diventa inaccessibile in A ed inaccessibile dall’esterno
 
 ```cpp
 main(){
   A a;
-  a.m1(); //NO m1 è private in B (inaccessibile da classi derivate -> private)
+  a.m1(); //NO m1 e' private in B (inaccessibile da classi derivate -> private)
 }
 void A::m4(){
-  m1(); //NO m1 è private in B e quindi inaccessibile da A
+  m1(); //NO m1 e' private in B e quindi inaccessibile da A
 }
 ```
 
--   Quando è public in B diventa public in A
+-   Quando e' public in B diventa public in A
 
 ```cpp
 main(){
@@ -116,7 +128,7 @@ void A::m4(){
 }
 ```
 
--   Quando è protected in B diventa protected in A
+-   Quando e' protected in B diventa protected in A
 
 ```cpp
 main(){
@@ -134,15 +146,15 @@ void B::m2(){
   m3(); //OK
 }
 void A::m4(){
-  m3(); //OK, se in B qualcosa è protected -> resta inaccessibile dall’esterno,
+  m3(); //OK, se in B qualcosa e' protected -> resta inaccessibile dall’esterno,
         //ma accessibile sia da classe base che da classe derivata
 }
-//IS-A -> ogni istanza di A è anche istanza di B -> EREDITARIETA’
+//IS-A -> ogni istanza di A e' anche istanza di B -> EREDITARIETA’
 ```
 
-#### Ereditarietà di tipo private `class A: private B`
+#### Ereditarieta' di tipo private `class A: private B`
 
--   Quando è private in B diventa inaccessibile da A ed inaccessibile dall’esterno
+-   Quando e' private in B diventa inaccessibile da A ed inaccessibile dall’esterno
 
 ```cpp
 main(){
@@ -150,11 +162,11 @@ main(){
   a.m1(); //NO
 }
 void A::m4(){
-  m1(); //NO *come nel caso precedente con ereditarietà public*
+  m1(); //NO *come nel caso precedente con ereditarieta' public*
 }
 ```
 
--   Quando è public in B diventa private in A
+-   Quando e' public in B diventa private in A
 
 ```cpp
 main(){
@@ -166,7 +178,7 @@ void A::m4(){
 }
 ```
 
--   Quando è protected in B diventa private in A
+-   Quando e' protected in B diventa private in A
 
 ```cpp
 main(){
@@ -178,9 +190,9 @@ void A::m4(){
 }
 ```
 
-#### Ereditarietà di tipo protected `class A: protected B`
+#### Ereditarieta' di tipo protected `class A: protected B`
 
--   Quando è private in B diventa inaccessibile da A ed inaccessibile dall’esterno
+-   Quando e' private in B diventa inaccessibile da A ed inaccessibile dall’esterno
 
 ```cpp
 main(){
@@ -192,7 +204,7 @@ void A::m4(){
 }
 ```
 
--   Quando è public in B diventa public in A
+-   Quando e' public in B diventa public in A
 
 ```cpp
 main(){
@@ -204,7 +216,7 @@ void A::m4(){
 }
 ```
 
--   Quando è protected in B diventa protected in A
+-   Quando e' protected in B diventa protected in A
 
 ```cpp
 main(){
@@ -223,7 +235,7 @@ void A::m4(){
 |          | Private   | Inaccessibile dall'esterno | Inaccessibile dalla derivata | Inaccessibile dall'esterno | Accessibile dalla derivata | Inaccessibile dall'esterno | Accessibile dalla derivata |
 |          | Protected | Inaccessibile dall'esterno | Inaccessibile dalla derivata | Inaccessibile dall'esterno | Accessibile dalla derivata | Inaccessibile dall'esterno | Accessibile dalla derivata |
 
-Le 2 righe `private` e `protected` sono uguali per accessibilità: ci sono conseguenze su classi derivate
+Le 2 righe `private` e `protected` sono uguali per accessibilita': ci sono conseguenze su classi derivate
 
 |           | Private       | Public    | Protected |
 | --------- | ------------- | --------- | --------- |
@@ -231,12 +243,12 @@ Le 2 righe `private` e `protected` sono uguali per accessibilità: ci sono conse
 | Private   | Inaccessibile | Private   | Private   |
 | Protected | Inaccessibile | Protected | Protected |
 
-Quando ha senso fare ereditarietà private/protected?
-Ereditare in modo `private` implica che la natura della classe base è nascosta dall’implementazione (ereditarietà per implementazione). In sostanza si effettua questo tipo di ereditarietà quando attributi e metodi sono utilizzati per l'implementazione.
+Quando ha senso fare ereditarieta' private/protected?
+Ereditare in modo `private` implica che la natura della classe base e' nascosta dall’implementazione (ereditarieta' per implementazione). In sostanza si effettua questo tipo di ereditarieta' quando attributi e metodi sono utilizzati per l'implementazione.
 
-La classe derivata diventa così diversa dalla classe sopra, ne deriva che non utilizzerà i metodi come la classe sopra (superclasse)
+La classe derivata diventa cosi' diversa dalla classe sopra, ne deriva che non utilizzera' i metodi come la classe sopra (superclasse)
 
-Quando ha senso fare ereditarietà public?
+Quando ha senso fare ereditarieta' public?
 
 ```cpp
 class A : public B{
@@ -245,61 +257,61 @@ class A : public B{
 A a;
 B b;
 a = b; //NO
-b = a; //SI (b è la classe base)
+b = a; //SI (b e' la classe base)
 ```
 
 <img src="https://github.com/davidegagliardi/OOP/blob/master/CelleMemoria.png"/>
 
-a contiene b, a è più grande
+a contiene b, a e' piu' grande
 
 ```cpp
 A& A::operator=(const A& a);
-B& B::operator=(const B& b); //OK per ereditarietà pubblica
+B& B::operator=(const B& b); //OK per ereditarieta' pubblica
 ```
 
 ### Differenze valore / puntatore / riferimento
 
--   **Passaggio per valore**: il valore di una variabile viene copiato in una struttura stack. Successivamente la funzione recupera il dato. Viene utilizzato questo tipo di passaggio quando la variabile è "piccola".
+-   **Passaggio per valore**: il valore di una variabile viene copiato in una struttura stack. Successivamente la funzione recupera il dato. Viene utilizzato questo tipo di passaggio quando la variabile e' "piccola".
 -   **Passaggio per indirizzo**: viene copiato l’indirizzo della variabile in modo esplicito.
-    Il passaggio per indirizzo viene utilizzato se la variabile è "grande".
--   **Passaggio per riferimento** (esclusivo del c++):  alla funzione viene passato l’indirizzo e non il valore dell’argomento. Questo approccio richiede meno memoria rispetto alla chiamata per valore, e soprattutto consente di modificare il valore delle variabili che sono ad un livello di visibilità (scope) esterno alla funzione o al metodo.
+    Il passaggio per indirizzo viene utilizzato se la variabile e' "grande".
+-   **Passaggio per riferimento** (esclusivo del c++):  il passaggio per riferimento in realtà persegue lo stesso obiettivo del passaggio per indirizzo, sintatticamente però è molto più conciso. In una funzione infatti, è sufficiente aggiungere l’operatore `&` davanti al nome di un parametro e considerare nel resto del codice come fosse un passaggio per copia. Questo perché il compilatore stesso riconosce la struttura e lo dereferenzia automaticamente ogni volta che viene richiamato all’interno della funzione.
 
 In linea di massima, si tende a non fare la copia.
 
 ### Operatore “++”
 
-Può essere pre-fisso (`++i`) o post-fisso (`i++`).
+Puo' essere pre-fisso (`++i`) o post-fisso (`i++`).
 
-Nel caso di incremento pre-fisso, la variabile verrà incrementata nello stesso ciclo:
+Nel caso di incremento pre-fisso, la variabile verra' incrementata nello stesso ciclo:
 
 ```cpp
 int i = 5;
 cout << "Il valore di i e' " << ++i;
-//L'output del programma sarà "Il valore di i è 6"
+//L'output del programma sara' "Il valore di i e' 6"
 ```
 
-Nel caso di operatore post fisso, la variabile verrà incrementata nel ciclo successivo:
+Nel caso di operatore post fisso, la variabile verra' incrementata nel ciclo successivo:
 
 ```cpp
 int i = 5;
 cout << "Il valore di i e' " << i++;
-//L'output del programma sarà "Il valore di i è 5"
+//L'output del programma sara' "Il valore di i e' 5"
 ```
 
-Se l'operatore viene applicato ad un puntatore, il valore della cella di memoria rimarrà il medesimo. Verrà però incrementato l'indirizzo di memoria contenuto dal puntatore.
+Se l'operatore viene applicato ad un puntatore, il valore della cella di memoria rimarra' il medesimo. Verra' pero' incrementato l'indirizzo di memoria contenuto dal puntatore.
 
 ### Operatore "new"
 
-L'operatore `new` alloca un puntatore di memoria, in questo modo l'allocazione avverrà in modo dinamico. Bisogna però preoccuparsi di utilizzare il comando `delete`, per non aumentare l'occupazione di memoria da parte del programma.
+L'operatore `new` alloca un puntatore di memoria, in questo modo l'allocazione avverra' in modo dinamico. Bisogna pero' preoccuparsi di utilizzare il comando `delete`, per non aumentare l'occupazione di memoria da parte del programma.
 
 ### Header
 
-Si tratta della dichiarazione all'inizio del file con cui si dichiara il nome che il compilatore usa per chiamare il metodo (che è l’unico nel programma).
+Si tratta della dichiarazione all'inizio del file con cui si dichiara il nome che il compilatore usa per chiamare il metodo (che e' l’unico nel programma).
 
 ### Costruttore
 
-Quando viene costruita una classe vuota, viene fatta una definizione astratta. Proprio per questo non è scontato che il compilatore allochi memoria (come per il `typedef`).
-L'allocazione di memoria avverrà una volta istanziata una classe. In questo modo verrano inseriti in memoria anche un puntatore `this` (che punta a dove la variabile è allocata) e un secondo puntatore verso i metodi di quella classe.
+Quando viene costruita una classe vuota, viene fatta una definizione astratta. Proprio per questo non e' scontato che il compilatore allochi memoria (come per il `typedef`).
+L'allocazione di memoria avverra' una volta istanziata una classe. In questo modo verrano inseriti in memoria anche un puntatore `this` (che punta a dove la variabile e' allocata) e un secondo puntatore verso i metodi di quella classe.
 
 A livello di memoria, il compilatore punta i costruttori che ci sono sempre (default, 0 parametri, distruttore, costruttore di copia, operatore di assegnazione).
 
@@ -313,9 +325,11 @@ Caratteristiche del costruttore sono:
 -   nome uguale a quello della classe di appartenenza;
 -   non ha un valore di ritorno
 
-Il costruttore può accettare uno o più argomenti. Nel caso di costruttore a zero parametri, prende il nome di costruttore di _default_. Nel caso fossero assenti i costruttori, il compilatore è in grado di generarne uno automaticamente (con i limiti del caso).
 
-L’uso di un costruttore appositamente definito, invece, consente di inizializzare tutti i membri della classe assieme, di modo che l’istanziazione di un oggetto sia sempre consistente con il nostro modello di dati e indipendente dalle scelte del compilatore.
+-   **Costruttore di default**: un costruttore è un metodo che viene richiamato automaticamente con il compito di inizializzare l’istanza a dei valori di default. Nel momento in cui viene sovrascritto da un qualsiasi costruttore (default o con parametri) viene disabilitato
+-   **Costruttore di copia**: il costruttore di copia si occupa di copiare un’istanza in un’altra della stessa classe. Di base questo avviene con una copia superficiale, per evitare che ci siano instabilità quindi è utile ridefinirlo così da attuare una copia profonda in caso di puntatori
+
+_L’uso di un costruttore appositamente definito consente di inizializzare tutti i membri della classe assieme, di modo che l’istanziazione di un oggetto sia sempre consistente con il nostro modello di dati e indipendente dalle scelte del compilatore._
 
 ```cpp
 NomeClasse::NomeClasse(){
@@ -330,7 +344,8 @@ NomeClasse::NomeClasse(Nome n, Cognome c){
 
 ### Distruttore
 
-Il distruttore di classe assolve il compito di rilasciare tutte le risorse associate ad un oggetto, quando esso non è più necessario.
+Il distruttore di classe assolve il compito di rilasciare tutte le risorse associate ad un oggetto, quando esso non e' piu' necessario.
+A differenza dei costruttori ce ne può essere solo uno e non viene ereditato dalle sottoclassi.
 
 ```cpp
 NomeClasse::~NomeClasse(){
@@ -338,38 +353,169 @@ NomeClasse::~NomeClasse(){
 };
 ```
 
-Il distruttore è caratterizzato dal fatto che non ha valori di ritorno né parametri. Per questo motivo non può essere sovraccaricato.
+Il distruttore e' caratterizzato dal fatto che non ha valori di ritorno né parametri. Per questo motivo non puo' essere sovraccaricato.
 
 Il suo compito primario dovrebbe essere sempre e solo quella di rimuovere un oggetto e tutte le sue dipendenze dallo stato del programma in maniera sicura e completa.
-Viene invocato automaticamente per tutte le variabili, ogni volta che viene raggiunta la fine del loro ambito di visibilità, oppure nel caso di deallocazione tramite il comando `delete`.
+Viene invocato automaticamente per tutte le variabili, ogni volta che viene raggiunta la fine del loro ambito di visibilita', oppure nel caso di deallocazione tramite il comando `delete`.
 
-### Attributi statici operatori
+## Specifiche di attributi, metodi e funzioni
 
-Gli attributi statici sono attributi istanziati solo una volta che valgono per tutte le istanze della classe.
-Se un’istanza cambia il contenuto, allora viene cambiata per tutte le istanze
+Attributi, metodi e funzioni possono avere dei qualificatori che ne specificano determinate caratteristiche:
+
+### Friend
+
+E' un qualificatore attribuito ad una funzione che si vuole rendere "amica" di una classe ovvero consentirle di accedere a tutti gli attributi e metodi (anche privati) di una classe.
+
+### Static
+
+E' un qualificatore che se messo davanti ad un attributo di una classe prevede che tutte le istanze di quella classe abbiano quell’attributo condiviso. Solitamente viene inizializzato come variabile globale (come in C) e non all’interno della classe, questo perché altrimenti ogni volta che venisse creata una nuova istanza il valore di quell’attributo verrebbe reinizializzato.
+
+### Const
+
+E' un qualificatore che può essere associato sia ad attributi che a metodi.
+
+-   Attributo: prevede che il suo valore non possa essere cambiato in seguito all’inizializzazione. Se viene associato ad un puntatore per esempio impedisce che nel resto del programma si possa cambiare il valore della casella di memoria al quale punta.
+-   Metodo: prevede che il metodo prevenga qualsiasi cambiamento fatto all’istanza chiamante, ciò garantisce più sicurezza nell’uso, per esempio, di metodi che coinvolgano parametri definiti privati.
+
+A seconda dell'attribuzione e' bene prestare attenzione alle funzionalita' questa introduce per non creare collisioni
 
 Esempio:
-`static int numIstanze`
 
--   indica il n° di licenze disponibili nel programma.
+-   `static int numIstanze` variabile comune a tutte le istanze che puo' essere incrementata
+-   `const float miaConst` variabile che dopo un'inizializzazione non potra' piu' essere modifica (per l'utilizzo del `const`)
+-   `static const int miaConst = 1` variabile che viene inizializzata al valore 1. Sara' comune a tutte le istanze e non potra' essere modificata
+-   `static const int a` si tratta come un errore. La variabile verra' inizializzata ad un valore casuale e non sara' possibile modificarla (a causa di `static`)
 
-Dal punto di vista funzionale, la variabile statica è come una variabile globale.
+### Explicit
 
-`const float miaConst`
+E' un qualificatore che può essere assegnato solo ai costruttore ad un parametro. Ogni volta che un costruttore ad un solo parametro viene invocato per inizializzare un oggetto si sta creando implicitamente una conversione dal tipo del parametro al tipo della classe. Talvolta però si desidera che questa conversione automatica non abbia luogo. Per questo motivo il linguaggio C++ definisce la parola riservata explicit.
 
--   non cambia mai dopo l’inizializzazione (attributo costante -> `A():miaConst(1.1){…}`)
--   qui ho già inizializzato l’attributo
+### Virtual
 
-`static const int a = 1`
+E' un qualificatore che può essere assegnato solo ai metodi, tramite questo si vuole indicare al compilatore di prevedere un binding dinamico riguardo quel metodo ovvero di decidere cosa eseguire runtime. Grazie a questa pratica, chiamata **polimorfismo** si ha la possibilità di utilizzare uno stesso metodo per oggetti di classi diverse. Questo qualificatore prevede che ci sia un’implementazione di classi derivate e che quindi si vada via via a creare una gerarchia di classi. In particolare si indica al compilatore che quel metodo verrà implementato nelle classi figlie e che verrà richiamato tramite un puntatore.
 
--   `static const int b` private
--   `const float A::b = 1.0` fuori dal main
+È inoltre possibile, tramite il qualificatore virtual, definire dei metodi virtuali puri, ovvero che non necessitano di un’implementazione seppur minima e che demandano il compito di essere scritti effettivamente nelle classi derivate. Come conseguenza dell’uso di metodi virtuali puri è che la classe diventa completamente astratta, ciò vuol dire che non è più possibile istanziarla.
 
-`static const int a`
+### Operatori in C++ e la loro ridefinizione (operator overloading)
 
--   NON posso scriverlo; con `static` potrei mettere il valore dopo l’inizializzazione, solo che con  `const` `a` deve esistere
+-   Operator `<<`
+-   Operator `=`
+-   Operator `++`
+-   Operator `==`
 
-### Overload operatori come metodi (all'interno della classe)
+Gli operatori sono funzioni, quindi e' possibile fare l’overloading degli operatori. Cio' vuol dire che alla stessa entita' si possono dare significati diversi (capita per le funzioni, posso fare overloading).
+
+#### Cosa sono gli operatori?
+
+Sono operazioni che si trovano nelle espressioni dei vari tipi base (per esempio nell’`int`: gli operatori predefiniti).
+L’operatore sempre definito in ogni classe e' l’operatore `=`.
+Qualsiasi classe noi definiamo, il comando `new` restituisce un puntatore.
+
+Data l’espressione `a = b + c`, il compilatore c++ cerca gli operatori/metodi per svolgere l’espressione
+
+-   nei tipi base: ci sono predefiniti
+-   nelle classi: li vado a cercare (l'operatore `=` c’e' sempre, mentre il `+` lo va a cercare)
+
+**Nota bene**: L’overloading degli operatori e' un caso particolare dell’overloading di funzioni.
+
+A livello codice, per alcuni operatori l’overloading e' realizzabile in due modi:
+
+-   come metodo
+-   come funzione esterna
+
+Al contrario, l’operator `=` ad esempio, e' possibile implementarlo solo come metodo.
+
+Consideriamo il seguente frame di codice
+
+```cpp
+class A{
+private:
+  int i;
+public:
+	A(int k){
+    i = k;
+  };
+	A operator+(const A& a)const{
+    return A(i+a.i);
+  };
+	friend A operator + (const A&, const A&);
+};
+A operator+(const A& a1, const A& a2) {
+  return A(a1.i+a2.i+i); //NON FUNZIONA, i e' privato -> uso funzione esterna
+};
+```
+
+vediamo gli operatori che vengono chiamati nei prossimi esempi
+
+```cpp
+A a1(1);
+A a2(2);
+a1 = a2 + 3;
+a1.operator = a2.operator + (A(3));     // chiamato costruttore ad un parametro
+a1 = 3 + a2;                            // non c’e' explicit quindi va
+a1.operator = (operator + (A(3), a2));  // l’operatore e' quello di intero,
+                                        // non trova modo di fare intero con a
+                                        // e quindi mi da errore
+```
+
+```cpp
+a1 = a1 + a2;
+A a1(1);
+A a2(2);
+a1.operator = (a1.operator + (a2));
+A a3;
+a3 = a1 + a2;
+```
+
+```cpp
+int c;
+c = 3 + 2;
+A d;
+d = 3 + 2;		
+d.operator = (A(3 + 2));
+```
+
+```cpp
+a1 += a2;
+class A{
+  private:
+    int i;
+  public:
+    A(int k){
+      i = k;
+    };
+    A& operator+=(const A& aa){ // & e' referenza
+      i += aa.i;
+      return \*this; // NO const dopo, perché l'oggetto chiamato sara' modificato
+    };
+};
+```
+
+nel `return` c’e' operazione di dereferenziazione, quindi ritorna la stessa istanza, ma modificata (`lvalue` per fare assegnazione e quindi come fa l’operazione di assegnazione).
+
+```cpp
+class A{
+private:
+  int i;
+public:
+  A(int k){
+    i = k;
+  };
+  bool operator<(const A& aa)const{
+    return i < aa.i;
+  };
+  A operator*(const A& aa)const{
+		A temp = \*this;
+		return temp \*= aa; //return (\*this) * aa; NO!!!
+  };
+  A& operator*=(const A& aa){ //efficienza uguale ma scrivo meno
+		(\*this) = (\*this) * aa;
+		return \*this;
+  };
+};
+```
+
+#### Esempi di overload
 
 -   [a = 3]
 
@@ -386,7 +532,7 @@ A& operator=(const int uk){
 ```cpp
 A& operator=(const A& a){
 	k = a.k;
-	cout << "operator = const A&" << endl; //NOTA: qualcuno ha già implementato
+	cout << "operator = const A&" << endl; //NOTA: qualcuno ha gia' implementato
 	return \*this; //uguale tra int e float
 };
 ```
@@ -424,7 +570,7 @@ A& operator==(const A& a){
 };
 ```
 
-`return *this == aa;` è un confronto infinito (ricorsivo) tra classi, quindi devo confrontare i valori
+`return *this == aa;` e' un confronto infinito (ricorsivo) tra classi, quindi devo confrontare i valori
 
 -   [a != c]
 
@@ -456,7 +602,7 @@ A operator++(int){
 };
 ```
 
-il passaggio del parametro di tipo `int` è ciò che distingue il post-incremento dal pre-incremento.
+il passaggio del parametro di tipo `int` e' cio' che distingue il post-incremento dal pre-incremento.
 
 Nel caso si voglia implementare **[ a == b ]**
 
@@ -468,130 +614,11 @@ bool operator==(const A& a, const B& b){ //funzione esterna alla classe
 ```
 
 Al contrario, per implementare  **[ b == a ]** bisogna cambiare `A` con `B` ed `a` con `b` e viceversa.
-**[ a == a ]** è un metodo interno.
-
-### Operatori in C++ e la loro ridefinizione (operator overloading)
-
--   Operator `<<`
--   Operator `=`
--   Operator `++`
--   Operator `==`
-
-Gli operatori sono funzioni, quindi è possibile fare l’overloading degli operatori. Ciò vuol dire che alla stessa entità si possono dare significati diversi (capita per le funzioni, posso fare overloading).
-
-#### Cosa sono gli operatori?
-
-Sono operazioni che si trovano nelle espressioni dei vari tipi base (per esempio nell’`int`: gli operatori predefiniti).
-L’operatore sempre definito in ogni classe è l’operatore `=`.
-Qualsiasi classe noi definiamo, il comando `new` restituisce un puntatore.
-
-Data l’espressione `a = b + c`, il compilatore c++ cerca gli operatori/metodi per svolgere l’espressione
-
--   nei tipi base: ci sono predefiniti
--   nelle classi: li vado a cercare (l'operatore `=` c’è sempre, mentre il `+` lo va a cercare)
-
-**Nota bene**: L’overloading degli operatori è un caso particolare dell’overloading di funzioni.
-
-A livello codice, per alcuni operatori l’overloading è realizzabile in due modi:
-
--   come metodo
--   come funzione esterna
-
-Al contrario, l’operator `=` ad esempio, è possibile implementarlo solo come metodo.
-
-Consideriamo il seguente frame di codice
-
-```cpp
-class A{
-private:
-  int i;
-public:
-	A(int k){
-    i = k;
-  };
-	A operator+(const A& a)const{
-    return A(i+a.i);
-  };
-	friend A operator + (const A&, const A&);
-};
-A operator+(const A& a1, const A& a2) {
-  return A(a1.i+a2.i+i); //NON FUNZIONA, i è privato -> uso funzione esterna
-};
-```
-
-vediamo gli operatori che vengono chiamati nei prossimi esempi
-
-```cpp
-A a1(1);
-A a2(2);
-a1 = a2 + 3;
-a1.operator = a2.operator + (A(3));     // chiamato costruttore ad un parametro
-a1 = 3 + a2;                            // non c’è explicit quindi va
-a1.operator = (operator + (A(3), a2));  // l’operatore è quello di intero,
-                                        // non trova modo di fare intero con a
-                                        // e quindi mi da errore
-```
-
-```cpp
-a1 = a1 + a2;
-A a1(1);
-A a2(2);
-a1.operator = (a1.operator + (a2));
-A a3;
-a3 = a1 + a2;
-```
-
-```cpp
-int c;
-c = 3 + 2;
-A d;
-d = 3 + 2;		
-d.operator = (A(3 + 2));
-```
-
-```cpp
-a1 += a2;
-class A{
-  private:
-    int i;
-  public:
-    A(int k){
-      i = k;
-    };
-    A& operator+=(const A& aa){ // & è referenza
-      i += aa.i;
-      return \*this; // NO const dopo, perché l'oggetto chiamato sarà modificato
-    };
-};
-```
-
-nel `return` c’è operazione di dereferenziazione, quindi ritorna la stessa istanza, ma modificata (`lvalue` per fare assegnazione e quindi come fa l’operazione di assegnazione).
-
-```cpp
-class A{
-private:
-  int i;
-public:
-  A(int k){
-    i = k;
-  };
-  bool operator<(const A& aa)const{
-    return i < aa.i;
-  };
-  A operator*(const A& aa)const{
-		A temp = \*this;
-		return temp \*= aa; //return (\*this) * aa; NO!!!
-  };
-  A& operator*=(const A& aa){ //efficienza uguale ma scrivo meno
-		(\*this) = (\*this) * aa;
-		return \*this;
-  };
-};
-```
+**[ a == a ]** e' un metodo interno.
 
 ## Standard Template Library (STL)
 
-Una Standard Template Library è universalmente nota; è portabile (integrata con il linguaggio, quindi il compilatore deve compilare ed avere accanto quella libreria standard).
+Una Standard Template Library e' universalmente nota; e' portabile (integrata con il linguaggio, quindi il compilatore deve compilare ed avere accanto quella libreria standard).
 
 Di seguito elenchiamo una funzione che calcola il minimo tra due variabili, riguardo diversi tipi:
 
@@ -638,7 +665,7 @@ B min(B b1, B b2){
 };
 ```
 
-Un template è utilizzato per definire opzioni, metodi e strutture parametrizzate.
+Un template e' utilizzato per definire opzioni, metodi e strutture parametrizzate.
 
 Ad esempio, per fare un cerca e copia di funzioni posso generalizzare rispetto ad un parametro.
 
@@ -653,7 +680,7 @@ template <E> E min(E e1, E e2){  // implementazione fuori main (nel main sarebbe
 };
 ```
 
-##### È possibile definire una classe template avendo una classe personalizzata?
+##### e' possibile definire una classe template avendo una classe personalizzata?
 
 ```cpp
 template <E> class list<E>{
@@ -670,7 +697,7 @@ l.push_front(3);
 l.push_back(1);
 ```
 
-È necessario standardizzare la varie classi che ricevono.
+e' necessario standardizzare la varie classi che ricevono.
 
 Nella STL ci sono:
 
@@ -706,23 +733,23 @@ Fanno cose come minimo dalla lista
 -   si passa ad una programmazione dove si compongono pezzi con algoritmi che ci sono
 
 Definisco delle classi (organizzate in una gerarchia) che mi permettono l’accesso agli elementi del contenitore.
-Gli **iteratori** sono un modo per accedere ai contenitori: non sono puntatori, ma ci assomigliano per alcune funzionalità.
+Gli **iteratori** sono un modo per accedere ai contenitori: non sono puntatori, ma ci assomigliano per alcune funzionalita'.
 
 ```cpp
-list/set/vector<int>::iterator it; //è un iteratore bidirezionale
+list/set/vector<int>::iterator it; //e' un iteratore bidirezionale
 map<int,float>::iterator it;
 ```
 
-Un esempio di implementazione è
+Un esempio di implementazione e'
 
 ```cpp
-list<int> l; //se l è vuoto, l.begin() == l.end();   iteratore è oggetto della classe di iteratori
+list<int> l; //se l e' vuoto, l.begin() == l.end();   iteratore e' oggetto della classe di iteratori
 l.push_front(3);
 l.push_back(2);
 list<int>::iterator it;
 for(it=l.begin(); it!=l.end(); it++){
   cout <<  \*it; //overloading di operatori per dereferenziare l’operatore -> * restituisce oggetto
-               //puntato, è un operatore unario
+               //puntato, e' un operatore unario
 }
 ```
 
@@ -742,7 +769,7 @@ Personaggio p; //NON posso scriverlo, la classe ha un metodo puramente virtuale
 ```
 
 Tramite `virtual`, posso decidere in che classe della gerarchia va fatto eseguire un determinato metodo. In poche parole, con il `virtual`, il compilatore non esegue il metodo della classe madre, ma quello delle classi derivate.
-Con gli operatori, prima guardo di che tipo (classe) è il primo operatore (sempre che in quella classe ci sia implementato lo stesso metodo del `virtual`) e poi il secondo che deve essere lo stesso tipo del primo.
+Con gli operatori, prima guardo di che tipo (classe) e' il primo operatore (sempre che in quella classe ci sia implementato lo stesso metodo del `virtual`) e poi il secondo che deve essere lo stesso tipo del primo.
 
 Il `virtual` viene utilizzato solo con allocazioni di tipo dinamico.
 
@@ -783,9 +810,9 @@ pp->stampa();
 ```
 
 -   Senza `virtual`, e con implementazione di `stampa()` in `Personaggio`, avrei stampato quello in `Personaggio`
--   Con `virtual`, vado a scegliere a runtime il metodo più giusto per stampare (`stampa()` in `Cavaliere`)
+-   Con `virtual`, vado a scegliere a runtime il metodo piu' giusto per stampare (`stampa()` in `Cavaliere`)
 
-A conferma di ciò, si verifica il seguente caso
+A conferma di cio', si verifica il seguente caso
 
 ```cpp
 Personaggio* pp = new Mago(…);
@@ -803,7 +830,7 @@ class Personaggio{
   public:
     virtual void Stampa() = 0;
     friend ostream& operator<<(ostream& os, const Personaggio& p);
-    friend virtual ostream& op(ostream& os); //non è virtuale puro perché implementato sotto
+    friend virtual ostream& op(ostream& os); //non e' virtuale puro perché implementato sotto
 };
 ostream& Personaggio::op(ostream& os){
   return os << vita;
@@ -853,7 +880,7 @@ if(deliter!=mialista.end()){
 }
 ```
 
-Proprietà della lista:
+Proprieta' della lista:
 
 -   Memoria non contigua e non pre-allocata
 -   Ricerca lineare
@@ -862,7 +889,7 @@ Proprietà della lista:
 -   Ogni elemento richiede uno spazio extra per il nodo che tiene l'elemento (next/prev)
 -   Quando viene aggiunto un elemento non deve ri-allocare la memoria dell'intera lista
 -   Inserimento e rimozione sono computazionalmente economici
--   Non si può accedere in modo casuale agli elementi, quindi si rischia scorrere l'intera lista
+-   Non si puo' accedere in modo casuale agli elementi, quindi si rischia scorrere l'intera lista
 -   Gli iteratori rimangono validi anche una volta aggiunti/rimossi gli elementi dalla lista
 
 #### Vector
@@ -882,11 +909,11 @@ void stampa(int dato){
 }
 ```
 
-Proprietà del Vector
+Proprieta' del Vector
 
 -   Memoria contigua e pre-allocata per elementi futuri. Viene dunque richiesto uno spazio extra oltre a quello degli elementi in sé
 -   Ogni elemento richiede solamente lo spazio per l'elemento stesso (non ci sono puntatori extra)
--   Può riallocare memoria per l'intero vettore ogni volta che viene aggiunto un elemento
+-   Puo' riallocare memoria per l'intero vettore ogni volta che viene aggiunto un elemento
 -   Gli inserimenti hanno un costo o(n), tranne alla fine dove sono costanti
 -   Le cancellazioni hanno un costo o(n), tranne alla fine dove sono costanti
 -   E' possibile accedere casualmente ai suoi elementi
@@ -900,7 +927,7 @@ Proprietà del Vector
 set<int> si;
 set<int>::iterator siter;
 si.insert(1);
-//se un valore è già presente, gli altri non vengono inseriti
+//se un valore e' gia' presente, gli altri non vengono inseriti
 
 //stampa
 for(siter=si.begin(); siter!=si.end(); ++siter){
@@ -919,11 +946,11 @@ bool MiaClasse::operator<(const Qualcosa& q)const{
 }
 ```
 
-Proprietà del set:
+Proprieta' del set:
 
--   La ricerca è logaritmica nella grandezza
+-   La ricerca e' logaritmica nella grandezza
 -   Inserimento e cancellazione sono logaritmiche
--   Gli elementi sono unici, ordinati e sempre disposti dal più basso al più alto
+-   Gli elementi sono unici, ordinati e sempre disposti dal piu' basso al piu' alto
 
 #### Multiset
 
@@ -938,7 +965,7 @@ for(miter=mi.begin(); miter!=mi.end(); ++miter){
 }
 ```
 
-Proprietà del multiset:
+Proprieta' del multiset:
 
 -   Si comporta come i set, ma gli elementi possono non essere unici
 
@@ -969,7 +996,7 @@ void stampaMap(map<string,int> mm){
 stampaMap(m);
 ```
 
-Proprietà del Map
+Proprieta' del Map
 
 -   Contenitore di dimensioni variabili che recupera il dato richiesto grazie all'utilizzo di una chiave ad esso associato
 -   Fornisce iteratori bidirezionali
@@ -995,6 +1022,6 @@ void stampaMMapDati(multimap<string, Dati> mdati){
 }
 ```
 
-Proprietà del Multimap
+Proprieta' del Multimap
 
 -   Si comporta come il Map, ma le chiavi possono non essere univoche
