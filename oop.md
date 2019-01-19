@@ -55,10 +55,9 @@ La parte grafica in UML non è arbitraria ma unificata, ovvero vengono utilizzat
 L'ereditarietà consente di creare classificazioni gerarchiche. E' possibile creare una classe generale che definisce le caratteristiche comuni a una serie di oggetti correlati. La classe può, in seguito, essere ereditata da una o più classi, ognuna delle quali aggiunge alla classe solo elementi specifici.
 Si definisce *classe base* la classe ereditata, mentre la classe che "riceve" l'eredità è detta *classe derivata*. Avviene mediante la seguente sintassi:
 
-```
-class NomeClasseDerivata : tipoEreditarietà NomeClasseBase{
-  // contenuto della classe
-  // il tipoEreditarietà può essere public, private, protected
+```cpp
+class NomeClasseDerivata : tipoEreditarieta NomeClasseBase{ //tipoEreditarieta può essere public, private, protected
+  //contenuto della classe
 };
 ```
 Quando, ad esempio, il tipo di accesso alla classe base è `public`, tutti i membri `public` della classe base diverranno membri `public` della classe derivata, Lo stesso discorso varrà per i membri `protected`.
@@ -68,13 +67,12 @@ Una classe derivata può ricevere in eredità elementi di due o più classi base
 
 Di seguito alcuni esempi di ereditarietà:
 
-```
-class A : tipoEreditarietà B{
+```cpp
+class A : tipoEreditarieta B{
   public:
     void m4();
-}
-
-class B {
+};
+class B{
   private:
     void m1();
   public:
@@ -82,38 +80,32 @@ class B {
   protected:
     void m3();
 };
-
-A seconda delle ereditarietà
-
-  A a;
-  a.m1();
-  a.m2();
-  a.m3();
-
-  // Chiamo i metodi m1, m2, m3
+//a seconda delle ereditarietà
+A a;
+a.m1();
+a.m2();
+a.m3();
+//chiamo i metodi m1, m2, m3
 ```
 
-#### Ereditarietà di tipo public `class A: public B{};`
+#### Ereditarietà di tipo public `class A : public B`
 
 * Quando è private in B diventa inaccessibile in A ed inaccessibile dall’esterno
 
-```
-main() {
-
+```cpp
+main(){
   A a;
-  a.m1(); // NO m1 è private in B (inaccessibile da classi derivate à private)
+  a.m1(); //NO m1 è private in B (inaccessibile da classi derivate -> private)
 }
-
 void A::m4(){
-  m1(); // NO m1 è private in B e quindi inaccessibile da A
+  m1(); //NO m1 è private in B e quindi inaccessibile da A
 }
 ```
 
 * Quando è public in B diventa public in A
 
-```
-main() {
-
+```cpp
+main(){
   A a;
   a.m2(); //OK
 }
@@ -124,38 +116,36 @@ void A::m4(){
 
 * Quando è protected in B diventa protected in A
 
-```
-main() {
+```cpp
+main(){
   A a;
-  a.m3(); // NO, non posso accedere dall’esterno
+  a.m3(); //NO, non posso accedere dall’esterno
 }
-
-main() {
+```
+```cpp
+main(){
   B b;
-  b.m3();  // NO
+  b.m3(); //NO
 }
 void B::m2(){
-  m3(); // OK
+  m3(); //OK
 }
 void A::m4(){
-  m3(); // OK, se in B qualcosa è protected -> resta inaccessibile dall’esterno,
-        // ma accessibile sia da classe base che da classe derivata
+  m3(); //OK, se in B qualcosa è protected -> resta inaccessibile dall’esterno,
+        //ma accessibile sia da classe base che da classe derivata
 }
-
-IS-A -> ogni istanza di A è anche istanza di B -> EREDITARIETA’
+//IS-A -> ogni istanza di A è anche istanza di B -> EREDITARIETA’
 ```
 
-#### Ereditarietà di tipo private `class A: private B{};`
+#### Ereditarietà di tipo private `class A: private B`
 
 * Quando è private in B diventa inaccessibile da A ed inaccessibile dall’esterno
 
-```
-main() {
-
+```cpp
+main(){
   A a;
   a.m1(); //NO
 }
-
 void A::m4(){
   m1(); //NO *come nel caso precedente con ereditarietà public*
 }
@@ -163,13 +153,11 @@ void A::m4(){
 
 * Quando è public in B diventa private in A
 
-```
-main() {
-
-A a;
-a.m2(); //NO -> privatizzato per l’esterno uguale
+```cpp
+main(){
+  A a;
+  a.m2(); //NO -> privatizzato per l’esterno uguale
 }
-
 void A::m4(){
   m2(); //OK -> accessibile anche per classi derivate
 }
@@ -177,42 +165,37 @@ void A::m4(){
 
 * Quando è protected in B diventa private in A
 
-```
-main() {
+```cpp
+main(){
   A a;
-  a.m3();  //NO
+  a.m3(); //NO
 }
-
 void A::m4(){
   m3(); //OK
 }
 ```
 
-#### Ereditarietà di tipo protected `class A: protected B{};`
+#### Ereditarietà di tipo protected `class A: protected B`
 
 * Quando è private in B diventa inaccessibile da A ed inaccessibile dall’esterno
 
-```
-main() {
-
+```cpp
+main(){
   A a;
   a.m1(); //NO
 }
-
 void A::m4(){
-  m1();  //NO
+  m1(); //NO
 }
 ```
 
 * Quando è public in B diventa public in A
 
-```
-main() {
-
+```cpp
+main(){
   A a;
   a.m2(); //NO -> esterno no
 }
-
 void A::m4(){
   m2(); //OK -> interno ok
 }
@@ -220,12 +203,11 @@ void A::m4(){
 
 * Quando è protected in B diventa protected in A
 
-```
-main() {
+```cpp
+main(){
   A a;
   a.m3(); //NO
 }
-
 void A::m4(){
   m3(); //OK
 }
@@ -255,23 +237,23 @@ La classe derivata diventa così diversa dalla classe sopra, ne deriva che non u
 Quando ha senso fare ereditarietà public?
 
 
-```
-class A: public B {
+```cpp
+class A : public B{
 	void m4();
 };
 A a;
 B b;
-a = b; // NO
-b = a; // SI 	(b è la classe base)
+a = b; //NO
+b = a; //SI (b è la classe base)
 ```
 
 <img src="https://github.com/davidegagliardi/OOP/blob/master/CelleMemoria.png" />
 
 a contiene b, a è più grande
 
-```
-A& A::operator=(const A&a)				
-B& B::operator=(const B&b)  // OK per ereditarietà pubblica
+```cpp
+A& A::operator=(const A& a);
+B& B::operator=(const B& b); //OK per ereditarietà pubblica
 ```
 
 ### Differenze valore / puntatore / riferimento
@@ -287,17 +269,15 @@ In linea di massima, si tende a non fare la copia.
 Può essere pre-fisso (`++i`) o post-fisso (`i++`).
 
 Nel caso di incremento pre-fisso, la variabile verrà incrementata nello stesso ciclo:
-```
+```cpp
 int i = 5;
-cout << "Il valore di i e' " <<  ++i;
-
+cout << "Il valore di i e' " << ++i;
 //L'output del programma sarà "Il valore di i è 6"
 ```
 Nel caso di operatore post fisso, la variabile verrà incrementata nel ciclo successivo:
-```
+```cpp
 int i = 5;
-cout << "Il valore di i e' " <<  i++;
-
+cout << "Il valore di i e' " << i++;
 //L'output del programma sarà "Il valore di i è 5"
 ```
 Se l'operatore viene applicato ad un puntatore, il valore della cella di memoria rimarrà il medesimo. Verrà però incrementato l'indirizzo di memoria contenuto dal puntatore.
@@ -331,25 +311,25 @@ Il costruttore può accettare uno o più argomenti. Nel caso di costruttore a ze
 
 L’uso di un costruttore appositamente definito, invece, consente di inizializzare tutti i membri della classe assieme, di modo che l’istanziazione di un oggetto sia sempre consistente con il nostro modello di dati e indipendente dalle scelte del compilatore.
 
-```
+```cpp
 NomeClasse::NomeClasse(){
   cout << "Costruttore di default/zero parametri";
-}
-NomeClasse::NomeClasse(Nome _nome, Cognome _cognome){
+};
+NomeClasse::NomeClasse(Nome n, Cognome c){
+  nome = n;
+  cognome = c;
   cout << "Costruttore specifico a due parametri";
-  nome = _nome;
-  cognome = _cognome;
-}
+};
 ```
 
 ### Distruttore
 
 Il distruttore di classe assolve il compito di rilasciare tutte le risorse associate ad un oggetto, quando esso non è più necessario.
 
-```
+```cpp
 NomeClasse::~NomeClasse(){
   cout << "Il contenuto e' stato distrutto";
-}
+};
 ```
 Il distruttore è caratterizzato dal fatto che non ha valori di ritorno né parametri. Per questo motivo non può essere sovraccaricato.
 
@@ -368,109 +348,107 @@ Esempio:
 Dal punto di vista funzionale, la variabile statica è come una variabile globale.
 
 `const float miaConst`
-* non cambia mai dopo l’inizializzazione (attributo costante ->`A():miaConst(1,1) {…}`)
+* non cambia mai dopo l’inizializzazione (attributo costante -> `A():miaConst(1.1){…}`)
 * qui ho già inizializzato l’attributo
 
-`static const int a = 1;`
-* `static const int b;` private
+`static const int a = 1`
+* `static const int b` private
 * `const float A::b = 1.0` fuori dal main
 
-`static const int a;`
+`static const int a`
 * NON posso scriverlo; con `static` potrei mettere il valore dopo l’inizializzazione, solo che con  `const` `a` deve esistere
 
 ### Overload operatori come metodi (all'interno della classe)
 
 * [a = 3]
 
-```
-A& operator = (const int _k) {			
-	k = _k;
-	cout << “operator = const int” << endl;
-	return *this;
-}
+```cpp
+A& operator=(const int uk){
+	k = uk;
+	cout << "operator = const int" << endl;
+	return \*this;
+};
 ```
 * [b = a]
 
-```
-A& operator = (const A& aa) {			
-	k = aa.k;
-	cout << “operator = const A&” << endl;			NOTA: qualcuno ha già implementato
-	return *this;							uguale tra int e float
-}
+```cpp
+A& operator=(const A& a){
+	k = a.k;
+	cout << "operator = const A&" << endl; //NOTA: qualcuno ha già implementato
+	return \*this; //uguale tra int e float
+};
 ```
 * [a = a + b]
 
-```
-A operator + (const A& aa) {			
+```cpp
+A operator+(const A& a){
 	A temp;                                //creata classe temporanea
-	temp.k = k + aa.k;                     //k = valore classe in cui sono dentro
-	cout << “operator + const A&” << endl; //aa.k = valore classe passata
+	temp.k = k + a.k;                      //k = valore classe in cui sono dentro
+	cout << "operator + const A&" << endl; //a.k = valore classe passata
 	return temp;                           //temp = il mio risultato
-}
-
-// A crea una nuova istanza. Prendo le 2 istanze e le sommo.
-// Infine metto il valore nella nuova istanza
-// temporanea -> la somma non modifica l’istanza corrente
+};
+//A crea una nuova istanza. Prendo le 2 istanze e le sommo.
+//Infine metto il valore nella nuova istanza
+//temporanea -> la somma non modifica l’istanza corrente
 ```
 * [c += a]
 
-```
-A& operator += (const A& aa) {			
-	k += aa.k;
-	cout << “operator += const A&” << endl;
-	return *this;
-}
+```cpp
+A& operator+=(const A& a){
+	k += a.k;
+	cout << "operator += const A&" << endl;
+	return \*this;
+};
 ```
 * [a == c]
 
-```
-A& operator == (const A& aa) {			
-	cout << “operator == const A&” << endl;		//NOTA: NO per classi diverse!!
+```cpp
+A& operator==(const A& a){
+	cout << "operator == const A&" << endl;		//NOTA: NO per classi diverse!!
 	return k == aa.k;
-}
+};
 ```
 `return *this == aa;` è un confronto infinito (ricorsivo) tra classi, quindi devo confrontare i valori
 
 * [a != c]
 
+```cpp
+A& operator!=(const A& a){
+	cout << "operator += const A&" << endl;
+	return k != aa.k; //in alternativa return !(\*this == a);
+};
 ```
-A& operator != (const A& aa) {			
-	cout << “operator += const A&” << endl;
-	return k!=aa.k;      // in alternativa return !(*this == aa);
-}
-```
-* [++a;]  pre-incremento
+* [++a] pre-incremento
 
-```
-A& operator ++ () {				
-	cout << “operator ++A” << endl;
+```cpp
+A& operator++(){
+	cout << "operator ++A" << endl;
 	k++;
-  return *this;
-}
+  return \*this;
+};
 ```
-* [++a;]  post-incremento
+* [a++] post-incremento
 
-```
-
-A operator ++ (int) {				
-	A aa = *this;
+```cpp
+A operator++(int){
+	A a = \*this;
 	k++;
-  cout << “operator A++” << endl;
-  return aa;	//istanza-1
-}
+  cout << "operator A++" << endl;
+  return a;	//istanza-1
+};
 ```
 il passaggio del parametro di tipo `int` è ciò che distingue il post-incremento dal pre-incremento.
 
 
 Nel caso si voglia implementare **[ a == b ]**
-```
-friend bool operator == (const A& aa, const B& bb);	 // dentro i 2 public delle 2 classi A e B
-bool operator == (const A& aa, const B& bb) {		   // funzione esterna alla classe
-	return aa.val == bb.val;
-}
+```cpp
+friend bool operator==(const A& a, const B& b); //dentro i 2 public delle 2 classi A e B
+bool operator==(const A& a, const B& b){ //funzione esterna alla classe
+	return a.k == b.k;
+};
 ```
 
-Al contrario, per implementare  **[ b == a ]** bisogna cambiare `A` con `B` ed `aa` con `bb` e viceversa.
+Al contrario, per implementare  **[ b == a ]** bisogna cambiare `A` con `B` ed `a` con `b` e viceversa.
 **[ a == a ]** è un metodo interno.
 
 ### Operatori in C++ e la loro ridefinizione (operator overloading)
@@ -486,7 +464,7 @@ Sono operazioni che si trovano nelle espressioni dei vari tipi base (per esempio
 L’operatore sempre definito in ogni classe è l’operatore `=`.
 Qualsiasi classe noi definiamo, il comando `new` restituisce un puntatore.
 
-Data l’espressione `a = b + c;`, il compilatore c++ cerca gli operatori/metodi per svolgere l’espressione
+Data l’espressione `a = b + c`, il compilatore c++ cerca gli operatori/metodi per svolgere l’espressione
 * nei tipi base: ci sono predefiniti
 * nelle classi: li vado a cercare (l'operatore `=` c’è sempre, mentre il `+` lo va a cercare)
 
@@ -500,22 +478,28 @@ Al contrario, l’operator `=` ad esempio, è possibile implementarlo solo come 
 
 Consideriamo il seguente frame di codice
 
-```
-class A {
+```cpp
+class A{
 private:
   int i;
 public:
-	A(int _i) { i = _i; }
-	A operator + (const A& _a) const {return A( i + _a.i )};
-	friend A operator + (const A&, const A&);
-	A operator + (const A& _a1, const A& _a2) {
-    return A(_a1.i + _a2.i + i); //NON FUNZIONA, i è privato. Uso funzione esterna
+	A(int k){
+    i = k;
   };
+	A operator+(const A& a)const{
+    return A(i+a.i);
+  };
+	friend A operator + (const A&, const A&);
+};
+A operator+(const A& a1, const A& a2) {
+  return A(a1.i+a2.i+i); //NON FUNZIONA, i è privato -> uso funzione esterna
+};
 ```
 vediamo gli operatori che vengono chiamati nei prossimi esempi
 
-```
-A a1(1), A a2(2);
+```cpp
+A a1(1);
+A a2(2);
 a1 = a2 + 3;
 a1.operator = a2.operator + (A(3));     // chiamato costruttore ad un parametro
 a1 = 3 + a2;                            // non c’è explicit quindi va
@@ -524,52 +508,61 @@ a1.operator = (operator + (A(3), a2));  // l’operatore è quello di intero,
                                         // e quindi mi da errore
 ```
 
-```
+```cpp
 a1 = a1 + a2;
-A a1(1);  A a2(2);
+A a1(1);
+A a2(2);
 a1.operator = (a1.operator + (a2));
 A a3;
 a3 = a1 + a2;
 ```
 
-```
-int c;  c = 3 + 2;
-A d;  d = 3 + 2;		
+```cpp
+int c;
+c = 3 + 2;
+A d;
+d = 3 + 2;		
 d.operator = (A(3 + 2));
 ```
 
-```
+```cpp
 a1 += a2;
-class A {
+class A{
   private:
     int i;
   public:
-    A(int _i) {i = _i;}
-    A& operator += (const A& _a){   // & è referenza
-      i += _a.i;  return *this;     // NO const dopo, perché l'oggetto chiamato sarà modificato
-    }
-}
+    A(int k){
+      i = k;
+    };
+    A& operator+=(const A& aa){ // & è referenza
+      i += aa.i;
+      return \*this; // NO const dopo, perché l'oggetto chiamato sarà modificato
+    };
+};
 ```
 nel `return` c’è operazione di dereferenziazione, quindi ritorna la stessa istanza, ma modificata (`lvalue` per fare assegnazione e quindi come fa l’operazione di assegnazione).
 
 
-```
-class A {
+```cpp
+class A{
 private:
   int i;
 public:
-  A(int _i) {i = _i;}
-  bool operator < (const A& _a) const { return (i < _a.i); }
-
-  A operator * (const A& _a) const {
-		A temp = (*this);
-		return temp *= _a;          //return (*this) * _a; NO!!!
-  }
-
-  A& operator *= (const A& _a) {    //efficienza uguale ma scrivo meno
-		(*this) = (*this) * _a;
-		return (*this);
-  }
+  A(int k){
+    i = k;
+  };
+  bool operator<(const A& aa)const{
+    return i < aa.i;
+  };
+  A operator*(const A& aa)const{
+		A temp = \*this;
+		return temp \*= aa; //return (\*this) * aa; NO!!!
+  };
+  A& operator*=(const A& aa){ //efficienza uguale ma scrivo meno
+		(\*this) = (\*this) * aa;
+		return \*this;
+  };
+};
 ```
 
 ## Standard Template Library (STL)
@@ -578,68 +571,80 @@ Una Standard Template Library è universalmente nota; è portabile (integrata co
 
 Di seguito elenchiamo una funzione che calcola il minimo tra due variabili, riguardo diversi tipi:
 
-```
-int min(_i int, _j int) {
-	if (_i < _j) return _i;
-	else return _j;
-}
+```cpp
+int min(int i, int j){
+	if(i < j){
+    return i;
+  }else{
+    return j;
+  }
+};
 ```
 
-```
-double min( _t double,  _s double);
+```cpp
+double min(double i, double j);
 ```
 
-```
-class A {
-private:
-  int i;
-public:
-  bool operator < (const _a A) const;
+```cpp
+class A{
+  private:
+    int i;
+  public:
+    bool operator<(const A a)const;
 };
 
-bool A::operator <(const _a A) const {
-  return i < _a.i;
-}
+bool A::operator<(const A a)const{
+  return i < a.i;
+};
 
-A min (A _a1, A _a2);
-A min (A _a1, A _a2) {
-	if (_a1 < _a2)  return _a1;
-	else return _a2;
-}
-B min (B _b1, B _b2) {
-  if (_b1 < _b2)  return b1;
-  else return b2;
-}
+A min(A a1, A a2);
+A min(A a1, A a2){
+	if(a1 < a2){
+    return a1;
+  }else{
+    return a2;
+  }
+};
+B min(B b1, B b2){
+  if(b1 < b2){
+    return b1;
+  }else{
+    return b2;
+  }
+};
 ```
 
 Un template è utilizzato per definire opzioni, metodi e strutture parametrizzate.
 
 Ad esempio, per fare un cerca e copia di funzioni posso generalizzare rispetto ad un parametro.
 
-```
-template <E> E min (E e1, E e2)   // header definizione template
-template <E> E min (E e1, E e2){  // implementazione fuori main (nel main sarebbe stato, ad esempio, min(3, 2));
-  if (e1 < e2)  return e1;
-	else return e2;
+```cpp
+template <E> E min(E e1, E e2);  // header definizione template
+template <E> E min(E e1, E e2){  // implementazione fuori main (nel main sarebbe stato, ad esempio, min(3,2))
+  if(e1 < e2){
+    return e1;
+  }else{
+    return e2;
   }
+};
 ```
 
 ##### È possibile definire una classe template avendo una classe personalizzata?
-```
-template <E> class list <E> {
+```cpp
+template <E> class list<E>{
   public:
     int size();
 };
 ```
 Allora con `#include <list>`
 
-```
-list <int> l;
+```cpp
+list<int> l;
 l.push_front(3);
 l.push_back(1);
 ```
 
-E' necessario standardizzare la varie classi che ricevono.
+È necessario standardizzare la varie classi che ricevono.
 
 Nella STL ci sono:
 * container (contenitori)
@@ -656,12 +661,12 @@ I **container** sono classi che contengono qualcosa:
 
 Uso i container per non implementare continuamente le stesse cose
 
-```
-class A {
-private:
-  list <B> lb;
-public:
-}
+```cpp
+class A{
+  private:
+    list<B> lb;
+  public:
+};
 ```
 
 
@@ -675,20 +680,21 @@ Fanno cose come minimo dalla lista
 Definisco delle classi (organizzate in una gerarchia) che mi permettono l’accesso agli elementi del contenitore.
 Gli **iteratori** sono un modo per accedere ai contenitori: non sono puntatori, ma ci assomigliano per alcune funzionalità.
 
-```
-list/set/vector <int>::iterator it;		//è un iteratore bidirezionale
-map <int, float>::iterator iter;
+```cpp
+list/set/vector<int>::iterator it; //è un iteratore bidirezionale
+map<int,float>::iterator it;
 ```
 
 Un esempio di implementazione è
 
-```
-list <int> l;	//se l è vuoto, l.begin() == l.end();   iteratore è oggetto della classe di iteratori
-l.push_front(3); l.push_back(2);
-list <int>::iterator it;
-for(it = l.begin(); it != l.end(); it++) {
-  cout << *it;	// overloading di operatori per dereferenziare l’operatore -> * restituisce oggetto
-                  // puntato, è un operatore unario
+```cpp
+list<int> l; //se l è vuoto, l.begin() == l.end();   iteratore è oggetto della classe di iteratori
+l.push_front(3);
+l.push_back(2);
+list<int>::iterator it;
+for(it=l.begin(); it!=l.end(); it++){
+  cout <<  \*it; //overloading di operatori per dereferenziare l’operatore -> * restituisce oggetto
+               //puntato, è un operatore unario
 }
 ```
 
@@ -697,15 +703,15 @@ for(it = l.begin(); it != l.end(); it++) {
 
 Consideriamo il seguente frame di codice:
 
-```
-class Personaggio {
-private:
-  int vita = 100;
-public:
-  virtual void stampa() = 0;  // =0 rende il metodo puramente virtuale
-  virtual bool operator < (const Personaggio&);
+```cpp
+class Personaggio{
+  private:
+    int vita = 100;
+  public:
+    virtual void stampa() = 0;  //=0 rende il metodo puramente virtuale
+    virtual bool operator<(const Personaggio&);
 };
-//Personaggio p;	NON posso scriverlo, la classe ha un metodo puramente virtuale
+Personaggio p; //NON posso scriverlo, la classe ha un metodo puramente virtuale
 ```
 
 Tramite `virtual`, posso decidere in che classe della gerarchia va fatto eseguire un determinato metodo. In poche parole, con il `virtual`, il compilatore non esegue il metodo della classe madre, ma quello delle classi derivate.
@@ -713,37 +719,39 @@ Con gli operatori, prima guardo di che tipo (classe) è il primo operatore (semp
 
 Il `virtual` viene utilizzato solo con allocazioni di tipo dinamico.
 
-```
-class Cavaliere: public Personaggio {
-private:
-  string nome;
-  int forza;
-public:
-  Cavaliere (string n, int f);
-  void stampa() {cout << … ;}
+```cpp
+class Cavaliere : public Personaggio{
+  private:
+    string nome;
+    int forza;
+  public:
+    Cavaliere(string n, int f);
+    void stampa(){
+      cout << "…";
+    }
 };
 
-class Mago: public Personaggio {
+class Mago : public Personaggio{
 private:
   string nome;
   int potere;
 public:
-  bool operator < (const Mago&);
-  friend ostream& operator << (ostream& os, const Mago& m);
+  bool operator<(const Mago&);
+  friend ostream& operator<<(ostream& os, const Mago& m);
 }
 
-main() {
-  list <Personaggio*> l;
-  l.push_front(new Mago(“Circe”, 100));
-  l.push_back(new Cavaliere(“Odolfo”, 100));
+main(){
+  list<Personaggio*> l;
+  l.push_front(new Mago("Circe", 100));
+  l.push_back(new Cavaliere("Odolfo", 100));
 }
 ```
 
 Allora, considerando la seguente implementazione
 
-```
+```cpp
 Personaggio* pp;
-pp = new Cavaliere(“Astolfo”, 100);
+pp = new Cavaliere("Astolfo", 100);
 pp->stampa();
 ```
 
@@ -752,31 +760,30 @@ pp->stampa();
 
 A conferma di ciò, si verifica il seguente caso
 
-```
-Personaggio* pp = new Mago( … );
+```cpp
+Personaggio* pp = new Mago(…);
 pp -> stampa();
-  //Mago::stampa(); perché ho virtual (con = 0 o senza)
-  //Personaggio::stampa() non ho virtual
+//Mago::stampa(); perché ho virtual (con = 0 o senza)
+//Personaggio::stampa(); non ho virtual
 ```
 
 Altro caso `virtual`
 
-```
-class Personaggio {
-private:
-  int vita = 100;
-public:
-  virtual void Stampa() = 0;
-  friend ostream& operator << (ostream& os, const Personaggio& p);
-  friend virtual ostream& op(ostream& os); //non è virtuale puro perché implementato sotto
-}
-ostream& Personaggio::op (ostream& os) {
+```cpp
+class Personaggio{
+  private:
+    int vita = 100;
+  public:
+    virtual void Stampa() = 0;
+    friend ostream& operator<<(ostream& os, const Personaggio& p);
+    friend virtual ostream& op(ostream& os); //non è virtuale puro perché implementato sotto
+};
+ostream& Personaggio::op(ostream& os){
   return os << vita;
-}
+};
+ostream& operator<<(ostream& os, const Personaggio& p){
 
-ostream& operator << (ostream& os, const Personaggio& p){
-
-}
+};
 ```
 Non si possono definire i metodi esterni come `virtual`, neanche i costruttori!
 
@@ -786,34 +793,35 @@ Di seguito la sintassi utile per liste, set, vector e map.
 
 #### Liste
 
-```
+```cpp
 #include <list>
-list <int> mialista;
-list <int>::iterator iter;
-list <int>::reverse_iterator riter;
+list<int> mialista;
+list<int>::iterator iter;
+list<int>::reverse_iterator riter;
 for(i=0; i<5; ++i){
-mialista.push_back(i);
-mialista.push_front(i);
+  mialista.push_back(i);
+  mialista.push_front(i);
 }
+
 //stampa inizio-fine
 for(iter=mialista.begin(); iter!=mialista.end(); ++iter){
-     //cout << *iter  << " ";
-     stampa(*iter);
+  //cout << \*iter  << " ";
+  stampa(*iter);
 }
 
 //stampa fine-inizio
 for(riter=mialista.rbegin(); riter!=mialista.rend(); ++riter){
-     cout << *riter << " ";
+  cout << \*riter << " ";
 }
 
 for_each(mialista.begin(),mialista.end(),&stampa); //da dove, a dove, cosa fa
 for_each(mialista.rbegin(),mialista.rend(),stampa);
 
 //delete
-list <int>::iterator deliter;
+list<int>::iterator deliter;
 deliter = find(mialista.begin(), mialista.end(), 3); //da dove, a dove, cosa fa
 if(deliter!=mialista.end()){
-    mialista.erase(deliter);
+  mialista.erase(deliter);
 }
 ```
 Proprietà della lista:
@@ -842,27 +850,28 @@ Proprietà del Vector
 
 #### Set
 
-```
+```cpp
 #include <set>
-set <int> si;
-set <int>::iterator siter;
+set<int> si;
+set<int>::iterator siter;
 si.insert(1);
-//Se un valore è già presente, gli altri non vengono inseriti
-//Stampa
+//se un valore è già presente, gli altri non vengono inseriti
+
+//stampa
 for(siter=si.begin(); siter!=si.end(); ++siter){
-  cout << *siter << " ";
+  cout << \*siter << " ";
 }
-//Elimina
+
+//elimina
 siter = si.find(15);
-if (siter != si.end()){
-    si.erase(siter);
+if(siter != si.end()){
+  si.erase(siter);
 }
 
 //ATTENZIONE->Ricordati di fare questo
-bool Lamiaclasse::operator < (const Qualcosa& q)const{
-    return name < q.name;
+bool MiaClasse::operator<(const Qualcosa& q)const{
+  return name < q.name;
 }
-
 ```
 Proprietà del set:
 * La ricerca è logaritmica nella grandezza
@@ -872,13 +881,14 @@ Proprietà del set:
 
 #### Multiset
 
-```
-multiset <int> mi;
-multiset <int>::iterator miter;
+```cpp
+multiset<int> mi;
+multiset<int>::iterator miter;
 mi.insert(30);
-//Stampa
+
+//stampa
 for(miter=mi.begin(); miter!=mi.end(); ++miter){
-  cout << *miter << " ";
+  cout << \*miter << " ";
 }
 ```
 Proprietà del multiset:
@@ -886,26 +896,26 @@ Proprietà del multiset:
 
 #### Map
 
-```
+```cpp
 #include <map>
-map <string, int> m;
-map <string,int>::iterator miter;
-m.insert(pair <Persona ,int> (Persona("Nome"),21));
+map<string,int> m;
+map<string,int>::iterator miter;
+m.insert(pair<Persona,int>(Persona("Nome"),21));
 //oppure
 m["Paolo"]=33;
-//Cerca ed elimina
+//cerca ed elimina
 miter = m.find("Paolo");
   if(miter!=m.end()){
     cout << "Eta' di " << miter->first << ": " << miter->second << endl;
     m.erase(miter);
 }
 //stampa
-void stampaMap(map <string,int> mm){
-     map <string,int>::iterator miter;
-     for(miter=mm.begin(); miter!=mm.end(); ++miter){
-			 	if(miter->second.getMatricola() == matricola)
-         cout << miter ->first << " di eta': " << miter -> second << endl;
-     }
+void stampaMap(map<string,int> mm){
+   map<string,int>::iterator miter;
+   for(miter=mm.begin(); miter!=mm.end(); ++miter){
+		 	if(miter->second.getMatricola() == matricola)
+       cout << miter->first << " di eta': " << miter->second << endl;
+   }
 }
 
 stampaMap(m);
