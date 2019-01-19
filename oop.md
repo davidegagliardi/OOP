@@ -1,25 +1,25 @@
 # Programmazione ad oggetti
 
-Appunti a cura di _Andrea Abriani (@aabriani), Davide Gagliardi (@davidegagliardi), Fabio Della Giustina (@fabiodellagiustina), Andrea Braghiroli_
+Appunti a cura di _Andrea Abriani (@aabriani), Davide Gagliardi (@davidegagliardi), Fabio Della Giustina (@fabiodellagiustina), Andrea Braghiroli_.
 
-## Fattori qualità software:
+## Fattori qualità del software
 
 ### Esterni
 
--   **Estendibilità**: sistema amplia funzionalità che il software aveva in precedenza. Programmazione ad oggetti viene resa più semplice.
--   **Riusabilità**: software e componenti possono essere riutilizzati per un insieme di requisiti che possono essere diversi da quelli precedenti.
+-   **Estendibilità:** è possibile ampliare le funzionalità che il software aveva in precedenza. Rende quindi la programmazione ad oggetti più semplice.
+-   **Riusabilità:** il software e le sue componenti possono essere riutilizzati per un insieme di requisiti che possono essere diversi da quelli iniziali.
 
-### Interni:
+### Interni
 
-_fattori percepibili al codice della sorgente_
+_Fattori percepibili dal codice sorgente_
 
--   **Strutturazione**: codice viene scritto in modo tale da astrarre delle singole parti. E’ possibile un’individuazione di parti di software indipendenti dalle altre (es. Input/output può essere posizionato in zona differente).
--   **Modularità**: collegata alla strutturazione. Va oltre la struttura e indica che può essere usata in modo diverso e con componenti può raggiungere scopi e requisiti differenti. (Il codice può essere utilizzato  per scopi diversi).
--   **Comprensibilità**: software strutturato in modo che corrisponda alla descrizione del dominio.
+-   **Strutturazione:** il codice viene scritto in modo tale da astrarre delle singole parti. E’ possibile un’individuazione di parti di software indipendenti dalle altre (es: input/output può essere posizionato in una zona del codice differente).
+-   **Modularità:** è collegata alla strutturazione. Va oltre la struttura e indica che può essere usata in modo diverso e con altri componenti può raggiungere scopi e requisiti differenti. Il codice può essere utilizzato  per scopi diversi.
+-   **Comprensibilità:** il software è strutturato in modo che corrisponda alla descrizione del dominio.
 
-## Caratteristiche della programmazione a oggetti
+## Caratteristiche programmazione a oggetti
 
-### Connessione esplicita fra funzioni e dati - Incapsulamento
+### Incapsulamento
 
 _Key idea: connessione esplicita funzioni-dati (non vi sono più struct con metodi e costruttori)_
 
@@ -30,7 +30,7 @@ In precedenza, vi era una procedura che lavorava su variabili globali. Ora invec
 Le classi sono legate in gerachie. Una eredita l'altra per creare una struttura.
 
 Si pone enfasi sulla rappresentazione. In caso di errori si andrà a realizzare una struttura sbagliata.
-L'enfasi viene spostata da computazione a rappresentazione (più o meno astratta) sul quale il software deve agire
+L'enfasi viene spostata da computazione a rappresentazione (più o meno astratta) sul quale il software deve agire.
 
 ### Enfasi sulla rappresentazione
 
@@ -38,7 +38,8 @@ Il software può essere visto come un insieme di scatole, nelle quali entrano ed
 
 Viene utilizzato l'**UML** (_unified modeling language_), uno standard che contiene un insieme di linguaggi grafici per realizzare un diagramma delle classi e degli oggetti, ottenendo una rappresentazione grafica della programmazione.
 
-Oggetti in UML
+#### Oggetti in UML
+
 All'interno dell'UML, la relazione oggetto-classe è simile a elemento-insieme
 
 | Classe  | Insieme  |
@@ -140,7 +141,7 @@ void A::m4(){
 //IS-A -> ogni istanza di A è anche istanza di B -> EREDITARIETA’
 ```
 
-#### Ereditarietà di tipo private `class A: private B`
+#### Ereditarietà di tipo private `class A : private B`
 
 -   Quando è private in B diventa inaccessibile da A ed inaccessibile dall’esterno
 
@@ -178,7 +179,7 @@ void A::m4(){
 }
 ```
 
-#### Ereditarietà di tipo protected `class A: protected B`
+#### Ereditarietà di tipo protected `class A : protected B`
 
 -   Quando è private in B diventa inaccessibile da A ed inaccessibile dall’esterno
 
@@ -234,7 +235,7 @@ Le 2 righe `private` e `protected` sono uguali per accessibilità: ci sono conse
 Quando ha senso fare ereditarietà private/protected?
 Ereditare in modo `private` implica che la natura della classe base è nascosta dall’implementazione (ereditarietà per implementazione). In sostanza si effettua questo tipo di ereditarietà quando attributi e metodi sono utilizzati per l'implementazione.
 
-La classe derivata diventa così diversa dalla classe sopra, ne deriva che non utilizzerà i metodi come la classe sopra (superclasse)
+La classe derivata diventa così diversa dalla classe sopra, ne deriva che non utilizzerà i metodi come la classe sopra (superclasse).
 
 Quando ha senso fare ereditarietà public?
 
@@ -266,7 +267,7 @@ B& B::operator=(const B& b); //OK per ereditarietà pubblica
 
 In linea di massima, si tende a non fare la copia.
 
-### Operatore “++”
+### Operatore "++"
 
 Può essere pre-fisso (`++i`) o post-fisso (`i++`).
 
@@ -290,11 +291,29 @@ Se l'operatore viene applicato ad un puntatore, il valore della cella di memoria
 
 ### Operatore "new"
 
-L'operatore `new` alloca un puntatore di memoria, in questo modo l'allocazione avverrà in modo dinamico. Bisogna però preoccuparsi di utilizzare il comando `delete`, per non aumentare l'occupazione di memoria da parte del programma.
+L'operatore `new` istanzia un oggetto dinamicamente nell'heap restituendo l'indirizzo di memoria dell'oggetto istanziato. Bisogna però preoccuparsi di utilizzare il comando `delete`, per non aumentare l'occupazione di memoria da parte del programma.
 
-### Header
+### Header file
 
-Si tratta della dichiarazione all'inizio del file con cui si dichiara il nome che il compilatore usa per chiamare il metodo (che è l’unico nel programma).
+File .h contenente le dichiarazioni di classi, metodi, funzioni.
+
+```cpp
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+//dichiarazioni
+#endif
+```
+
+### Function header
+
+Include il nome della funzione e specifica i parametri in ingresso e il tipo di dato in uscita.
+
+```cpp
+returnValueType functionName(valueType parameter1, valueType parameter2, ...){
+  ...
+  return returnValue;
+}
+```
 
 ### Costruttore
 
@@ -343,7 +362,7 @@ Il distruttore è caratterizzato dal fatto che non ha valori di ritorno né para
 Il suo compito primario dovrebbe essere sempre e solo quella di rimuovere un oggetto e tutte le sue dipendenze dallo stato del programma in maniera sicura e completa.
 Viene invocato automaticamente per tutte le variabili, ogni volta che viene raggiunta la fine del loro ambito di visibilità, oppure nel caso di deallocazione tramite il comando `delete`.
 
-### Attributi statici operatori
+### Attributi statici operatori(???)
 
 Gli attributi statici sono attributi istanziati solo una volta che valgono per tutte le istanze della classe.
 Se un’istanza cambia il contenuto, allora viene cambiata per tutte le istanze
@@ -353,7 +372,7 @@ Esempio:
 
 -   indica il n° di licenze disponibili nel programma.
 
-Dal punto di vista funzionale, la variabile statica è come una variabile globale.
+Dal punto di vista funzionale, la variabile statica è come una variabile globale per le istanze della stessa classe.
 
 `const float miaConst`
 
@@ -375,9 +394,9 @@ Dal punto di vista funzionale, la variabile statica è come una variabile global
 
 ```cpp
 A& operator=(const int uk){
-	k = uk;
-	cout << "operator = const int" << endl;
-	return \*this;
+  k = uk;
+  cout << "operator = const int" << endl;
+  return \*this;
 };
 ```
 
@@ -385,9 +404,9 @@ A& operator=(const int uk){
 
 ```cpp
 A& operator=(const A& a){
-	k = a.k;
-	cout << "operator = const A&" << endl; //NOTA: qualcuno ha già implementato
-	return \*this; //uguale tra int e float
+  k = a.k;
+  cout << "operator = const A&" << endl; //NOTA: qualcuno ha già implementato
+  return \*this; //uguale tra int e float
 };
 ```
 
@@ -395,10 +414,10 @@ A& operator=(const A& a){
 
 ```cpp
 A operator+(const A& a){
-	A temp;                                //creata classe temporanea
-	temp.k = k + a.k;                      //k = valore classe in cui sono dentro
-	cout << "operator + const A&" << endl; //a.k = valore classe passata
-	return temp;                           //temp = il mio risultato
+  A temp;                                //creata classe temporanea
+  temp.k = k + a.k;                      //k = valore classe in cui sono dentro
+  cout << "operator + const A&" << endl; //a.k = valore classe passata
+  return temp;                           //temp = il mio risultato
 };
 //A crea una nuova istanza. Prendo le 2 istanze e le sommo.
 //Infine metto il valore nella nuova istanza
@@ -409,9 +428,9 @@ A operator+(const A& a){
 
 ```cpp
 A& operator+=(const A& a){
-	k += a.k;
-	cout << "operator += const A&" << endl;
-	return \*this;
+  k += a.k;
+  cout << "operator += const A&" << endl;
+  return \*this;
 };
 ```
 
@@ -419,8 +438,8 @@ A& operator+=(const A& a){
 
 ```cpp
 A& operator==(const A& a){
-	cout << "operator == const A&" << endl;		//NOTA: NO per classi diverse!!
-	return k == aa.k;
+  cout << "operator == const A&" << endl;		//NOTA: NO per classi diverse!!
+  return k == aa.k;
 };
 ```
 
@@ -430,8 +449,8 @@ A& operator==(const A& a){
 
 ```cpp
 A& operator!=(const A& a){
-	cout << "operator += const A&" << endl;
-	return k != aa.k; //in alternativa return !(\*this == a);
+  cout << "operator += const A&" << endl;
+  return k != aa.k; //in alternativa return !(\*this == a);
 };
 ```
 
@@ -439,8 +458,8 @@ A& operator!=(const A& a){
 
 ```cpp
 A& operator++(){
-	cout << "operator ++A" << endl;
-	k++;
+  cout << "operator ++A" << endl;
+  k++;
   return \*this;
 };
 ```
@@ -449,8 +468,8 @@ A& operator++(){
 
 ```cpp
 A operator++(int){
-	A a = \*this;
-	k++;
+  A a = \*this;
+  k++;
   cout << "operator A++" << endl;
   return a;	//istanza-1
 };
