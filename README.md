@@ -335,7 +335,7 @@ Si tratta della dichiarazione all'inizio del file con cui si dichiara il nome ch
 Quando viene costruita una classe vuota, viene fatta una definizione astratta. Proprio per questo non è scontato che il compilatore allochi memoria (come per il `typedef`).
 L'allocazione di memoria avverrà una volta istanziata una classe. In questo modo verrano inseriti in memoria anche un puntatore `this` (che punta a dove la variabile è allocata) e un secondo puntatore verso i metodi di quella classe.
 
-A livello di memoria, il compilatore punta i costruttori che ci sono sempre (default, 0 parametri, distruttore, costruttore di copia, operatore di assegnazione).
+A livello di memoria, il compilatore punta i costruttori che ci sono sempre (default, distruttore, costruttore di copia, operatore di assegnazione).
 
 Funzione membro che si occupa di:
 
