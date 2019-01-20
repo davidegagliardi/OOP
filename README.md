@@ -1049,3 +1049,21 @@ void stampaMMapDati(multimap<string, Dati> mdati){
 Proprietà del Multimap
 
 -   Si comporta come il Map, ma le chiavi possono non essere univoche
+
+## C++ features
+
+Il C++ mette inoltre a disposizioni varie features che l’utente può utilizzare:
+
+-   Puntatore this: questo puntatore viene istanziato e inizializzato automaticamente dal compilatore e contiene l’indirizzo di memoria dell’istanza che ha evocato un metodo. Può tornare utile in caso di alcuni metodi che non potrebbero funzionare se non con il richiamo dell’oggetto stesso, come per esempio un `set_value()` per uno dei campi dell’oggetto in questione.
+
+
+-   Iteratori: sono delle entità particolari che hanno il compito di scorrere i contenitori vector, list, set, map e multimap come fossero dei puntatori con un vettore. In realtà possono essere trattati grossomodo come i puntatori ma essi sono dei tipi ben precisi e vengono istanziati con il tipo iterator dopo aver indicato il tipo di contenitore che si vuole scorrere.
+-   Parola chiave Template: questa parola permette di definire delle funzioni che possono essere riutilizzate per qualsiasi istanza per cui viene richiamata la funzione, essendo generica quindi si può applicare a qualsiasi tipo, non c’è quindi bisogno di ricodifica. Una funzione generica (ovvero la funzione generata runtime dal compilatore partendo da quella template) deve eseguire le stesse operazioni per ogni versione, non può essere associata ad una funzione virtuale e non può coinvolgere distruttori, è molto utile però nel caso di algoritmi generalizzabili come il bubble sort.
+    Possono anche essere definite classi e metodi template, in questo caso bisogna stare attenti all’implementazione in quanto si deve essere sicuri che il compilatore associ il tipo corretto.
+-   try...throw...catch: può capitare che durante l’esecuzione di un programma si verifichi un errore runtime che rischi di abortire il programma stesso. Per evitare ciò il c++ ha messo a disposizione il costrutto try...throw...catch che prevede la gestione delle eccezioni (ovvero gli errori) così che sia possibile eseguire sempre e con sicurezza il programma.
+    Quando si sospetta che una porzione di codice possa generare un’eccezione la si pone in un blocco preceduto dalla parola chiave `try` e, prima di chiuderlo, si inserisce la parola chiave throw seguita da un’espressione che descrive l’errore. Tramite questa procedura nel momento in cui si genera un errore il costrutto lo coglie e "lancia" l’espressione indicata da throw. La cosa importante in questa parte di codice non è tanto il valore dell’espressione stesso, esso infatti potrebbe non sopravvivere fino alla fine dell’esecuzione del blocco, ma piuttosto il tipo che funge da marca di riconoscimento dell’errore.
+    Subito a seguito del blocco try...throw segue il blocco catch che costituisce il vero e proprio handler della funzione. La parola chiave catch si comporta proprio come l'header di una funzione, ovvero contiene un’espressione, se il tipo dell’espressione corrisponde a quello lanciato dall’istruzione throw allora viene riconosciuta l’eccezione e si può eseguire una porzione di codice fatta ad hoc per la gestione e quindi evitare che il programma venga abortito. In realtà ci possono essere vari blocchi catch in cascata, questo perché così possono essere colte eccezioni diverse in base al tipo indicato nell’espressione (se nel campo dell’espressione compare ... allora qualsiasi eccezione verrà colta indipendentemente dal tipo indicato nel throw).
+-   Puntatori a funzioni: in C++ è anche possibile utilizzare dei puntatori a funzione. Questi, quando vengono dichiarati, devono avere la forma
+    `tipoDiRitorno (\*nomePuntatore)(argomentiFunzione);`
+
+successivamente, runtime, verrà assegnata una funzione come valore al puntatore. La funzione creata precedentemente deve avere lo stesso tipo di ritorno e gli stessi argomenti del puntatore e questo deve per forza essere assegnato prima della fine dell’esecuzione del programma.
