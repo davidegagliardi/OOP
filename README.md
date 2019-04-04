@@ -1,8 +1,14 @@
 # Programmazione ad oggetti
 
-Appunti a cura di _**Andrea Abriani** (@aabriani), **Davide Gagliardi** (@davidegagliardi), **Fabio Della Giustina** (@fabiodellagiustina), **Andrea Braghiroli**._
+Appunti a cura di:
+-  _**Andrea Abriani** (@aabriani)_
+-  _**Davide Gagliardi** (@davidegagliardi)_
+-  _**Fabio Della Giustina** (@fabiodellagiustina)_
+-  _**Andrea Braghiroli**_
 
-_Si ringraziano **Antonio Stefani** (@AntonioStefani) e **Davide Galvan** (@gvlaan) per aver contibuito agli appunti._
+Si ringraziano per aver contribuito
+- _**Antonio Stefani** (@AntonioStefani)_
+- _**Davide Galvan** (@gvlaan)_
 
 ## Fattori qualità software:
 
@@ -56,7 +62,7 @@ Gli oggetti risultano essere elementi del dominio con vita propria indipendente 
 
 La parte grafica in UML non è arbitraria ma unificata, ovvero vengono utilizzate convenzioni per rappresentare determinati elementi del programma.
 
-<img src="https://github.com/davidegagliardi/OOP/blob/master/ObjectUML.png" />
+<img src="./ObjectUML.png" />
 
 ### Ereditarietà
 
@@ -262,7 +268,7 @@ a = b; //NO
 b = a; //SI (b è la classe base)
 ```
 
-<img src="https://github.com/davidegagliardi/OOP/blob/master/CelleMemoria.png"/>
+<img src="./CelleMemoria.png"/>
 
 a contiene b, a è più grande
 
